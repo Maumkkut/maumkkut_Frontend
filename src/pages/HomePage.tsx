@@ -13,6 +13,10 @@ const HomePage = () => {
       >
         추가
       </button>
+      <h2 className="text-2xl">일반</h2>
+      <h2 className="font-tantan text-2xl">탄탄</h2>
+      <h2 className="font-dotum text-2xl">돋움</h2>
+      <h2 className="font-pretendard text-2xl">프리</h2>
     </div>
   );
 };
