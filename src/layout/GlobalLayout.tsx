@@ -3,9 +3,9 @@ import Footer from '@/components/Footer';
 
 import { Outlet } from 'react-router-dom';
 
-const Layout = () => {
+const GlobalLayout = () => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex min-h-screen flex-col">
       <div className="grow">
         <Header />
         <Outlet />
@@ -15,4 +15,4 @@ const Layout = () => {
   );
 };
 
-export default Layout;
+export default GlobalLayout;

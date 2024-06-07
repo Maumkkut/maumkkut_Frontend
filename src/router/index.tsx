@@ -1,10 +1,10 @@
 import HomePage from '@pages/HomePage';
-import Layout from '@components/Layout';
+import GlobalLayout from '@layout/GlobalLayout';
 
 const routerInfo = [
   {
     path: '/',
-    element: <Layout />,
+    element: <GlobalLayout />,
     children: [{ index: true, element: <HomePage /> }],
   },
 ];
