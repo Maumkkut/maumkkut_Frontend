@@ -1,5 +1,6 @@
 import ContentLayout from '@/layout/ContentLayout';
 import { NavLink } from 'react-router-dom';
+import logoImg from '@assets/images/logo/Logo.png';
 
 const Header = () => {
   return (
@@ -9,7 +10,7 @@ const Header = () => {
           {/* 로고영역 */}
           <div className="ml-[69px]">
             <img
-              src="/src/assets/images/logo/logo.png"
+              src={logoImg}
               alt="logo"
             />
           </div>
