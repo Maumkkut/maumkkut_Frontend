@@ -17,6 +17,7 @@ const Footer = () => {
                 <span className="pb-2">Copyright &copy IGODOYA</span>
                 <span>All rights reserved.</span>
               </div>
+              {/* 추후 링크 추가 */}
               <div className="text-[10px] text-black">
                 <span>이용약관 | 개인정보처리방침 | 고객지원 | 1:1 문의</span>
               </div>
