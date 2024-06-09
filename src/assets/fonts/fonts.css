@@ -1,0 +1,17 @@
+@font-face {
+  font-family: 'gamtanDotum';
+  src: url('./gamtanDotum.ttf');
+}
+@font-face {
+  font-family: 'gamtanTantan';
+  src: url('./gamtanTantan.ttf');
+}
+
+@layer base {
+  html,
+  body,
+  #root,
+  .app {
+    font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+  }
+}
