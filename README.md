@@ -30,7 +30,17 @@
 
 ## 실행 환경
 
+- Node : 20.12.0
+- React : 18.2.0
+- react-router-dom : 6.23.1
+- zustand": 4.5.2
+
 ## 사용 방법
+
+```javascript
+npm i
+npm run dev
+```
 
 ## 서비스 구현 화면
 
