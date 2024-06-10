@@ -3,7 +3,7 @@ type layoutProps = {
 };
 
 const ContentLayout = ({ children }: layoutProps) => {
-  return <div className="mx-auto my-0 w-[1440px]">{children}</div>;
+  return <div className="mx-auto my-0 h-full w-[1440px]">{children}</div>;
 };
 
 export default ContentLayout;
