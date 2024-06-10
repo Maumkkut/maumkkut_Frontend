@@ -1,5 +1,7 @@
 import ContentLayout from '@/layout/ContentLayout';
 import HeroImage from '@/assets/images/HomePage/HeroImage.png';
+import dice from '@/assets/images/HomePage/dice.jpg';
+import sea from '@/assets/images/HomePage/sea.jpg';
 
 const HomePage = () => {
   return (
@@ -33,10 +35,107 @@ const HomePage = () => {
         </div>
       </div>
       <ContentLayout>
-        <div>서비스바로가기</div>
+        {/* 서비스 바로가기 컴포넌트 */}
+        <GoService />
+        {/* 이벤트 in 강원 컴포넌트 */}
         <div>이벤트 in 강원</div>
+        {/* 강원도 추천 여행 코스 컴포넌트 */}
         <div>강원도 추천 여행 코스</div>
       </ContentLayout>
+    </div>
+  );
+};
+
+const GoService = () => {
+  return (
+    <div className="mt-20 text-center">
+      <h2 className="text-4xl">서비스 바로가기</h2>
+      <div className="me-[144px] ms-[144px] mt-[100px] flex h-[200px] justify-between">
+        <div className="relative w-[300px]">
+          <div className="h-full overflow-hidden rounded-lg">
+            <img
+              src={HeroImage}
+              alt="HeroImage"
+              className="h-full w-full object-cover"
+            />
+          </div>
+          {/* 이미지를 어둡게하기 위해 살짝 반투명한 검정색 뒤집어 씌우기 */}
+          <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
+          <h3 className="absolute inset-0 top-[82px] font-pretendard text-[28px] font-bold text-mk-light">
+            강원도 이곳저곳
+          </h3>
+        </div>
+        <div className="relative w-[300px]">
+          <div className="h-full overflow-hidden rounded-lg">
+            <img
+              src={sea}
+              alt="sea"
+              className="h-full w-full object-cover"
+            />
+          </div>
+          <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
+          <h3 className="absolute inset-0 top-[82px] font-pretendard text-[28px] font-bold text-mk-light">
+            여행 취향 테스트
+          </h3>
+        </div>
+
+        <div className="relative w-[300px]">
+          <div className="h-full overflow-hidden rounded-lg">
+            <img
+              src={sea}
+              alt="sea"
+              className="h-full w-full object-cover"
+            />
+          </div>
+          <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
+          <h3 className="absolute inset-0 top-[82px] font-pretendard text-[28px] font-bold text-mk-light">
+            우리여행 코스추천
+          </h3>
+        </div>
+      </div>
+      <div className="me-[144px] ms-[144px] mt-[100px] flex h-[200px] justify-between">
+        <div className="relative w-[300px]">
+          <div className="h-full overflow-hidden rounded-lg">
+            <img
+              src={dice}
+              alt="dice"
+              className="h-full w-full object-cover"
+            />
+          </div>
+          {/* 이미지를 어둡게하기 위해 살짝 반투명한 검정색 뒤집어 씌우기 */}
+          <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
+          <h3 className="absolute inset-0 top-[82px] font-pretendard text-[28px] font-bold text-mk-light">
+            랜덤 여행지 추천
+          </h3>
+        </div>
+        <div className="relative w-[300px]">
+          <div className="h-full overflow-hidden rounded-lg">
+            <img
+              src={sea}
+              alt="sea"
+              className="h-full w-full object-cover"
+            />
+          </div>
+          <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
+          <h3 className="absolute inset-0 top-[82px] font-pretendard text-[28px] font-bold text-mk-light">
+            커뮤니티
+          </h3>
+        </div>
+
+        <div className="relative w-[300px]">
+          <div className="h-full overflow-hidden rounded-lg">
+            <img
+              src={sea}
+              alt="sea"
+              className="h-full w-full object-cover"
+            />
+          </div>
+          <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
+          <h3 className="absolute inset-0 top-[82px] font-pretendard text-[28px] font-bold text-mk-light">
+            마이페이지
+          </h3>
+        </div>
+      </div>
     </div>
   );
 };
