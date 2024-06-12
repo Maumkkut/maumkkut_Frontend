@@ -2,6 +2,11 @@ import ContentLayout from '@/layout/ContentLayout';
 import HeroImage from '@/assets/images/HomePage/HeroImage.png';
 import dice from '@/assets/images/HomePage/dice.jpg';
 import sea from '@/assets/images/HomePage/sea.jpg';
+import eventIcon1 from '@/assets/images/HomePage/EventInGangwon1.png';
+import eventIcon2 from '@/assets/images/HomePage/EventInGangwon2.png';
+import eventIcon3 from '@/assets/images/HomePage/EventInGangwon3.png';
+import btnRight from '@/assets/images/HomePage/carouselRight.png';
+import btnLeft from '@/assets/images/HomePage/carouselLeft.png';
 
 const HomePage = () => {
   return (
@@ -20,14 +25,14 @@ const HomePage = () => {
             {/* 작은 따옴표 그냥 쓰면 오류나서 &lsquo; 이용 */}
             <div className="ms-36 mt-[152px]">
               <div className="w-[888px] font-tantan text-[64px] text-mk-light">
-                <p>&lsquo;마음껏 함께, 모두&lsquo; 즐기는 여행</p>
+                <p>&lsquo;마음껏 함께, 모두&rsquo; 즐기는 여행</p>
                 <p>마음끗으로 떠나보세요</p>
               </div>
               <button className="mt-[36px] h-[52px] w-[179px] rounded bg-mk-logoPoint font-pretendard text-[20px] font-bold">
                 여행 시작하기
               </button>
               <p className="mt-[36px] font-dotum text-[15px] text-mk-light">
-                마음끗 : &lsquo;마음껏&lsquo;, 마카:&lsquo;모두&lsquo;라는 뜻의
+                마음끗 : &lsquo;마음껏&rsquo;, 마카:&lsquo;모두&rsquo;라는 뜻의
                 강원도 사투리
               </p>
             </div>
@@ -38,7 +43,7 @@ const HomePage = () => {
         {/* 서비스 바로가기 컴포넌트 */}
         <GoService />
         {/* 이벤트 in 강원 컴포넌트 */}
-        <div>이벤트 in 강원</div>
+        <EventInGangwon />
         {/* 강원도 추천 여행 코스 컴포넌트 */}
         <div>강원도 추천 여행 코스</div>
       </ContentLayout>
@@ -50,6 +55,7 @@ const GoService = () => {
   return (
     <div className="mt-20 text-center">
       <h2 className="text-4xl">서비스 바로가기</h2>
+      <div></div>
       <div className="me-[144px] ms-[144px] mt-[100px] flex h-[200px] justify-between">
         <div className="relative w-[300px]">
           <div className="h-full overflow-hidden rounded-lg">
@@ -135,6 +141,72 @@ const GoService = () => {
             마이페이지
           </h3>
         </div>
+      </div>
+    </div>
+  );
+};
+
+const EventInGangwon = () => {
+  const gangwondoEvent = [
+    { title: '영월 캠핑 페스티벌', img: eventIcon1 },
+    { title: '화천 토마토 축제', img: eventIcon2 },
+    { title: '강릉 커피 축제', img: eventIcon3 },
+  ];
+  // 캐러셀 중심 인덱스
+  // const [centerIdx, clickButton] = useState(0);
+
+  return (
+    <div className="mt-20 text-center">
+      <h2 className="mt-[100px] text-4xl">이벤트 in 강원</h2>
+      <div className="flex justify-around">
+        <img
+          src={btnLeft}
+          alt="btnLeft"
+          className="my-auto h-[50px] w-[40px]"
+        />
+        <div className="relative mx-auto mt-[100px] flex h-[700px] w-[1200px] justify-evenly">
+          <div className="my-auto h-[250px] w-[300px] justify-evenly rounded-lg shadow-2xl">
+            <div className="mx-auto mt-[24px] h-[150px] w-[100px]">
+              <img
+                src={gangwondoEvent[0].img}
+                alt="gangwondoEvent[0].title"
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <h3 className="mt-[24px] font-pretendard text-[20px]">
+              {gangwondoEvent[0].title}
+            </h3>
+          </div>
+          <div className="my-auto h-[700px] w-[450px] rounded-lg shadow-2xl">
+            <div className="mx-auto mt-[24px] h-[600px] w-[400px]">
+              <img
+                src={gangwondoEvent[1].img}
+                alt="gangwondoEvent[1].title"
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <h3 className="my-[18px] font-pretendard text-[28px]">
+              {gangwondoEvent[1].title}
+            </h3>
+          </div>
+          <div className="my-auto h-[250px] w-[300px] rounded-lg shadow-2xl">
+            <div className="mx-auto mt-[24px] h-[150px] w-[100px]">
+              <img
+                src={gangwondoEvent[2].img}
+                alt="gangwondoEvent[2].title"
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <h3 className="mt-[24px] font-pretendard text-[20px]">
+              {gangwondoEvent[2].title}
+            </h3>
+          </div>
+        </div>
+        <img
+          src={btnRight}
+          alt="btnRight"
+          className="my-auto h-[50px] w-[40px]"
+        />
       </div>
     </div>
   );
