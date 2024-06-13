@@ -7,6 +7,10 @@ import eventIcon2 from '@/assets/images/HomePage/EventInGangwon2.png';
 import eventIcon3 from '@/assets/images/HomePage/EventInGangwon3.png';
 import btnRight from '@/assets/images/HomePage/carouselRight.png';
 import btnLeft from '@/assets/images/HomePage/carouselLeft.png';
+import course1 from '@/assets/images/HomePage/Course1.png';
+import course2 from '@/assets/images/HomePage/Course2.png';
+import course3 from '@/assets/images/HomePage/Course3.png';
+import course4 from '@/assets/images/HomePage/Course4.png';
 
 const HomePage = () => {
   return (
@@ -45,7 +49,7 @@ const HomePage = () => {
         {/* 이벤트 in 강원 컴포넌트 */}
         <EventInGangwon />
         {/* 강원도 추천 여행 코스 컴포넌트 */}
-        <div>강원도 추천 여행 코스</div>
+        <CourseRecommend />
       </ContentLayout>
     </div>
   );
@@ -54,7 +58,7 @@ const HomePage = () => {
 const GoService = () => {
   return (
     <div className="mt-20 text-center">
-      <h2 className="text-4xl">서비스 바로가기</h2>
+      <h2 className="text-mk-grey1 font-tantan text-4xl">서비스 바로가기</h2>
       <div></div>
       <div className="me-[144px] ms-[144px] mt-[100px] flex h-[200px] justify-between">
         <div className="relative w-[300px]">
@@ -156,16 +160,16 @@ const EventInGangwon = () => {
   // const [centerIdx, clickButton] = useState(0);
 
   return (
-    <div className="mt-20 text-center">
-      <h2 className="mt-[100px] text-4xl">이벤트 in 강원</h2>
-      <div className="flex justify-around">
+    <div className="my-[100px] text-center">
+      <h2 className="text-mk-grey1 font-tantan text-4xl">이벤트 in 강원</h2>
+      <div className="mx-[100px] mt-[70px] flex h-[700px] justify-between">
         <img
           src={btnLeft}
           alt="btnLeft"
-          className="my-auto h-[50px] w-[40px]"
+          className="mx-[21px] my-auto h-[50px] w-[40px]"
         />
-        <div className="relative mx-auto mt-[100px] flex h-[700px] w-[1200px] justify-evenly">
-          <div className="my-auto h-[250px] w-[300px] justify-evenly rounded-lg shadow-2xl">
+        <div className="flex h-full w-[1200px] justify-between">
+          <div className="my-auto h-[250px] w-[300px] rounded-lg shadow-2xl">
             <div className="mx-auto mt-[24px] h-[150px] w-[100px]">
               <img
                 src={gangwondoEvent[0].img}
@@ -173,19 +177,19 @@ const EventInGangwon = () => {
                 className="h-full w-full object-cover"
               />
             </div>
-            <h3 className="mt-[24px] font-pretendard text-[20px]">
+            <h3 className="text-mk-grey1 mt-[24px] font-pretendard text-[20px]">
               {gangwondoEvent[0].title}
             </h3>
           </div>
-          <div className="my-auto h-[700px] w-[450px] rounded-lg shadow-2xl">
-            <div className="mx-auto mt-[24px] h-[600px] w-[400px]">
+          <div className="h-full w-[450px] rounded-lg shadow-2xl">
+            <div className="mx-auto h-[600px] w-[400px]">
               <img
                 src={gangwondoEvent[1].img}
                 alt="gangwondoEvent[1].title"
                 className="h-full w-full object-cover"
               />
             </div>
-            <h3 className="my-[18px] font-pretendard text-[28px]">
+            <h3 className="text-mk-grey1 my-[18px] font-pretendard text-[28px]">
               {gangwondoEvent[1].title}
             </h3>
           </div>
@@ -197,7 +201,7 @@ const EventInGangwon = () => {
                 className="h-full w-full object-cover"
               />
             </div>
-            <h3 className="mt-[24px] font-pretendard text-[20px]">
+            <h3 className="text-mk-grey1 mt-[24px] font-pretendard text-[20px]">
               {gangwondoEvent[2].title}
             </h3>
           </div>
@@ -205,7 +209,115 @@ const EventInGangwon = () => {
         <img
           src={btnRight}
           alt="btnRight"
-          className="my-auto h-[50px] w-[40px]"
+          className="mx-[21px] my-auto h-[50px] w-[40px]"
+        />
+      </div>
+    </div>
+  );
+};
+
+const CourseRecommend = () => {
+  return (
+    <div className="my-[100px] text-center">
+      <h2 className="text-mk-grey1 font-tantan text-4xl">
+        강원도 추천 여행 코스
+      </h2>
+      <div className="mx-[100px] mt-[70px] flex h-[488px] justify-center">
+        <img
+          src={btnLeft}
+          alt="btnLeft"
+          className="mx-[21px] my-auto h-[50px] w-[40px]"
+        />
+        <div className="flex h-full w-[1200px] justify-center">
+          <div className="h-full w-[300px] rounded-lg shadow">
+            <div className="mx-[16px] mt-[24px] h-[352px] w-[267px]">
+              <div className="mx-auto h-[300px] w-[200px]">
+                <img
+                  src={course1}
+                  alt="course1"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <h3 className="text-mk-grey1 font-pretendard text-[28px] font-bold">
+                양양서핑 페스티벌
+              </h3>
+              <div className="text-mk-grey2 mt-[12px] font-pretendard text-[20px] font-medium">
+                <p>
+                  파도를 거스르는 자들이여
+                  <br />
+                  양양 서핑 완전정복 코스로!
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="h-full w-[300px] rounded-lg shadow">
+            <div className="mx-[16px] mt-[24px] h-[352px] w-[267px]">
+              <div className="mx-auto h-[300px] w-[200px]">
+                <img
+                  src={course2}
+                  alt="course2"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <h3 className="text-mk-grey1 font-pretendard text-[28px] font-bold">
+                강원 바다
+              </h3>
+              <div className="text-mk-grey2 mt-[12px] font-pretendard text-[20px] font-medium">
+                <p>
+                  힐링을 찾는 그대에게!
+                  <br />
+                  강원도 푸른 바다 코스
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="h-full w-[300px] rounded-lg shadow">
+            <div className="mx-[16px] mt-[24px] h-[352px] w-[267px]">
+              <div className="mx-auto h-[300px] w-[200px]">
+                <img
+                  src={course3}
+                  alt="course3"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <h3 className="text-mk-grey1 font-pretendard text-[28px] font-bold">
+                액티비티 패스
+              </h3>
+              <div className="text-mk-grey2 mt-[12px] font-pretendard text-[20px] font-medium">
+                <p>
+                  활동적인 당신을 위한
+                  <br />
+                  액티비티 마스터 코스
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="h-full w-[300px] rounded-lg shadow">
+            <div className="mx-[16px] mt-[24px] h-[352px] w-[267px]">
+              <div className="mx-auto h-[300px] w-[200px]">
+                <img
+                  src={course4}
+                  alt="course4"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <h3 className="text-mk-grey1 font-pretendard text-[28px] font-bold">
+                역사 여행 속으로
+              </h3>
+              <div className="text-mk-grey2 mt-[12px] font-pretendard text-[20px] font-medium">
+                <p>
+                  전통이 살아있는
+                  <br />
+                  강원도 역사 코스
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <img
+          src={btnRight}
+          alt="btnRight"
+          className="mx-[21px] my-auto h-[50px] w-[40px]"
         />
       </div>
     </div>

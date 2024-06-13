@@ -10,6 +10,8 @@ export default {
         'mk-logo4': '#023A40',
         'mk-logoPoint': '#FFD74A',
         'mk-light': '#F8F8F8',
+        'mk-grey1': '#4D4D4D',
+        'mk-grey2': '#717171',
       },
       fontFamily: {
         tantan: ['gamtanTantan', 'sans-serif'],
