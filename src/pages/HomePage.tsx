@@ -12,6 +12,12 @@ import course2 from '@/assets/images/HomePage/Course2.png';
 import course3 from '@/assets/images/HomePage/Course3.png';
 import course4 from '@/assets/images/HomePage/Course4.png';
 
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import './SwiperComponent.css'; // 추가: 스타일을 적용할 CSS 파일 화살표 위치 조정
+
 const HomePage = () => {
   return (
     <div>
@@ -32,7 +38,7 @@ const HomePage = () => {
                 <p>&lsquo;마음껏 함께, 모두&rsquo; 즐기는 여행</p>
                 <p>마음끗으로 떠나보세요</p>
               </div>
-              <button className="mt-[36px] h-[52px] w-[179px] rounded bg-mk-logoPoint font-pretendard text-[20px] font-bold">
+              <button className="mt-[36px] h-[52px] w-[179px] rounded bg-mk-logoPoint text-[20px] font-bold">
                 여행 시작하기
               </button>
               <p className="mt-[36px] font-dotum text-[15px] text-mk-light">
@@ -49,7 +55,8 @@ const HomePage = () => {
         {/* 이벤트 in 강원 컴포넌트 */}
         <EventInGangwon />
         {/* 강원도 추천 여행 코스 컴포넌트 */}
-        <CourseRecommend />
+        <CourseRecommend /> {/*실제 보여야할 모습*/}
+        <CourseRecommend2 /> {/*화살표가 바깥으로 가야하고 모양도 바꿔야함!!*/}
       </ContentLayout>
     </div>
   );
@@ -58,7 +65,7 @@ const HomePage = () => {
 const GoService = () => {
   return (
     <div className="mt-20 text-center">
-      <h2 className="text-mk-grey1 font-tantan text-4xl">서비스 바로가기</h2>
+      <h2 className="font-tantan text-4xl text-mk-grey1">서비스 바로가기</h2>
       <div></div>
       <div className="me-[144px] ms-[144px] mt-[100px] flex h-[200px] justify-between">
         <div className="relative w-[300px]">
@@ -71,7 +78,7 @@ const GoService = () => {
           </div>
           {/* 이미지를 어둡게하기 위해 살짝 반투명한 검정색 뒤집어 씌우기 */}
           <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
-          <h3 className="absolute inset-0 top-[82px] font-pretendard text-[28px] font-bold text-mk-light">
+          <h3 className="absolute inset-0 top-[82px] text-[28px] font-bold text-mk-light">
             강원도 이곳저곳
           </h3>
         </div>
@@ -84,7 +91,7 @@ const GoService = () => {
             />
           </div>
           <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
-          <h3 className="absolute inset-0 top-[82px] font-pretendard text-[28px] font-bold text-mk-light">
+          <h3 className="absolute inset-0 top-[82px] text-[28px] font-bold text-mk-light">
             여행 취향 테스트
           </h3>
         </div>
@@ -98,7 +105,7 @@ const GoService = () => {
             />
           </div>
           <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
-          <h3 className="absolute inset-0 top-[82px] font-pretendard text-[28px] font-bold text-mk-light">
+          <h3 className="absolute inset-0 top-[82px] text-[28px] font-bold text-mk-light">
             우리여행 코스추천
           </h3>
         </div>
@@ -114,7 +121,7 @@ const GoService = () => {
           </div>
           {/* 이미지를 어둡게하기 위해 살짝 반투명한 검정색 뒤집어 씌우기 */}
           <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
-          <h3 className="absolute inset-0 top-[82px] font-pretendard text-[28px] font-bold text-mk-light">
+          <h3 className="absolute inset-0 top-[82px] text-[28px] font-bold text-mk-light">
             랜덤 여행지 추천
           </h3>
         </div>
@@ -127,7 +134,7 @@ const GoService = () => {
             />
           </div>
           <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
-          <h3 className="absolute inset-0 top-[82px] font-pretendard text-[28px] font-bold text-mk-light">
+          <h3 className="absolute inset-0 top-[82px] text-[28px] font-bold text-mk-light">
             커뮤니티
           </h3>
         </div>
@@ -141,7 +148,7 @@ const GoService = () => {
             />
           </div>
           <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
-          <h3 className="absolute inset-0 top-[82px] font-pretendard text-[28px] font-bold text-mk-light">
+          <h3 className="absolute inset-0 top-[82px] text-[28px] font-bold text-mk-light">
             마이페이지
           </h3>
         </div>
@@ -161,7 +168,7 @@ const EventInGangwon = () => {
 
   return (
     <div className="my-[100px] text-center">
-      <h2 className="text-mk-grey1 font-tantan text-4xl">이벤트 in 강원</h2>
+      <h2 className="font-tantan text-4xl text-mk-grey1">이벤트 in 강원</h2>
       <div className="mx-[100px] mt-[70px] flex h-[700px] justify-between">
         <img
           src={btnLeft}
@@ -177,7 +184,7 @@ const EventInGangwon = () => {
                 className="h-full w-full object-cover"
               />
             </div>
-            <h3 className="text-mk-grey1 mt-[24px] font-pretendard text-[20px]">
+            <h3 className="mt-[24px] text-[20px] text-mk-grey1">
               {gangwondoEvent[0].title}
             </h3>
           </div>
@@ -189,7 +196,7 @@ const EventInGangwon = () => {
                 className="h-full w-full object-cover"
               />
             </div>
-            <h3 className="text-mk-grey1 my-[18px] font-pretendard text-[28px]">
+            <h3 className="my-[18px] text-[28px] text-mk-grey1">
               {gangwondoEvent[1].title}
             </h3>
           </div>
@@ -201,7 +208,7 @@ const EventInGangwon = () => {
                 className="h-full w-full object-cover"
               />
             </div>
-            <h3 className="text-mk-grey1 mt-[24px] font-pretendard text-[20px]">
+            <h3 className="mt-[24px] text-[20px] text-mk-grey1">
               {gangwondoEvent[2].title}
             </h3>
           </div>
@@ -216,10 +223,68 @@ const EventInGangwon = () => {
   );
 };
 
+interface CourseCardProps {
+  title: string;
+  text1: string;
+  text2: string;
+  img: string;
+}
+
+const CourseCard = ({ title, text1, text2, img }: CourseCardProps) => {
+  return (
+    <div className="h-[488px] w-[300px] rounded-lg shadow">
+      <div className="mx-[16px] my-auto h-[352px] w-[267px]">
+        <div className="mx-auto h-[300px] w-[200px]">
+          <img
+            src={img}
+            alt="img"
+            className="h-full w-full object-cover"
+          />
+        </div>
+        <h3 className="text-[28px] font-bold text-mk-grey1">{title}</h3>
+        <div className="mt-[12px] text-[20px] font-medium text-mk-grey2">
+          <p>
+            {text1}
+            <br />
+            {text2}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const CourseRecommend = () => {
+  const CourseInfo = [
+    {
+      title: '양양서핑 페스티벌',
+      text1: '파도를 거스르는 자들이여',
+      text2: '양양 서핑 완전정복 코스로!',
+      img: course1,
+    },
+    {
+      title: '강원 바다',
+      text1: '힐링을 찾는 그대에게!',
+      text2: '강원도 푸른 바다 코스',
+      img: course2,
+    },
+    {
+      title: '액티비티 패스',
+      text1: '활동적인 당신을 위한',
+      text2: '액티비티 마스터 코스',
+      img: course3,
+    },
+    {
+      title: '역사 여행 속으로',
+      text1: '전통이 살아있는',
+      text2: '강원도 역사 코스',
+      img: course4,
+    },
+  ];
+
   return (
     <div className="my-[100px] text-center">
-      <h2 className="text-mk-grey1 font-tantan text-4xl">
+      <h2 className="font-tantan text-4xl text-mk-grey1">
         강원도 추천 여행 코스
       </h2>
       <div className="mx-[100px] mt-[70px] flex h-[488px] justify-center">
@@ -228,97 +293,109 @@ const CourseRecommend = () => {
           alt="btnLeft"
           className="mx-[21px] my-auto h-[50px] w-[40px]"
         />
+
         <div className="flex h-full w-[1200px] justify-center">
-          <div className="h-full w-[300px] rounded-lg shadow">
-            <div className="mx-[16px] mt-[24px] h-[352px] w-[267px]">
-              <div className="mx-auto h-[300px] w-[200px]">
-                <img
-                  src={course1}
-                  alt="course1"
-                  className="h-full w-full object-cover"
-                />
-              </div>
-              <h3 className="text-mk-grey1 font-pretendard text-[28px] font-bold">
-                양양서핑 페스티벌
-              </h3>
-              <div className="text-mk-grey2 mt-[12px] font-pretendard text-[20px] font-medium">
-                <p>
-                  파도를 거스르는 자들이여
-                  <br />
-                  양양 서핑 완전정복 코스로!
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="h-full w-[300px] rounded-lg shadow">
-            <div className="mx-[16px] mt-[24px] h-[352px] w-[267px]">
-              <div className="mx-auto h-[300px] w-[200px]">
-                <img
-                  src={course2}
-                  alt="course2"
-                  className="h-full w-full object-cover"
-                />
-              </div>
-              <h3 className="text-mk-grey1 font-pretendard text-[28px] font-bold">
-                강원 바다
-              </h3>
-              <div className="text-mk-grey2 mt-[12px] font-pretendard text-[20px] font-medium">
-                <p>
-                  힐링을 찾는 그대에게!
-                  <br />
-                  강원도 푸른 바다 코스
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="h-full w-[300px] rounded-lg shadow">
-            <div className="mx-[16px] mt-[24px] h-[352px] w-[267px]">
-              <div className="mx-auto h-[300px] w-[200px]">
-                <img
-                  src={course3}
-                  alt="course3"
-                  className="h-full w-full object-cover"
-                />
-              </div>
-              <h3 className="text-mk-grey1 font-pretendard text-[28px] font-bold">
-                액티비티 패스
-              </h3>
-              <div className="text-mk-grey2 mt-[12px] font-pretendard text-[20px] font-medium">
-                <p>
-                  활동적인 당신을 위한
-                  <br />
-                  액티비티 마스터 코스
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="h-full w-[300px] rounded-lg shadow">
-            <div className="mx-[16px] mt-[24px] h-[352px] w-[267px]">
-              <div className="mx-auto h-[300px] w-[200px]">
-                <img
-                  src={course4}
-                  alt="course4"
-                  className="h-full w-full object-cover"
-                />
-              </div>
-              <h3 className="text-mk-grey1 font-pretendard text-[28px] font-bold">
-                역사 여행 속으로
-              </h3>
-              <div className="text-mk-grey2 mt-[12px] font-pretendard text-[20px] font-medium">
-                <p>
-                  전통이 살아있는
-                  <br />
-                  강원도 역사 코스
-                </p>
-              </div>
-            </div>
-          </div>
+          {CourseInfo.map((course, index) => (
+            <CourseCard
+              key={index}
+              title={course.title}
+              text1={course.text1}
+              text2={course.text2}
+              img={course.img}
+            />
+          ))}
         </div>
         <img
           src={btnRight}
           alt="btnRight"
           className="mx-[21px] my-auto h-[50px] w-[40px]"
         />
+      </div>
+    </div>
+  );
+};
+
+const CourseRecommend2 = () => {
+  const CourseInfo = [
+    {
+      title: '양양서핑 페스티벌',
+      text1: '파도를 거스르는 자들이여',
+      text2: '양양 서핑 완전정복 코스로!',
+      img: course1,
+    },
+    {
+      title: '강원 바다',
+      text1: '힐링을 찾는 그대에게!',
+      text2: '강원도 푸른 바다 코스',
+      img: course2,
+    },
+    {
+      title: '액티비티 패스',
+      text1: '활동적인 당신을 위한',
+      text2: '액티비티 마스터 코스',
+      img: course3,
+    },
+    {
+      title: '역사 여행 속으로',
+      text1: '전통이 살아있는',
+      text2: '강원도 역사 코스',
+      img: course4,
+    },
+    {
+      title: '양양서핑 페스티벌',
+      text1: '파도를 거스르는 자들이여',
+      text2: '양양 서핑 완전정복 코스로!',
+      img: course1,
+    },
+    {
+      title: '강원 바다',
+      text1: '힐링을 찾는 그대에게!',
+      text2: '강원도 푸른 바다 코스',
+      img: course2,
+    },
+    {
+      title: '액티비티 패스',
+      text1: '활동적인 당신을 위한',
+      text2: '액티비티 마스터 코스',
+      img: course3,
+    },
+    {
+      title: '역사 여행 속으로',
+      text1: '전통이 살아있는',
+      text2: '강원도 역사 코스',
+      img: course4,
+    },
+  ];
+  return (
+    <div className="my-[100px] text-center">
+      <h2 className="font-tantan text-4xl text-mk-grey1">
+        강원도 추천 여행 코스
+      </h2>
+
+      <div className="swiper-container">
+        <Swiper
+          className="my-auto mt-[70px] h-[490px] w-[1210px]"
+          modules={[Navigation]}
+          spaceBetween={0}
+          slidesPerView={4}
+          autoplay
+          navigation
+          loop={true}
+        >
+          {CourseInfo.map((course, index) => (
+            <SwiperSlide
+              key={index}
+              className="h-[488px] w-[300px]"
+            >
+              <CourseCard
+                title={course.title}
+                text1={course.text1}
+                text2={course.text2}
+                img={course.img}
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </div>
   );
