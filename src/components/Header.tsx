@@ -9,10 +9,12 @@ const Header = () => {
         <div className="flex h-full items-center">
           {/* 로고영역 */}
           <div className="ml-[69px]">
-            <img
-              src={logoImg}
-              alt="logo"
-            />
+            <NavLink to={'/'}>
+              <img
+                src={logoImg}
+                alt="logo"
+              />
+            </NavLink>
           </div>
 
           {/* navitem */}
@@ -23,17 +25,21 @@ const Header = () => {
             <NavLink to={'/'}>우리여행 코스추천</NavLink>
             <NavLink to={'/'}>랜덤 여행지 추천</NavLink>
             <NavLink to={'/'}>커뮤니티</NavLink>
-            <NavLink to={'/'}>마이페이지</NavLink>
+            {/* <NavLink to={'/'}>마이페이지</NavLink> */}
           </div>
 
           {/* login */}
-          <div className="ml-[66px] flex w-[183px] justify-between font-tantan">
-            <button className="h-[40px] w-[78px] rounded-md bg-white text-mk-logo3">
-              로그인
-            </button>
-            <button className="h-[40px] w-[91px] rounded-md bg-mk-logo3 text-white">
-              회원가입
-            </button>
+          <div className="ml-32 flex w-[183px] justify-between font-tantan">
+            <NavLink to={'/signin'}>
+              <button className="h-[40px] w-[78px] rounded-md bg-white text-mk-logo3">
+                로그인
+              </button>
+            </NavLink>
+            <NavLink to={'/signup'}>
+              <button className="h-[40px] w-[91px] rounded-md bg-mk-logo3 text-white">
+                회원가입
+              </button>
+            </NavLink>
           </div>
         </div>
       </ContentLayout>
