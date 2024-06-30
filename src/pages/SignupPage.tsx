@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import { useState } from 'react';
 
-interface LoginType {
+interface SignupType {
   id: string;
   password: string;
   birth_date: number;
@@ -50,9 +50,9 @@ const SignupPage = () => {
     formState: { errors },
     handleSubmit,
     resetField,
-  } = useForm<LoginType>();
+  } = useForm<SignupType>();
 
-  const signupSubmit = (formValues: LoginType) => {
+  const signupSubmit = (formValues: SignupType) => {
     resetField('id');
     // resetField('password');
     console.log(formValues);
@@ -209,14 +209,14 @@ const SignupPage = () => {
                         errors={errors}
                         name="id"
                         render={({ message }) => (
-                          <span className="text-mk-gangwon absolute -bottom-6 pb-1 text-xs">
+                          <span className="absolute -bottom-6 pb-1 text-xs text-mk-gangwon">
                             {message}
                           </span>
                         )}
                       />
                       <input
                         id="id"
-                        className="border-mk-newgrey mr-5 h-10 w-52 rounded-md border-2 px-3"
+                        className="mr-5 h-10 w-52 rounded-md border-2 border-mk-newgrey px-3"
                         readOnly={isCheckId}
                         autoComplete="username"
                         {...idRegister}
@@ -246,7 +246,7 @@ const SignupPage = () => {
                         errors={errors}
                         name="password"
                         render={({ message }) => (
-                          <span className="text-mk-gangwon absolute -bottom-6 pb-1 text-xs">
+                          <span className="absolute -bottom-6 pb-1 text-xs text-mk-gangwon">
                             {message}
                           </span>
                         )}
@@ -254,7 +254,7 @@ const SignupPage = () => {
                       <input
                         id="password"
                         type="password"
-                        className="border-mk-newgrey h-10 w-full rounded-md border-2 px-3"
+                        className="h-10 w-full rounded-md border-2 border-mk-newgrey px-3"
                         autoComplete="new-password"
                         {...passwordRegister}
                       />
@@ -276,7 +276,7 @@ const SignupPage = () => {
                         errors={errors}
                         name="confirm_password"
                         render={({ message }) => (
-                          <span className="text-mk-gangwon absolute -bottom-6 pb-1 text-xs">
+                          <span className="absolute -bottom-6 pb-1 text-xs text-mk-gangwon">
                             {message}
                           </span>
                         )}
@@ -284,7 +284,7 @@ const SignupPage = () => {
                       <input
                         id="confirm_password"
                         type="password"
-                        className="border-mk-newgrey h-10 w-full rounded-md border-2 px-3"
+                        className="h-10 w-full rounded-md border-2 border-mk-newgrey px-3"
                         autoComplete="new-password"
                         {...confirmPasswordRegister}
                       />
@@ -306,14 +306,14 @@ const SignupPage = () => {
                         errors={errors}
                         name="name"
                         render={({ message }) => (
-                          <span className="text-mk-gangwon absolute -bottom-6 pb-1 text-xs">
+                          <span className="absolute -bottom-6 pb-1 text-xs text-mk-gangwon">
                             {message}
                           </span>
                         )}
                       />
                       <input
                         id="name"
-                        className="border-mk-newgrey h-10 w-full rounded-md border-2 px-3"
+                        className="h-10 w-full rounded-md border-2 border-mk-newgrey px-3"
                         autoComplete="name"
                         {...nameRegister}
                       />
@@ -335,14 +335,14 @@ const SignupPage = () => {
                         errors={errors}
                         name="nickname"
                         render={({ message }) => (
-                          <span className="text-mk-gangwon absolute -bottom-6 pb-1 text-xs">
+                          <span className="absolute -bottom-6 pb-1 text-xs text-mk-gangwon">
                             {message}
                           </span>
                         )}
                       />
                       <input
                         id="nickname"
-                        className="border-mk-newgrey mr-5 h-10 w-52 rounded-md border-2 px-3"
+                        className="mr-5 h-10 w-52 rounded-md border-2 border-mk-newgrey px-3"
                         readOnly={isCheckNickname}
                         {...nickNameRegister}
                       />
@@ -371,7 +371,7 @@ const SignupPage = () => {
                         errors={errors}
                         name="birth_date"
                         render={({ message }) => (
-                          <span className="text-mk-gangwon absolute -bottom-6 pb-1 text-xs">
+                          <span className="absolute -bottom-6 pb-1 text-xs text-mk-gangwon">
                             {message}
                           </span>
                         )}
@@ -379,7 +379,7 @@ const SignupPage = () => {
                       <input
                         id="birth_date"
                         type="date"
-                        className="border-mk-newgrey h-10 w-full rounded-md border-2 px-3"
+                        className="h-10 w-full rounded-md border-2 border-mk-newgrey px-3"
                         {...birthDateRegister}
                       />
                     </div>
@@ -400,7 +400,7 @@ const SignupPage = () => {
                         errors={errors}
                         name="phone_number"
                         render={({ message }) => (
-                          <span className="text-mk-gangwon absolute -bottom-6 pb-1 text-xs">
+                          <span className="absolute -bottom-6 pb-1 text-xs text-mk-gangwon">
                             {message}
                           </span>
                         )}
@@ -408,7 +408,7 @@ const SignupPage = () => {
                       <input
                         id="phone_number"
                         type="tel"
-                        className="border-mk-newgrey h-10 w-full rounded-md border-2 px-3"
+                        className="h-10 w-full rounded-md border-2 border-mk-newgrey px-3"
                         {...phoneNumberRegister}
                       />
                     </div>
@@ -429,7 +429,7 @@ const SignupPage = () => {
                         errors={errors}
                         name="email"
                         render={({ message }) => (
-                          <span className="text-mk-gangwon absolute -bottom-6 pb-1 text-xs">
+                          <span className="absolute -bottom-6 pb-1 text-xs text-mk-gangwon">
                             {message}
                           </span>
                         )}
@@ -437,7 +437,7 @@ const SignupPage = () => {
                       <input
                         id="email"
                         type="email"
-                        className="border-mk-newgrey h-10 w-full rounded-md border-2 px-3"
+                        className="h-10 w-full rounded-md border-2 border-mk-newgrey px-3"
                         autoComplete="email"
                         {...emailRegister}
                       />
@@ -459,7 +459,7 @@ const SignupPage = () => {
                         errors={errors}
                         name="address"
                         render={({ message }) => (
-                          <span className="text-mk-gangwon absolute -bottom-6 pb-1 text-xs">
+                          <span className="absolute -bottom-6 pb-1 text-xs text-mk-gangwon">
                             {message}
                           </span>
                         )}
@@ -467,7 +467,7 @@ const SignupPage = () => {
                       <div>
                         <input
                           id="postalCode"
-                          className="border-mk-newgrey mr-2 h-10 w-[150px] rounded-md border-2 px-3"
+                          className="mr-2 h-10 w-[150px] rounded-md border-2 border-mk-newgrey px-3"
                           {...postalCodeRegister}
                         />
                         <button
@@ -480,13 +480,13 @@ const SignupPage = () => {
                       </div>
                       <input
                         id="address"
-                        className="border-mk-newgrey h-10 w-full rounded-md border-2 px-3"
+                        className="h-10 w-full rounded-md border-2 border-mk-newgrey px-3"
                         placeholder="기본 주소"
                         {...addressRegister}
                       />
                       <input
                         id="detailAddress"
-                        className="border-mk-newgrey h-10 w-full rounded-md border-2 px-3"
+                        className="h-10 w-full rounded-md border-2 border-mk-newgrey px-3"
                         placeholder="상세 주소"
                         {...addressDetailRegister}
                       />
@@ -496,7 +496,7 @@ const SignupPage = () => {
                   {/* 이용약관 */}
                   <div className="">
                     <h3 className="text-xl font-bold">이용약관 동의</h3>
-                    <div className="border-mk-newgrey mt-2 h-44 w-full overflow-y-scroll border-2 px-5 py-5">
+                    <div className="mt-2 h-44 w-full overflow-y-scroll border-2 border-mk-newgrey px-5 py-5">
                       <span>
                         제 1 장 총칙
                         <br />제 1 조 (목적)
@@ -528,7 +528,7 @@ const SignupPage = () => {
                       errors={errors}
                       name="agreeTerms"
                       render={({ message }) => (
-                        <span className="text-mk-gangwon absolute pb-1 text-xs">
+                        <span className="absolute pb-1 text-xs text-mk-gangwon">
                           {message}
                         </span>
                       )}
@@ -538,7 +538,7 @@ const SignupPage = () => {
                     <h3 className="text-xl font-bold">
                       개인정보 수집 및 이용동의
                     </h3>
-                    <div className="border-mk-newgrey mt-2 h-44 w-full overflow-y-scroll border-2 px-5 py-5">
+                    <div className="mt-2 h-44 w-full overflow-y-scroll border-2 border-mk-newgrey px-5 py-5">
                       <span>
                         제 1 장 총칙
                         <br />제 1 조 (목적)
@@ -570,7 +570,7 @@ const SignupPage = () => {
                       errors={errors}
                       name="agreePrivacy"
                       render={({ message }) => (
-                        <span className="text-mk-gangwon absolute pb-1 text-xs">
+                        <span className="absolute pb-1 text-xs text-mk-gangwon">
                           {message}
                         </span>
                       )}
