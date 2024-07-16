@@ -13,6 +13,7 @@ import course3 from '@/assets/images/HomePage/Course3.png';
 import course4 from '@/assets/images/HomePage/Course4.png';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { useState } from 'react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -53,10 +54,10 @@ const HomePage = () => {
         {/* 서비스 바로가기 컴포넌트 */}
         <GoService />
         {/* 이벤트 in 강원 컴포넌트 */}
-        <EventInGangwon />
+        {/* <EventInGangwon /> */}
+        <EventInGangwon2 />
         {/* 강원도 추천 여행 코스 컴포넌트 */}
-        <CourseRecommend /> {/*실제 보여야할 모습*/}
-        <CourseRecommend2 /> {/*화살표가 바깥으로 가야하고 모양도 바꿔야함!!*/}
+        <CourseRecommend /> {/*화살표가 바깥으로 가야하고 모양도 바꿔야함!!*/}
       </ContentLayout>
     </div>
   );
@@ -157,67 +158,158 @@ const GoService = () => {
   );
 };
 
-const EventInGangwon = () => {
+// const EventInGangwon = () => {
+//   const gangwondoEvent = [
+//     { title: '영월 캠핑 페스티벌', img: eventIcon1 },
+//     { title: '화천 토마토 축제', img: eventIcon2 },
+//     { title: '강릉 커피 축제', img: eventIcon3 },
+//     { title: '영월 캠핑 페스티벌', img: eventIcon1 },
+//     { title: '화천 토마토 축제', img: eventIcon2 },
+//     { title: '강릉 커피 축제', img: eventIcon3 },
+//   ];
+//   // 캐러셀 중심 인덱스
+//   // const [centerIdx, clickButton] = useState(0);
+//   const [idx, setIdx] = useState<number>(1);
+
+//   return (
+//     <div className="mx-auto my-[100px] h-[700px] w-[1400px] text-center">
+//       <h2 className="font-tantan text-4xl text-mk-grey1">이벤트 in 강원</h2>
+//       <div className="swiper-container my-auto">
+//         <Swiper
+//           className="mx-auto"
+//           modules={[Navigation]}
+//           spaceBetween={0}
+//           autoplay
+//           navigation
+//           slidesPerView={3}
+//           loop={true}
+//         >
+//           {gangwondoEvent.map((item, index) =>
+//             idx === index ? (
+//               <SwiperSlide
+//                 key={index}
+//                 className="my-auto"
+//               >
+//                 <BigCard
+//                   img={item.img}
+//                   title={item.title}
+//                 />
+//               </SwiperSlide>
+//             ) : (
+//               <SwiperSlide
+//                 key={index}
+//                 className="mx-0 my-auto h-[250px] w-[300px]"
+//               >
+//                 <SmallCard
+//                   img={item.img}
+//                   title={item.title}
+//                 />
+//               </SwiperSlide>
+//             ),
+//           )}
+//         </Swiper>
+//       </div>
+//     </div>
+//   );
+// };
+const SmallCard = ({ img, title }: { img: string; title: string }) => {
+  return (
+    <div className="my-auto h-[250px] w-[300px] rounded-lg shadow-lg">
+      <div className="mx-auto my-[24px] h-[150px] w-[100px]">
+        <img
+          className="h-full w-full"
+          src={img}
+          alt={title}
+        />
+      </div>
+      <div>
+        <p className="mt-[24px] text-[20px] text-mk-grey1">{title}</p>
+      </div>
+    </div>
+  );
+};
+const BigCard = ({ img, title }: { img: string; title: string }) => {
+  return (
+    <div className="h-[700px] w-[450px] rounded-lg shadow-lg">
+      <div className="mx-auto h-[600px] w-[400px]">
+        <img
+          className="h-full w-full"
+          src={img}
+          alt={title}
+        />
+      </div>
+      <div>
+        <p className="my-[18px] text-[28px] text-mk-grey1">{title}</p>
+      </div>
+    </div>
+  );
+};
+
+const EventInGangwon2 = () => {
   const gangwondoEvent = [
     { title: '영월 캠핑 페스티벌', img: eventIcon1 },
     { title: '화천 토마토 축제', img: eventIcon2 },
     { title: '강릉 커피 축제', img: eventIcon3 },
   ];
-  // 캐러셀 중심 인덱스
-  // const [centerIdx, clickButton] = useState(0);
 
+  const n: number = gangwondoEvent.length; //강원도 이벤트 개수
+  const [idx, setIdx] = useState<number>(0);
+  const setMove = function () {
+    setIdx((idx + 1) % n);
+    console.log(idx);
+  };
   return (
     <div className="my-[100px] text-center">
       <h2 className="font-tantan text-4xl text-mk-grey1">이벤트 in 강원</h2>
-      <div className="mx-[100px] mt-[70px] flex h-[700px] justify-between">
-        <img
-          src={btnLeft}
-          alt="btnLeft"
-          className="mx-[21px] my-auto h-[50px] w-[40px]"
-        />
-        <div className="flex h-full w-[1200px] justify-between">
-          <div className="my-auto h-[250px] w-[300px] rounded-lg shadow-2xl">
-            <div className="mx-auto mt-[24px] h-[150px] w-[100px]">
-              <img
-                src={gangwondoEvent[0].img}
-                alt="gangwondoEvent[0].title"
-                className="h-full w-full object-cover"
+      <div className="flex justify-center">
+        <div className="my-[100px] flex justify-center space-x-4 text-center">
+          <button
+            className="my-auto"
+            onClick={setMove}
+          >
+            <img
+              src={btnLeft}
+              alt="btnLeft"
+            />
+          </button>
+
+          {/* <SmallCard
+          img={gangwondoEvent[idx].img}
+          title={gangwondoEvent[idx].title}
+        ></SmallCard>
+        <BigCard
+          img={gangwondoEvent[(idx + 1) % n].img}
+          title={gangwondoEvent[(idx + 1) % n].title}
+        ></BigCard>
+        <SmallCard
+          img={gangwondoEvent[(idx + 2) % n].img}
+          title={gangwondoEvent[(idx + 2) % n].title}
+        ></SmallCard> */}
+          {gangwondoEvent.map((item, index) =>
+            index === idx ? (
+              <BigCard
+                key={index}
+                img={item.img}
+                title={item.title}
               />
-            </div>
-            <h3 className="mt-[24px] text-[20px] text-mk-grey1">
-              {gangwondoEvent[0].title}
-            </h3>
-          </div>
-          <div className="h-full w-[450px] rounded-lg shadow-2xl">
-            <div className="mx-auto h-[600px] w-[400px]">
-              <img
-                src={gangwondoEvent[1].img}
-                alt="gangwondoEvent[1].title"
-                className="h-full w-full object-cover"
+            ) : (
+              <SmallCard
+                key={index}
+                img={item.img}
+                title={item.title}
               />
-            </div>
-            <h3 className="my-[18px] text-[28px] text-mk-grey1">
-              {gangwondoEvent[1].title}
-            </h3>
-          </div>
-          <div className="my-auto h-[250px] w-[300px] rounded-lg shadow-2xl">
-            <div className="mx-auto mt-[24px] h-[150px] w-[100px]">
-              <img
-                src={gangwondoEvent[2].img}
-                alt="gangwondoEvent[2].title"
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <h3 className="mt-[24px] text-[20px] text-mk-grey1">
-              {gangwondoEvent[2].title}
-            </h3>
-          </div>
+            ),
+          )}
+          <button
+            className="my-auto"
+            onClick={setMove}
+          >
+            <img
+              src={btnRight}
+              alt="btnRight"
+            />
+          </button>
         </div>
-        <img
-          src={btnRight}
-          alt="btnRight"
-          className="mx-[21px] my-auto h-[50px] w-[40px]"
-        />
       </div>
     </div>
   );
@@ -255,67 +347,6 @@ const CourseCard = ({ title, text1, text2, img }: CourseCardProps) => {
 };
 
 const CourseRecommend = () => {
-  const CourseInfo = [
-    {
-      title: '양양서핑 페스티벌',
-      text1: '파도를 거스르는 자들이여',
-      text2: '양양 서핑 완전정복 코스로!',
-      img: course1,
-    },
-    {
-      title: '강원 바다',
-      text1: '힐링을 찾는 그대에게!',
-      text2: '강원도 푸른 바다 코스',
-      img: course2,
-    },
-    {
-      title: '액티비티 패스',
-      text1: '활동적인 당신을 위한',
-      text2: '액티비티 마스터 코스',
-      img: course3,
-    },
-    {
-      title: '역사 여행 속으로',
-      text1: '전통이 살아있는',
-      text2: '강원도 역사 코스',
-      img: course4,
-    },
-  ];
-
-  return (
-    <div className="my-[100px] text-center">
-      <h2 className="font-tantan text-4xl text-mk-grey1">
-        강원도 추천 여행 코스
-      </h2>
-      <div className="mx-[100px] mt-[70px] flex h-[488px] justify-center">
-        <img
-          src={btnLeft}
-          alt="btnLeft"
-          className="mx-[21px] my-auto h-[50px] w-[40px]"
-        />
-
-        <div className="flex h-full w-[1200px] justify-center">
-          {CourseInfo.map((course, index) => (
-            <CourseCard
-              key={index}
-              title={course.title}
-              text1={course.text1}
-              text2={course.text2}
-              img={course.img}
-            />
-          ))}
-        </div>
-        <img
-          src={btnRight}
-          alt="btnRight"
-          className="mx-[21px] my-auto h-[50px] w-[40px]"
-        />
-      </div>
-    </div>
-  );
-};
-
-const CourseRecommend2 = () => {
   const CourseInfo = [
     {
       title: '양양서핑 페스티벌',
