@@ -15,6 +15,7 @@ export default {
         'mk-grey3': '#666666',
         'mk-newgrey': '#B5B5B5',
         'mk-gangwon': '#CA0238',
+        'mk-mint': '#8BD9D1',
       },
       fontFamily: {
         tantan: ['gamtanTantan', 'sans-serif'],
