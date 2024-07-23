@@ -32,7 +32,8 @@ const TravelTasteTest = () => {
 const HeroSection = () => {
   return (
     <>
-      <div className="mb-[130px] h-[310px] overflow-hidden">
+      {/* relative라는 클래스 없으면 다른 버튼들이 안눌림.. */}
+      <div className="relative mb-[130px] h-[310px] overflow-hidden">
         <img
           className="h-full w-full object-cover brightness-75"
           src={sea}

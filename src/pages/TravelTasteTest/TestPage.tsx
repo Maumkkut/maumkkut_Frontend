@@ -1,5 +1,6 @@
 import ContentLayout from '@/layout/ContentLayout';
 import useTTTStore from '@/store/useTTTStore';
+import { useNavigate } from 'react-router-dom';
 
 const TestPage = () => {
   const questions: string[] = [
@@ -111,7 +112,6 @@ const CircleButton = ({
     const newAnswers = [...answers];
     newAnswers[i] = j;
     setAnswers(newAnswers);
-    console.log(answers);
   };
 
   return (
@@ -124,9 +124,24 @@ const CircleButton = ({
 };
 
 const ResultOrRestart = () => {
+  const { answers } = useTTTStore();
+  const navigate = useNavigate();
+  const checkAnswers = (): void => {
+    if (answers.includes(-1)) {
+      console.log('빈칸 있음!!!!');
+      // 빈칸이 있다고 모달 띄우는 로직 필요
+    } else {
+      // 이곳에 결과 저장하는 로직필요
+      navigate('/TravelTasteTest/history');
+    }
+  };
+
   return (
     <div className="mx-auto my-[100px] flex h-[80px] w-[450px] justify-between font-tantan text-[28px] text-white">
-      <button className="h-full w-[200px] rounded-[10px] bg-mk-logo3">
+      <button
+        className="h-full w-[200px] rounded-[10px] bg-mk-logo3"
+        onClick={checkAnswers}
+      >
         <p>결과보기</p>
       </button>
       <button className="h-full w-[200px] rounded-[10px] bg-[#C9C9C9]">
