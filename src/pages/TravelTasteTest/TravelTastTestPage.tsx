@@ -41,7 +41,7 @@ const HeroSection = () => {
         />
         <div className="absolute inset-0">
           <ContentLayout>
-            <div className="left-[144px] ms-[162px] mt-[160px] w-[1224px] text-center">
+            <div className="left-[144px] my-[96px] ms-[162px] w-[1224px] text-center">
               <p className="text-[32px] text-white">내 여행 MBTI는 뭘까?</p>
               <h2 className="mt-[10px] font-tantan text-[48px] text-[#FFD74A]">
                 무료 여행 취향 테스트
