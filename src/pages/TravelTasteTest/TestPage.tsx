@@ -4,16 +4,16 @@ import { useNavigate } from 'react-router-dom';
 
 const TestPage = () => {
   const questions: string[] = [
-    '질문1',
-    '질문2',
-    '질문3',
-    '질문4',
-    '질문5',
-    '질문6',
-    '질문7',
-    '질문8',
-    '질문9',
-    '질문10',
+    '여행지에서 마음의 안정을 찾고 힐링하는 것이 중요하다고 생각합니다.',
+    '여행 중 여유롭게 시간을 보내는 것을 선호합니다.',
+    '자연 경관을 즐기는 여행을 좋아합니다.',
+    '여행 중 박물관이나 전시회 같은 곳을 관람하는 것을 좋아합니다.',
+    '여행 중 현지 음식점에서 다양한 음식을 맛보는 것이 중요하다고 생각합니다.',
+    '여행 중 모험적인 활동에 참여하는 것을 좋아합니다.',
+    '여행 중 다양한 액티비티에 참여하는 것을 선호합니다.',
+    '여행 중 다양한 경험을 많이 하는 것이 중요하다고 생각합니다.',
+    '여행 중 쇼핑을 즐깁니다.',
+    '여행 중 사진 촬영을 좋아합니다.',
   ];
 
   return (
@@ -51,7 +51,7 @@ const QuestionCard = ({ question, i }: { question: string; i: number }) => {
       <h3 className="my-[40px] text-[24px]">{question}</h3>
       <div className="mx-auto flex h-[85px] w-[850px] justify-between">
         <div className="my-auto w-[200px] text-center text-[25px] text-[#CA0238]">
-          <p>동의함</p>
+          <p>동의하지 않음</p>
         </div>
         <div className="flex w-[450px] justify-between">
           {CircleData.map((datum, index) =>
@@ -73,7 +73,7 @@ const QuestionCard = ({ question, i }: { question: string; i: number }) => {
           )}
         </div>
         <div className="my-auto w-[200px] text-center text-[25px] text-[#038C8C]">
-          <p>동의하지 않음</p>
+          <p>동의함</p>
         </div>
       </div>
     </div>
