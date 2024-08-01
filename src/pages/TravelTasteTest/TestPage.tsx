@@ -55,7 +55,7 @@ const QuestionCard = ({ question, i }: { question: string; i: number }) => {
         </div>
         <div className="flex w-[450px] justify-between">
           {CircleData.map((datum, index) =>
-            answers[i] === index ? (
+            answers[i] === index + 1 ? (
               <CircleClicked
                 key={index}
                 color={datum.color}
@@ -67,7 +67,7 @@ const QuestionCard = ({ question, i }: { question: string; i: number }) => {
                 color={datum.color}
                 w={datum.w}
                 i={i}
-                j={index}
+                j={index + 1}
               />
             ),
           )}
@@ -112,6 +112,7 @@ const CircleButton = ({
     const newAnswers = [...answers];
     newAnswers[i] = j;
     setAnswers(newAnswers);
+    console.log(newAnswers);
   };
 
   return (
@@ -124,16 +125,20 @@ const CircleButton = ({
 };
 
 const ResultOrRestart = () => {
-  const { answers } = useTTTStore();
+  const { answers, setAnswers } = useTTTStore();
   const navigate = useNavigate();
   const checkAnswers = (): void => {
-    if (answers.includes(-1)) {
-      console.log('빈칸 있음!!!!');
+    if (answers.includes(0)) {
       // 빈칸이 있다고 모달 띄우는 로직 필요
+      window.alert('빈칸이 있습니다!');
     } else {
       // 이곳에 결과 저장하는 로직필요
       navigate('/TravelTasteTest/history');
     }
+  };
+
+  const clickRestart = (): void => {
+    setAnswers([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]); //아무것도 클릭하지 않은 상태로 변경하기
   };
 
   return (
@@ -144,7 +149,10 @@ const ResultOrRestart = () => {
       >
         <p>결과보기</p>
       </button>
-      <button className="h-full w-[200px] rounded-[10px] bg-[#C9C9C9]">
+      <button
+        className="h-full w-[200px] rounded-[10px] bg-[#C9C9C9]"
+        onClick={() => clickRestart()}
+      >
         <p>다시하기</p>
       </button>
     </div>

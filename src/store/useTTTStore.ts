@@ -1,7 +1,7 @@
 import create from 'zustand';
 
 interface TestResult {
-  id : number;
+  id: number;
   date: string;
   type: string;
   description: string;
@@ -14,7 +14,7 @@ interface TTTStore {
 }
 
 const useTTTStore = create<TTTStore>((set) => ({
-  answers: Array(10).fill(-1),
+  answers: Array(10).fill(0),
   setAnswers: (answers) => set({ answers }),
   testResults: [
     {
