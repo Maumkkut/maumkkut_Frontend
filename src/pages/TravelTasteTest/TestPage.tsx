@@ -1,6 +1,9 @@
 import ContentLayout from '@/layout/ContentLayout';
 import useTTTStore from '@/store/useTTTStore';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+
+// or via CommonJS
 
 const TestPage = () => {
   const questions: string[] = [
@@ -127,10 +130,16 @@ const CircleButton = ({
 const ResultOrRestart = () => {
   const { answers, setAnswers } = useTTTStore();
   const navigate = useNavigate();
+
   const checkAnswers = (): void => {
     if (answers.includes(0)) {
       // 빈칸이 있다고 모달 띄우는 로직 필요
-      window.alert('빈칸이 있습니다!');
+      // window.alert('빈칸이 있습니다!');
+      Swal.fire({
+        icon: 'error',
+        title: '빈칸이 있습니다.',
+        text: '모든 항목을 선택해주세요!',
+      });
     } else {
       // 이곳에 결과 저장하는 로직필요
       navigate('/TravelTasteTest/history');
@@ -139,6 +148,8 @@ const ResultOrRestart = () => {
 
   const clickRestart = (): void => {
     setAnswers([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]); //아무것도 클릭하지 않은 상태로 변경하기
+    // top:0 >> 맨위로  behavior:smooth >> 부드럽게 이동할수 있게 설정하는 속성
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (

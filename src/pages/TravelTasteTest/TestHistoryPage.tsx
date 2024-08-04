@@ -1,6 +1,7 @@
 import ContentLayout from '@/layout/ContentLayout';
 import resultDefault from '@/assets/images/TravelTasteTest/resultDefault.png';
 import useTTTStore from '@/store/useTTTStore';
+import Swal from 'sweetalert2';
 
 const TestHistoryPage = () => {
   const name: string = '호준';
@@ -44,11 +45,30 @@ const HistoryCard = ({
   type: string;
   description: string;
 }) => {
+  const deleteDetail = (idx: number) => {
+    Swal.fire({
+      icon: 'question',
+      title: '여행 유형 삭제',
+      text: '정말로 삭제하시겠습니까?',
+      confirmButtonText: '예',
+      cancelButtonText: '아니오',
+      confirmButtonColor: '#429f50',
+      cancelButtonColor: '#d33',
+      showCancelButton: true,
+      showCloseButton: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        console.log(`${idx}번째 삭제하는 로직 필요함`);
+        // 여기에서 삭제 로직을 추가해야함
+      }
+    });
+  };
+
   return (
     <div className="mx-auto mb-[30px] h-[259px] w-[1237px] border border-white border-b-mk-logo3">
       <div className="mx-auto mt-[55px] flex h-[150px] w-[1118px] items-center justify-between">
         <div className="relative">
-          <div className="bg-mk-tag1 top-[5px] my-auto h-[30px] w-[30px] rounded-full"></div>
+          <div className="top-[5px] my-auto h-[30px] w-[30px] rounded-full bg-mk-tag1"></div>
           <span className="absolute left-[0px] top-[-12px] text-[25px] text-[#6E6E6E]">
             {index + 1}
           </span>
@@ -71,7 +91,10 @@ const HistoryCard = ({
             </button>
           </div>
           <div className="h-[60px] w-full">
-            <button className="h-full w-full rounded-[10px] border border-mk-logo3 text-[23px] text-[#6E6E6E]">
+            <button
+              className="h-full w-full rounded-[10px] border border-mk-logo3 text-[23px] text-[#6E6E6E]"
+              onClick={() => deleteDetail(0)} //나중에 0대신 유형 index들어가야함
+            >
               유형 삭제하기
             </button>
           </div>

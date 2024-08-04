@@ -15,7 +15,7 @@ const TestOrHistory = () => {
     <>
       <div className="mx-auto my-[200px] flex h-[895px] w-[800px] justify-between text-center text-[30px]">
         <Link to="test">
-          <button className="bg-mk-mint h-[600px] w-[380px] text-mk-light">
+          <button className="h-[600px] w-[380px] bg-mk-mint text-mk-light">
             <div className="h-[100px]">
               <h3>
                 내 여행 유형은 뭘까?
@@ -31,7 +31,7 @@ const TestOrHistory = () => {
           </button>
         </Link>
         <Link to="history">
-          <button className="border-mk-mint h-[600px] w-[380px] border outline-4">
+          <button className="h-[600px] w-[380px] border border-mk-mint outline-4">
             <div className="h-[100px] py-6">
               <h3>결과 이력 확인하기</h3>
             </div>
