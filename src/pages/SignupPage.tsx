@@ -6,6 +6,7 @@ import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import { useState } from 'react';
+import { originSignup } from '@/api/user';
 
 interface SignupType {
   id: string;
@@ -15,7 +16,7 @@ interface SignupType {
   name: string;
   confirm_password: string;
   username: string;
-  phone_number: number;
+  phone_number: string;
   email: string;
   address: string;
   postalCode: string;
@@ -54,8 +55,24 @@ const SignupPage = () => {
 
   const signupSubmit = (formValues: SignupType) => {
     resetField('id');
-    // resetField('password');
-    console.log(formValues);
+    resetField('password');
+    const payload = {
+      username: formValues.id,
+      email: formValues.email,
+      password1: formValues.password,
+      password2: formValues.confirm_password,
+      name: formValues.name,
+      phone_number: formValues.phone_number
+        .replace(/[^0-9]/g, '')
+        .replace(
+          /(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{3,4})([0-9]{4})/g,
+          '$1-$2-$3',
+        ),
+      address: formValues.address,
+      nickname: formValues.nickname,
+      date_of_birth: formValues.birth_date,
+    };
+    originSignup(payload);
   };
 
   const idRegister = register('id', {

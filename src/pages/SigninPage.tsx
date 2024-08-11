@@ -6,6 +6,7 @@ import ContentLayout from '@/layout/ContentLayout';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import { NavLink } from 'react-router-dom';
+import { useUserSignin } from '@/hooks/queries/user';
 
 interface LoginType {
   id: string;
@@ -13,6 +14,8 @@ interface LoginType {
 }
 
 const SigninPage = () => {
+  const { mutate: signinMutate } = useUserSignin();
+
   const {
     register,
     formState: { errors },
@@ -21,7 +24,12 @@ const SigninPage = () => {
   } = useForm<LoginType>();
 
   const signinSubmit = (formValues: LoginType) => {
-    console.log(formValues);
+    const payload = {
+      username: formValues.id,
+      password: formValues.password,
+    };
+
+    signinMutate(payload);
   };
 
   const idRegister = register('id', {
@@ -68,7 +76,7 @@ const SigninPage = () => {
               >
                 <div className="relative flex flex-col">
                   <label
-                    className="text-mk-grey3 mb-2"
+                    className="mb-2 text-mk-grey3"
                     htmlFor="id"
                   >
                     아이디
@@ -93,7 +101,7 @@ const SigninPage = () => {
                 </div>
                 <div className="relative flex flex-col">
                   <label
-                    className="text-mk-grey3 mb-2"
+                    className="mb-2 text-mk-grey3"
                     htmlFor="password"
                   >
                     비밀번호
@@ -146,21 +154,30 @@ const SigninPage = () => {
               </div>
               {/* 소셜로그인  */}
               <div className="flex flex-col items-center">
-                <h3 className="text-mk-grey3 text-lg">소셜 로그인</h3>
-                <div className="mt-7">
+                <h3 className="text-lg text-mk-grey3">소셜 로그인</h3>
+                <button
+                  className="mt-7 cursor-pointer"
+                  onClick={() => {
+                    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?
+		client_id=477831349954-rrpg2rhq9b1r3ttca8knt8e4oq71ekrc.apps.googleusercontent.com
+		&redirect_uri=http://localhost:8000/accounts/google/callback/
+		&response_type=code
+		&scope=email profile&access_type=offline`;
+                  }}
+                >
                   <img
                     src={googleSI}
                     alt="google signin"
                   />
-                </div>
+                </button>
               </div>
             </div>
           </div>
           {/* 회원가입 유도 */}
           <div className="flex items-center justify-between">
-            <div className="bg-mk-grey3 h-[2px] w-[185px] opacity-25"></div>
-            <h2 className="text-mk-grey3 text-xl">마음끗 회원이 아니신가요?</h2>
-            <div className="bg-mk-grey3 h-[2px] w-[185px] opacity-25"></div>
+            <div className="h-[2px] w-[185px] bg-mk-grey3 opacity-25"></div>
+            <h2 className="text-xl text-mk-grey3">마음끗 회원이 아니신가요?</h2>
+            <div className="h-[2px] w-[185px] bg-mk-grey3 opacity-25"></div>
           </div>
           <div className="mb-7 mt-9">
             <h3 className="text-center text-xl text-mk-grey2">
