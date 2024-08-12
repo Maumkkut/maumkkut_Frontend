@@ -1,16 +1,20 @@
 import CommunityBoardItem from '@components/community/CommunityBoardItem';
-import { communityBoarditem } from '@/types/community';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useFetchBoard } from '@/hooks/queries/board';
+import { BoardItemInterface } from '@/types/community';
 
 const CommunityBoard = () => {
-  const dummyData: communityBoarditem = {
-    id: 1,
-    title: '[여행 후기 게시글] 게시판 이용 안내(2024.05.02 업데이트)',
-    date: 20240613,
-    author: 'faker',
-  };
-
+  // const dummyData: communityBoarditem = {
+  //   id: 1,
+  //   title: '[여행 후기 게시글] 게시판 이용 안내(2024.05.02 업데이트)',
+  //   date: 20240613,
+  //   author: 'faker',
+  // };
+  const location = useLocation();
   const navigate = useNavigate();
+  const pathSegments = location.pathname.split('/');
+
+  const { data: boardData, isSuccess } = useFetchBoard(pathSegments[2]);
 
   const handlePostBtn = () => {
     navigate('/community/post');
@@ -40,7 +44,11 @@ const CommunityBoard = () => {
         <div className="flex items-center justify-between">
           <div>
             <span>
-              총 <span className="font-bold text-mk-logo3">510</span>개 글
+              총{' '}
+              <span className="font-bold text-mk-logo3">
+                {isSuccess && boardData.total_count}
+              </span>
+              개 글
             </span>
           </div>
           <div className="flex items-center gap-x-5">
@@ -61,7 +69,7 @@ const CommunityBoard = () => {
               <span className="text-white">검색</span>
             </button>
             <button
-              className="border-mk-darkgray h-10 w-[90px] rounded-md border-[1px]"
+              className="h-10 w-[90px] rounded-md border-[1px] border-mk-darkgray"
               type="button"
               onClick={() => handlePostBtn()}
             >
@@ -91,7 +99,13 @@ const CommunityBoard = () => {
             </div>
           </div>
           {/* board item */}
-          <CommunityBoardItem data={dummyData} />
+          {isSuccess &&
+            boardData.results.map((data: BoardItemInterface) => (
+              <CommunityBoardItem
+                key={data.id}
+                data={data}
+              />
+            ))}
         </div>
       </div>
     </div>

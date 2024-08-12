@@ -1,24 +1,27 @@
-import { communityBoarditem } from '@/types/community';
+import { BoardItemInterface } from '@/types/community';
 
-const CommunityBoardItem = ({ data }: { data: communityBoarditem }) => {
-  console.log(data.author);
+const CommunityBoardItem = ({ data }: { data: BoardItemInterface }) => {
+  const date = new Date(data.created_at);
+
   return (
-    <div className="border-mk-darkgray flex h-[50px] items-center border-b-[1px]">
+    <div className="flex h-[50px] items-center border-b-[1px] border-mk-darkgray">
       {/* article num */}
       <div className="w-[150px] text-center">
-        <span className="text-mk-darkgray text-xl">{data.id}</span>
+        <span className="text-xl text-mk-darkgray">{data.id}</span>
       </div>
       {/* article title */}
       <div className="w-[500px] text-center">
-        <span className="text-mk-darkgray text-xl">{data.title}</span>
+        <span className="text-xl text-mk-darkgray">{data.title}</span>
       </div>
       {/* article date */}
       <div className="w-[152px] text-center">
-        <span className="text-mk-darkgray text-xl">{data.date}</span>
+        <span className="text-xl text-mk-darkgray">
+          {date.toISOString().split('T')[0]}
+        </span>
       </div>
       {/* article author */}
       <div className="w-[152px] text-center">
-        <span className="text-mk-darkgray text-xl">{data.author}</span>
+        <span className="text-xl text-mk-darkgray">{data.author}</span>
       </div>
     </div>
   );

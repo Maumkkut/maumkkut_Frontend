@@ -1,10 +1,11 @@
-import { useQuery, useMutation } from '@tanstack/react-query';
+import { useQuery, useMutation, queryOptions } from '@tanstack/react-query';
 import {
   originSignin,
   // originSignup,
   // socialLogin,
   fetchUserInfo,
 } from '@api/user';
+
 import { useNavigate } from 'react-router-dom';
 
 export const useUserSignin = () => {
@@ -27,3 +28,9 @@ export const useUserInfo = () => {
     retry: 1,
   });
 };
+
+export const userInfoQueryHelper = queryOptions({
+  queryKey: ['userInfo'],
+  queryFn: fetchUserInfo,
+  staleTime: Infinity,
+});

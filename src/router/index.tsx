@@ -18,7 +18,9 @@ const routerInfo = [
         path: '/community',
         element: <CommunityPage />,
         children: [
-          { index: true, element: <CommunityBoard /> },
+          { path: 'free', element: <CommunityBoard /> },
+          { path: 'travel', element: <CommunityBoard /> },
+          { path: 'all', element: <CommunityBoard /> },
           { path: 'post', element: <CommunityPost /> },
         ],
       },
