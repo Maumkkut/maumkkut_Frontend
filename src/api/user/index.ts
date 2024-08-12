@@ -6,6 +6,8 @@ const socialLogin = async () => {
 };
 
 const fetchUserInfo = async () => {
+  const access = sessionStorage.getItem('token');
+  if (!access) return null;
   const res = await instance.get('accounts/user/');
   return res.data;
 };

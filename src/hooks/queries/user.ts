@@ -24,5 +24,6 @@ export const useUserInfo = () => {
     queryKey: ['userInfo'],
     queryFn: fetchUserInfo,
     staleTime: Infinity,
+    retry: 1,
   });
 };
