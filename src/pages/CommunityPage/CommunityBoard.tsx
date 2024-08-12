@@ -1,18 +1,25 @@
 import CommunityBoardItem from '@components/community/CommunityBoardItem';
 import { communityBoarditem } from '@/types/community';
+import { useNavigate } from 'react-router-dom';
 
 const CommunityBoard = () => {
   const dummyData: communityBoarditem = {
     id: 1,
-    title: 'asdf',
-    date: 2016,
+    title: '[여행 후기 게시글] 게시판 이용 안내(2024.05.02 업데이트)',
+    date: 20240613,
     author: 'faker',
+  };
+
+  const navigate = useNavigate();
+
+  const handlePostBtn = () => {
+    navigate('/community/post');
   };
 
   return (
     <div className="flex flex-col items-center gap-y-14">
       {/* set article filtering */}
-      <div className="flex w-[270px] justify-between">
+      <div className="flex w-[270px] justify-between pt-14">
         <button
           className="h-[50px] w-[120px] rounded-md border-2 border-mk-newgrey"
           type="button"
@@ -56,6 +63,7 @@ const CommunityBoard = () => {
             <button
               className="border-mk-darkgray h-10 w-[90px] rounded-md border-[1px]"
               type="button"
+              onClick={() => handlePostBtn()}
             >
               <span className="text-mk-darkgray">글쓰기</span>
             </button>

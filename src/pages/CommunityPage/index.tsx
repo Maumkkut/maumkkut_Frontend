@@ -1,7 +1,9 @@
 import ContentLayout from '@/layout/ContentLayout';
 import HeroImg from '@assets/images/community/Hero Section.png';
 import { NavLink } from 'react-router-dom';
-import CommunityBoard from '@/components/community/CommunityBoard';
+// import CommunityBoard from '@pages/CommunityPage/CommunityBoard';
+
+import { Outlet } from 'react-router-dom';
 
 const CommunityPage = () => {
   return (
@@ -22,7 +24,7 @@ const CommunityPage = () => {
         <nav className="w-[650px]">
           <ul className="flex justify-between">
             <li>
-              <NavLink to={'/'}>
+              <NavLink to={'/community'}>
                 <span className="text-mk-darkgray font-bold">전체 게시글</span>
               </NavLink>
             </li>
@@ -38,7 +40,7 @@ const CommunityPage = () => {
         </nav>
       </div>
       <div>
-        <CommunityBoard />
+        <Outlet />
       </div>
     </ContentLayout>
   );
