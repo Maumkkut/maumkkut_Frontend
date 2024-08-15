@@ -29,8 +29,10 @@ export const useUserInfo = () => {
   });
 };
 
-export const userInfoQueryHelper = queryOptions({
-  queryKey: ['userInfo'],
-  queryFn: fetchUserInfo,
-  staleTime: Infinity,
-});
+export function userInfoQueryHelper() {
+  return queryOptions({
+    queryKey: ['userInfo'],
+    queryFn: fetchUserInfo,
+    staleTime: Infinity,
+  });
+}

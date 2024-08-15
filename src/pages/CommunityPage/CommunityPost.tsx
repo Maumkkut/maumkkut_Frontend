@@ -21,8 +21,8 @@ const CommunityPost = () => {
   const { mutate } = usePostBoard();
 
   const communityPostSubmit = (formValues: PostType) => {
-    console.log(formValues);
-    const userData = queryClient.getQueryData(userInfoQueryHelper.queryKey);
+    const userData = queryClient.getQueryData(userInfoQueryHelper().queryKey);
+
     if (!userData) {
       return;
     }
@@ -32,7 +32,11 @@ const CommunityPost = () => {
       author: userData.pk,
       board_type: formValues.board_type,
     };
+
     mutate(payload);
+    queryClient.invalidateQueries({
+      queryKey: [`${formValues.board_type}board`],
+    });
   };
 
   const titleRegister = register('title', {
@@ -94,7 +98,7 @@ const CommunityPost = () => {
           />
         </div>
         <div className="flex w-full justify-center">
-          <button className="bg-mk-logo0 mt-14 h-[60px] w-[180px] text-mk-logo3">
+          <button className="mt-14 h-[60px] w-[180px] bg-mk-logo0 text-mk-logo3">
             작성
           </button>
         </div>

@@ -24,17 +24,17 @@ const CommunityPage = () => {
         <nav className="w-[650px]">
           <ul className="flex justify-between">
             <li className="flex h-[50px] w-[170px] items-center justify-center">
-              <NavLink to={'/community/all'}>
+              <NavLink to={'/community/all/1'}>
                 <span className="font-bold text-mk-darkgray">전체 게시글</span>
               </NavLink>
             </li>
             <li className="flex h-[50px] w-[170px] items-center justify-center">
-              <NavLink to={'/community/free'}>
+              <NavLink to={'/community/free/1'}>
                 <span className="font-bold text-mk-darkgray"> 게시글</span>
               </NavLink>
             </li>
             <li className="flex h-[50px] w-[170px] items-center justify-center">
-              <NavLink to={'/community/travel'}>
+              <NavLink to={'/community/travel/1'}>
                 <span className="font-bold text-mk-darkgray">
                   여행 후기 게시글
                 </span>

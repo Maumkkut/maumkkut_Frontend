@@ -1,7 +1,9 @@
 import CommunityBoardItem from '@components/community/CommunityBoardItem';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { useFetchBoard } from '@/hooks/queries/board';
 import { BoardItemInterface } from '@/types/community';
+import Pagination from '@/components/Pagination';
+import NoContents from '@pages/NoContents';
 
 const CommunityBoard = () => {
   // const dummyData: communityBoarditem = {
@@ -12,16 +14,28 @@ const CommunityBoard = () => {
   // };
   const location = useLocation();
   const navigate = useNavigate();
+  const { page } = useParams();
+
+  const currentPage = page ?? '1';
   const pathSegments = location.pathname.split('/');
 
-  const { data: boardData, isSuccess } = useFetchBoard(pathSegments[2]);
-
+  const { data: boardData, isSuccess } = useFetchBoard(
+    pathSegments[2],
+    currentPage,
+  );
   const handlePostBtn = () => {
     navigate('/community/post');
   };
 
+  if (isSuccess && boardData.results.length === 0) {
+    return <NoContents />;
+  }
+  if (!boardData) {
+    return <NoContents />;
+  }
+
   return (
-    <div className="flex flex-col items-center gap-y-14">
+    <div className="mb-40 flex flex-col items-center gap-y-14">
       {/* set article filtering */}
       <div className="flex w-[270px] justify-between pt-14">
         <button
@@ -107,6 +121,13 @@ const CommunityBoard = () => {
               />
             ))}
         </div>
+      </div>
+      <div>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={boardData?.total_count}
+          boardType={pathSegments[2]}
+        />
       </div>
     </div>
   );

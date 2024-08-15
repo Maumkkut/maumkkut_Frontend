@@ -2,7 +2,7 @@ export interface BoardItemInterface {
   id: number;
   title: string;
   content: string;
-  author: number;
+  author_username: string;
   created_at: string;
   board_type: string;
   comment_count: number;
@@ -13,4 +13,10 @@ export interface postBoardType {
   content: string;
   author: number;
   board_type: string;
+}
+
+export interface BoardPaginationInterface {
+  currentPage: string;
+  totalPages: number;
+  boardType: string;
 }

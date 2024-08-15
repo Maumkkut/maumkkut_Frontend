@@ -5,6 +5,7 @@ import SigninPage from '@/pages/SigninPage';
 import CommunityPage from '@pages/CommunityPage';
 import CommunityPost from '@pages/CommunityPage/CommunityPost';
 import CommunityBoard from '@pages/CommunityPage/CommunityBoard';
+import NotFound from '@/pages/NotFound';
 
 const routerInfo = [
   {
@@ -18,12 +19,13 @@ const routerInfo = [
         path: '/community',
         element: <CommunityPage />,
         children: [
-          { path: 'free', element: <CommunityBoard /> },
-          { path: 'travel', element: <CommunityBoard /> },
-          { path: 'all', element: <CommunityBoard /> },
+          { path: 'free/:page', element: <CommunityBoard /> },
+          { path: 'travel/:page', element: <CommunityBoard /> },
+          { path: 'all/:page', element: <CommunityBoard /> },
           { path: 'post', element: <CommunityPost /> },
         ],
       },
+      { path: '*', element: <NotFound /> },
     ],
   },
 ];

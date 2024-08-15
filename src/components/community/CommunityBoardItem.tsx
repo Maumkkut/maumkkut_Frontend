@@ -21,7 +21,7 @@ const CommunityBoardItem = ({ data }: { data: BoardItemInterface }) => {
       </div>
       {/* article author */}
       <div className="w-[152px] text-center">
-        <span className="text-xl text-mk-darkgray">{data.author}</span>
+        <span className="text-xl text-mk-darkgray">{data.author_username}</span>
       </div>
     </div>
   );
