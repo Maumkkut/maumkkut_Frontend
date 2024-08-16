@@ -25,6 +25,9 @@ const Pagination = ({
   }
 
   if (totalPages <= 50) {
+    if (pageNumbers.length === 1) {
+      return pageNumbers;
+    }
     pageNumbers.splice(0, pageNumbers.length, 1, Math.ceil(totalPages / 10));
   }
 

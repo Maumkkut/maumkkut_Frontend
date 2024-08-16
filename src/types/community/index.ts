@@ -20,3 +20,10 @@ export interface BoardPaginationInterface {
   totalPages: number;
   boardType: string;
 }
+
+export interface FetchBoardInterface {
+  total_count: number;
+  next: string | null;
+  previous: string | null;
+  results: object;
+}
