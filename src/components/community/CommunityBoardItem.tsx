@@ -6,7 +6,7 @@ const CommunityBoardItem = ({ data }: { data: BoardItemInterface }) => {
   const date = new Date(data.created_at);
 
   const handleContent = () => {
-    return navigate('/');
+    return navigate(`/community/${data.board_type}/detail/${data.id}/`);
   };
 
   return (

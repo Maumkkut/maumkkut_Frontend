@@ -74,8 +74,8 @@ const CommunityDetail = () => {
 
             {/* 댓글 contents */}
             {data.comments.length === 0 ? (
-              <div className="bg-mk-ligtgray mb-28 h-[240px] w-full px-12 py-8 text-xl">
-                <p>아직 댓글이 없어요!</p>
+              <div className="bg-mk-ligtgray mb-28 flex h-[240px] w-full items-center justify-center px-12 py-8 text-xl">
+                <p className="text-mk-darkgray">등록된 댓글이 없습니다.</p>
               </div>
             ) : (
               <div className="bg-mk-ligtgray mb-28 flex w-full flex-col gap-y-10 px-12 py-8 text-xl">
