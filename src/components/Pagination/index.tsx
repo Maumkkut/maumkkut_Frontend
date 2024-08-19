@@ -3,18 +3,21 @@ import { BoardPaginationInterface } from '@/types/community';
 
 const Pagination = ({
   currentPage,
-  totalPages,
+  totalContents,
   boardType,
 }: BoardPaginationInterface) => {
   const navigate = useNavigate();
-  const pageNumbers = [];
+  const pageNumbers: Array<number> = [];
   const pagesToShow = 5;
 
   let startPage = Math.max(
     1,
-    parseInt(currentPage) - Math.floor(pagesToShow / 2),
+    parseInt(currentPage) - Math.floor(pagesToShow / 2) - 1,
   );
-  const endPage = Math.min(totalPages, startPage + pagesToShow - 1);
+  const endPage = Math.min(
+    Math.ceil(totalContents / 10),
+    startPage + pagesToShow - 1,
+  );
 
   if (endPage - startPage + 1 < pagesToShow) {
     startPage = Math.max(1, endPage - pagesToShow + 1);
@@ -24,18 +27,16 @@ const Pagination = ({
     pageNumbers.push(i);
   }
 
-  if (totalPages <= 50) {
-    if (pageNumbers.length === 1) {
-      return pageNumbers;
-    }
-    pageNumbers.splice(0, pageNumbers.length, 1, Math.ceil(totalPages / 10));
+  if (totalContents <= 50) {
+    const insertNum = Math.ceil(totalContents / 10);
+    pageNumbers.splice(insertNum);
   }
 
   const handlePageChange = (number: number) => {
     if (number === 0) {
       return;
     }
-    if (pageNumbers.length < number) {
+    if (!pageNumbers.includes(number)) {
       return;
     }
     navigate(`/community/${boardType}/${number}`);

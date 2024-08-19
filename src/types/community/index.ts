@@ -17,7 +17,7 @@ export interface postBoardType {
 
 export interface BoardPaginationInterface {
   currentPage: string;
-  totalPages: number;
+  totalContents: number;
   boardType: string;
 }
 

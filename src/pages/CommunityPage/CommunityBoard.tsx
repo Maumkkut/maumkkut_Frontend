@@ -80,7 +80,7 @@ const CommunityBoard = () => {
       <div>
         <Pagination
           currentPage={currentPage}
-          totalPages={boardData?.total_count}
+          totalContents={boardData?.total_count}
           boardType={pathSegments[2]}
         />
       </div>
