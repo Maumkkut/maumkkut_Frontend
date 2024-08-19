@@ -1,5 +1,8 @@
 import ContentLayout from '@/layout/ContentLayout';
 import HeroImage from '@/assets/images/HomePage/HeroImage.png';
+import HeroImage2 from '@/assets/images/HomePage/HeroImage2.png';
+import HeroImage3 from '@/assets/images/HomePage/HeroImage3.png';
+import HeroImage4 from '@/assets/images/HomePage/HeroImage4.png';
 import dice from '@/assets/images/HomePage/dice.jpg';
 import sea from '@/assets/images/HomePage/sea.jpg';
 import eventIcon1 from '@/assets/images/HomePage/EventInGangwon1.png';
@@ -14,42 +17,16 @@ import course4 from '@/assets/images/HomePage/Course4.png';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useState } from 'react';
-import { Navigation } from 'swiper/modules';
+import { Pagination, Autoplay, Navigation } from 'swiper/modules';
 import 'swiper/css';
-import 'swiper/css/navigation';
+import 'swiper/css/autoplay';
+
 import './SwiperComponent.css'; // 추가: 스타일을 적용할 CSS 파일 화살표 위치 조정
 
 const HomePage = () => {
   return (
     <div>
-      {/* Hero Section */}
-      <div className="relative h-[610px] w-full overflow-hidden">
-        {/* Hero Image */}
-        <img
-          src={HeroImage}
-          alt="HeroImage"
-          className="h-full w-full object-cover"
-        />
-        {/* Hero Image 내부 글씨들 */}
-        <div className="absolute inset-0">
-          <ContentLayout>
-            {/* 작은 따옴표 그냥 쓰면 오류나서 &lsquo; 이용 */}
-            <div className="ms-36 mt-[152px]">
-              <div className="w-[888px] font-tantan text-[64px] text-mk-light">
-                <p>&lsquo;마음껏 함께, 모두&rsquo; 즐기는 여행</p>
-                <p>마음끗으로 떠나보세요</p>
-              </div>
-              <button className="mt-[36px] h-[52px] w-[179px] rounded bg-mk-logoPoint text-[20px] font-bold">
-                여행 시작하기
-              </button>
-              <p className="mt-[36px] font-dotum text-[15px] text-mk-light">
-                마음끗 : &lsquo;마음껏&rsquo;, 마카:&lsquo;모두&rsquo;라는 뜻의
-                강원도 사투리
-              </p>
-            </div>
-          </ContentLayout>
-        </div>
-      </div>
+      <HeroSection />
       <ContentLayout>
         {/* 서비스 바로가기 컴포넌트 */}
         <GoService />
@@ -62,6 +39,143 @@ const HomePage = () => {
     </div>
   );
 };
+const HeroSection = () => {
+  return (
+    <Swiper
+      modules={[Autoplay, Pagination]}
+      slidesPerView={1}
+      scrollbar={{ draggable: true }} // 드래그해서 움직이기 가능
+      pagination={{ clickable: true }}
+      autoplay={{ delay: 3000, disableOnInteraction: false }}
+    >
+      <SwiperSlide>
+        <HeroSection1 />
+      </SwiperSlide>
+      <SwiperSlide>
+        <HeroSection2 />
+      </SwiperSlide>
+      <SwiperSlide>
+        <HeroSection3 />
+      </SwiperSlide>
+      <SwiperSlide>
+        <HeroSection4 />
+      </SwiperSlide>
+    </Swiper>
+  );
+};
+
+const HeroSection1 = () => {
+  return (
+    <div className="relative h-[610px] w-full overflow-hidden">
+      {/* Hero Image */}
+      <img
+        src={HeroImage}
+        alt="HeroImage"
+        className="h-full w-full object-cover"
+      />
+      {/* Hero Image 내부 글씨들 */}
+      <div className="absolute inset-0">
+        <ContentLayout>
+          {/* 작은 따옴표 그냥 쓰면 오류나서 &lsquo; 이용 */}
+          <div className="ms-36 mt-[152px]">
+            <div className="w-[888px] font-tantan text-[64px] text-mk-light">
+              <p>&lsquo;마음껏 함께, 모두&rsquo; 즐기는 여행</p>
+              <p>마음끗으로 떠나보세요</p>
+            </div>
+            <button className="mt-[36px] h-[52px] w-[179px] rounded bg-mk-logoPoint text-[20px] font-bold text-mk-logo4">
+              여행 시작하기
+            </button>
+            <p className="mt-[36px] font-dotum text-[15px] text-mk-light">
+              마음끗 : &lsquo;마음껏&rsquo;, 마카:&lsquo;모두&rsquo;라는 뜻의
+              강원도 사투리
+            </p>
+          </div>
+        </ContentLayout>
+      </div>
+    </div>
+  );
+};
+
+const HeroSection2 = () => {
+  return (
+    <div className="relative h-[610px] w-full overflow-hidden">
+      {/* Hero Image */}
+      <img
+        src={HeroImage2}
+        alt="HeroImage2"
+        className="h-full w-full object-cover"
+      />
+      {/* Hero Image 내부 글씨들 */}
+      <div className="absolute inset-0">
+        <ContentLayout>
+          {/* 작은 따옴표 그냥 쓰면 오류나서 &lsquo; 이용 */}
+          <div className="ms-36 mt-[152px]">
+            <div className="w-[1000px] font-tantan text-[64px] text-mk-light">
+              <p>이번 여행지는 랜덤으로 정해볼까요?</p>
+            </div>
+            <button className="mt-[36px] h-[52px] w-[280px] rounded bg-mk-logoPoint text-[20px] font-bold text-mk-logo4">
+              랜덤 여행지 추천 바로가기
+            </button>
+          </div>
+        </ContentLayout>
+      </div>
+    </div>
+  );
+};
+const HeroSection3 = () => {
+  return (
+    <div className="relative h-[610px] w-full overflow-hidden">
+      {/* Hero Image */}
+      <img
+        src={HeroImage3}
+        alt="HeroImage3"
+        className="h-full w-full object-cover"
+      />
+      {/* Hero Image 내부 글씨들 */}
+      <div className="absolute inset-0">
+        <ContentLayout>
+          {/* 작은 따옴표 그냥 쓰면 오류나서 &lsquo; 이용 */}
+          <div className="ms-36 mt-[152px]">
+            <div className="w-[1000px] font-tantan text-[64px] text-mk-light">
+              <p>내 여행 MBTI는 뭘까?</p>
+            </div>
+            <button className="mt-[36px] h-[52px] w-[280px] rounded bg-mk-logoPoint text-[20px] font-bold text-mk-logo4">
+              여행 취향 테스트 바로가기
+            </button>
+          </div>
+        </ContentLayout>
+      </div>
+    </div>
+  );
+};
+
+const HeroSection4 = () => {
+  return (
+    <div className="relative h-[610px] w-full overflow-hidden">
+      {/* Hero Image */}
+      <img
+        src={HeroImage4}
+        alt="HeroImage4"
+        className="h-full w-full object-cover"
+      />
+      {/* Hero Image 내부 글씨들 */}
+      <div className="absolute inset-0">
+        <ContentLayout>
+          {/* 작은 따옴표 그냥 쓰면 오류나서 &lsquo; 이용 */}
+          <div className="ms-36 mt-[152px]">
+            <div className="w-[1200px] font-tantan text-[64px] text-mk-light">
+              <p>강원도 이곳 저곳을 방문하고 포인트 모아</p>
+              <p>행운 룰렛에 참여하세요</p>
+            </div>
+            <button className="mt-[36px] h-[52px] w-[221px] rounded bg-mk-logoPoint text-[20px] font-bold text-mk-logo4">
+              행운 룰렛 참여하기
+            </button>
+          </div>
+        </ContentLayout>
+      </div>
+    </div>
+  );
+};
 
 const GoService = () => {
   return (
@@ -69,8 +183,8 @@ const GoService = () => {
       <h2 className="font-tantan text-4xl text-mk-grey1">서비스 바로가기</h2>
       <div></div>
       <div className="me-[144px] ms-[144px] mt-[100px] flex h-[200px] justify-between">
-        <div className="relative w-[300px]">
-          <div className="h-full overflow-hidden rounded-lg">
+        <button className="relative w-[300px] hover:drop-shadow-2xl">
+          <div className="h-full w-full overflow-hidden rounded-lg">
             <img
               src={HeroImage}
               alt="HeroImage"
@@ -82,8 +196,8 @@ const GoService = () => {
           <h3 className="absolute inset-0 top-[82px] text-[28px] font-bold text-mk-light">
             강원도 이곳저곳
           </h3>
-        </div>
-        <div className="relative w-[300px]">
+        </button>
+        <button className="relative w-[300px] hover:drop-shadow-2xl">
           <div className="h-full overflow-hidden rounded-lg">
             <img
               src={sea}
@@ -95,9 +209,9 @@ const GoService = () => {
           <h3 className="absolute inset-0 top-[82px] text-[28px] font-bold text-mk-light">
             여행 취향 테스트
           </h3>
-        </div>
+        </button>
 
-        <div className="relative w-[300px]">
+        <button className="relative w-[300px] hover:drop-shadow-2xl">
           <div className="h-full overflow-hidden rounded-lg">
             <img
               src={sea}
@@ -109,10 +223,10 @@ const GoService = () => {
           <h3 className="absolute inset-0 top-[82px] text-[28px] font-bold text-mk-light">
             우리여행 코스추천
           </h3>
-        </div>
+        </button>
       </div>
       <div className="me-[144px] ms-[144px] mt-[100px] flex h-[200px] justify-between">
-        <div className="relative w-[300px]">
+        <button className="relative w-[300px] hover:drop-shadow-2xl">
           <div className="h-full overflow-hidden rounded-lg">
             <img
               src={dice}
@@ -125,8 +239,8 @@ const GoService = () => {
           <h3 className="absolute inset-0 top-[82px] text-[28px] font-bold text-mk-light">
             랜덤 여행지 추천
           </h3>
-        </div>
-        <div className="relative w-[300px]">
+        </button>
+        <button className="relative w-[300px] hover:drop-shadow-2xl">
           <div className="h-full overflow-hidden rounded-lg">
             <img
               src={sea}
@@ -138,9 +252,9 @@ const GoService = () => {
           <h3 className="absolute inset-0 top-[82px] text-[28px] font-bold text-mk-light">
             커뮤니티
           </h3>
-        </div>
+        </button>
 
-        <div className="relative w-[300px]">
+        <button className="relative w-[300px]">
           <div className="h-full overflow-hidden rounded-lg">
             <img
               src={sea}
@@ -152,7 +266,7 @@ const GoService = () => {
           <h3 className="absolute inset-0 top-[82px] text-[28px] font-bold text-mk-light">
             마이페이지
           </h3>
-        </div>
+        </button>
       </div>
     </div>
   );
