@@ -1,10 +1,20 @@
 import { BoardItemInterface } from '@/types/community';
+import { useNavigate } from 'react-router-dom';
 
 const CommunityBoardItem = ({ data }: { data: BoardItemInterface }) => {
+  const navigate = useNavigate();
   const date = new Date(data.created_at);
 
+  const handleContent = () => {
+    return navigate('/');
+  };
+
   return (
-    <div className="flex h-[50px] items-center border-b-[1px] border-mk-darkgray">
+    <div
+      className="flex h-[50px] cursor-pointer items-center border-b-[1px] border-mk-darkgray"
+      onClick={() => handleContent()}
+      aria-hidden="true"
+    >
       {/* article num */}
       <div className="w-[150px] text-center">
         <span className="text-xl text-mk-darkgray">{data.id}</span>

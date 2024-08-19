@@ -27,3 +27,16 @@ export interface FetchBoardInterface {
   previous: string | null;
   results: object;
 }
+
+export type TBoardComment = {
+  id: number;
+  content: string;
+  author_username: string;
+  created_at: string;
+  replies: Array<TBoardComment>;
+};
+
+export interface FetchBoardDetailInterface extends BoardItemInterface {
+  comments: Array<TBoardComment>;
+  liked_users_count: number;
+}
