@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import TestEntryPage from '@/pages/TravelTasteTest/TestEntryPage';
 import TestPage from '@/pages/TravelTasteTest/TestPage';
 import TestHistoryPage from '@/pages/TravelTasteTest/TestHistoryPage';
+import TestDetailPage from '@/pages/TravelTasteTest/TestDetailPage';
 import sea from '@/assets/images/TravelTasteTest/sea.jpg';
 import ContentLayout from '@/layout/ContentLayout';
 const TravelTasteTest = () => {
@@ -23,6 +24,10 @@ const TravelTasteTest = () => {
         <Route
           path="history"
           element={<TestHistoryPage />}
+        />
+        <Route
+          path="history/:historyId"
+          element={<TestDetailPage />}
         />
       </Routes>
     </>
