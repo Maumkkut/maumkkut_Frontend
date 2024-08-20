@@ -5,23 +5,17 @@ import { BoardItemInterface, FetchBoardInterface } from '@/types/community';
 import Pagination from '@/components/Pagination';
 import NoContents from '@pages/NoContents';
 
-const CommunityBoard = () => {
-  // const dummyData: communityBoarditem = {
-  //   id: 1,
-  //   title: '[여행 후기 게시글] 게시판 이용 안내(2024.05.02 업데이트)',
-  //   date: 20240613,
-  //   author: 'faker',
-  // };
-  const location = useLocation();
-  const { page } = useParams();
+type ParamsType = {
+  page: string;
+};
 
-  const currentPage = page ?? '1';
+const CommunityBoard = () => {
+  const location = useLocation();
+  const { page } = useParams() as ParamsType;
+
   const pathSegments = location.pathname.split('/');
 
-  const { data: boardData, isSuccess } = useFetchBoard(
-    pathSegments[2],
-    currentPage,
-  );
+  const { data: boardData, isSuccess } = useFetchBoard(pathSegments[2], page);
 
   if (isSuccess && boardData.results.length === 0) {
     return (
@@ -79,7 +73,7 @@ const CommunityBoard = () => {
       </div>
       <div>
         <Pagination
-          currentPage={currentPage}
+          currentPage={page}
           totalContents={boardData?.total_count}
           boardType={pathSegments[2]}
         />

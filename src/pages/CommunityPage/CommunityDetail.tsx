@@ -47,7 +47,7 @@ const CommunityDetail = () => {
         <div className="my-4 border-[1px]" />
         {/* 본문 */}
         <div className="py-9">
-          <p className="whitespace-normal text-xl">{data.content}</p>
+          <p className="whitespace-pre-line text-xl">{data.content}</p>
         </div>
         <div className="my-4 border-[1px]" />
         {/* 댓글 */}
@@ -74,11 +74,11 @@ const CommunityDetail = () => {
 
             {/* 댓글 contents */}
             {data.comments.length === 0 ? (
-              <div className="bg-mk-ligtgray mb-28 flex h-[240px] w-full items-center justify-center px-12 py-8 text-xl">
+              <div className="mb-28 flex h-[240px] w-full items-center justify-center bg-mk-ligtgray px-12 py-8 text-xl">
                 <p className="text-mk-darkgray">등록된 댓글이 없습니다.</p>
               </div>
             ) : (
-              <div className="bg-mk-ligtgray mb-28 flex w-full flex-col gap-y-10 px-12 py-8 text-xl">
+              <div className="mb-28 flex w-full flex-col gap-y-10 bg-mk-ligtgray px-12 py-8 text-xl">
                 {data.comments.map((item) => (
                   <CommunityComment
                     key={item.id}
