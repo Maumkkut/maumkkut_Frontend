@@ -4,6 +4,8 @@ import { useFetchBoard } from '@/hooks/queries/board';
 import { BoardItemInterface, FetchBoardInterface } from '@/types/community';
 import Pagination from '@/components/Pagination';
 import NoContents from '@pages/NoContents';
+import { SEARCH_PERIOD, SEARCH_TYPE } from '@/constants/boardType';
+import { useState } from 'react';
 
 type ParamsType = {
   page: string;
@@ -84,9 +86,30 @@ const CommunityBoard = () => {
 
 const CommunityToolbar = ({ data }: { data: FetchBoardInterface }) => {
   const navigate = useNavigate();
+  const [isSearchPeriodOpen, setSearchPeriodOpen] = useState(false);
+  const [isSearchTypeOpen, setSearchTypeOpen] = useState(false);
+  const [searchPeriod, setSearchPeriod] = useState('전체 기간');
+  const [searchType, setSearchType] = useState('제목');
 
   const handlePostBtn = () => {
     navigate('/community/post');
+  };
+
+  const handlePeriodDrop = () => {
+    setSearchPeriodOpen(!isSearchPeriodOpen);
+  };
+  const handleTypeDrop = () => {
+    setSearchTypeOpen(!isSearchTypeOpen);
+  };
+
+  const handlePeriod = (period: string) => {
+    setSearchPeriod(period);
+    setSearchPeriodOpen(false);
+  };
+
+  const handleType = (type: string) => {
+    setSearchType(type);
+    setSearchTypeOpen(false);
   };
 
   return (
@@ -116,13 +139,62 @@ const CommunityToolbar = ({ data }: { data: FetchBoardInterface }) => {
               개 글
             </span>
           </div>
-          <div className="flex items-center gap-x-5">
+          <div className="relative flex items-center gap-x-5">
             {/* dropdown */}
-            <div className="flex h-[50px] w-[150px] items-center justify-center border-[1px] border-mk-newgrey">
-              <span>전체 기간</span>
+            {/* 기간 옵션 */}
+            <div
+              className="flex h-[50px] w-[150px] items-center justify-center border-[1px] border-mk-newgrey"
+              onClick={() => handlePeriodDrop()}
+              aria-hidden="true"
+            >
+              <span className="grow pl-4 text-center">{searchPeriod}</span>
+
+              <span className="material-symbols-outlined cursor-pointer px-2">
+                {isSearchPeriodOpen ? 'arrow_drop_up' : 'arrow_drop_down'}
+              </span>
+              {isSearchPeriodOpen && (
+                <div className="absolute top-[50px]">
+                  {Object.keys(SEARCH_PERIOD).map((key) => {
+                    return (
+                      <div
+                        className="flex h-[50px] w-[150px] cursor-pointer items-center justify-center border-[1px] border-mk-newgrey bg-white"
+                        key={key}
+                        onClick={() => handlePeriod(key)}
+                        aria-hidden="true"
+                      >
+                        <span>{key}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
-            <div className="flex h-[50px] w-[150px] items-center justify-center border-[1px] border-mk-newgrey">
-              <span>제목 + 내용</span>
+            {/* 검색 옵션 */}
+            <div
+              className="flex h-[50px] w-[150px] items-center justify-center border-[1px] border-mk-newgrey"
+              onClick={() => handleTypeDrop()}
+              aria-hidden="true"
+            >
+              <span className="grow pl-4 text-center">{searchType}</span>
+              <span className="material-symbols-outlined cursor-pointer px-2">
+                {isSearchTypeOpen ? 'arrow_drop_up' : 'arrow_drop_down'}
+              </span>
+              {isSearchTypeOpen && (
+                <div className="absolute top-[50px]">
+                  {Object.keys(SEARCH_TYPE).map((key) => {
+                    return (
+                      <div
+                        className="flex h-[50px] w-[150px] cursor-pointer items-center justify-center border-[1px] border-mk-newgrey bg-white"
+                        key={key}
+                        onClick={() => handleType(key)}
+                        aria-hidden="true"
+                      >
+                        <span>{key}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
 
             {/* ect btn */}
