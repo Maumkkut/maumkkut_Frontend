@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import { usePostBoard } from '@/hooks/queries/board';
 import { useQueryClient } from '@tanstack/react-query';
 import { userInfoQueryHelper } from '@/hooks/queries/user';
+import { useNavigate } from 'react-router-dom';
+
 interface PostType {
   title: string;
   content: string;
@@ -12,15 +14,15 @@ interface PostType {
 const CommunityPost = () => {
   const {
     register,
-    // formState: { errors },
     handleSubmit,
     // resetField,
   } = useForm<PostType>();
 
   const queryClient = useQueryClient();
-  const { mutate } = usePostBoard();
+  const navigate = useNavigate();
+  const { mutateAsync } = usePostBoard();
 
-  const communityPostSubmit = (formValues: PostType) => {
+  const communityPostSubmit = async (formValues: PostType) => {
     const userData = queryClient.getQueryData(userInfoQueryHelper().queryKey);
 
     if (!userData) {
@@ -33,9 +35,13 @@ const CommunityPost = () => {
       board_type: formValues.board_type,
     };
 
-    mutate(payload);
-    queryClient.invalidateQueries({
-      queryKey: [`${formValues.board_type}board`],
+    mutateAsync(payload, {
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: [`${formValues.board_type}board`],
+        });
+        navigate(`/community/${formValues.board_type}/1`);
+      },
     });
   };
 

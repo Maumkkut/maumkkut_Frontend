@@ -7,7 +7,6 @@ import {
   postBoardComment,
   updateBoardComment,
 } from '@/api/board';
-import { useNavigate } from 'react-router-dom';
 
 export const useFetchBoard = (boardType: string, page: string) => {
   return useQuery({
@@ -37,13 +36,8 @@ export const useFetchBoardComment = (id: number) => {
 };
 
 export const usePostBoard = () => {
-  const navigate = useNavigate();
-
   return useMutation({
     mutationFn: postBoard,
-    onSuccess: async () => {
-      navigate('/community/free');
-    },
   });
 };
 

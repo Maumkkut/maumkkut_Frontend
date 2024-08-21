@@ -2,10 +2,12 @@ import ContentLayout from '@/layout/ContentLayout';
 import HeroImg from '@assets/images/community/Hero Section.png';
 import { NavLink } from 'react-router-dom';
 // import CommunityBoard from '@pages/CommunityPage/CommunityBoard';
+import { useLocation } from 'react-router-dom';
 
 import { Outlet } from 'react-router-dom';
 
 const CommunityPage = () => {
+  const location = useLocation();
   return (
     <ContentLayout>
       {/* Hero section */}
