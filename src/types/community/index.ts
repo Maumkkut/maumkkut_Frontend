@@ -36,6 +36,12 @@ export type TBoardComment = {
   replies: Array<TBoardComment>;
 };
 
+export type TcommentPayload = {
+  content: object;
+  postId: string;
+  commentId?: number;
+};
+
 export interface FetchBoardDetailInterface extends BoardItemInterface {
   comments: Array<TBoardComment>;
   liked_users_count: number;

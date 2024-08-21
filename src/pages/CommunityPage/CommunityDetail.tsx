@@ -3,11 +3,11 @@ import {
   // useFetchBoardComment,
 } from '@/hooks/queries/board';
 import { BOARD_TYPE } from '@/constants/boardType';
-
 import { useParams, useLocation } from 'react-router-dom';
 
 import LoadingPage from '@pages/LoadingPage';
 import CommunityComment from '@/components/community/CommunityComment';
+import CommentInput from '@/components/community/CommentInput';
 
 type ParamsType = {
   page: string;
@@ -63,14 +63,7 @@ const CommunityDetail = () => {
             </div>
 
             {/* 댓글 작성 input */}
-            <form className="flex h-14 w-full">
-              <textarea
-                name=""
-                id=""
-                className="grow resize-none border-[1px] px-4 py-1"
-              ></textarea>
-              <button className="w-[100px] bg-mk-logo2 text-white">작성</button>
-            </form>
+            <CommentInput commentType="comment" />
 
             {/* 댓글 contents */}
             {data.comments.length === 0 ? (
