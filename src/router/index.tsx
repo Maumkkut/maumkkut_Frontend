@@ -7,6 +7,7 @@ import CommunityPost from '@pages/CommunityPage/CommunityPost';
 import CommunityBoard from '@pages/CommunityPage/CommunityBoard';
 import NotFound from '@/pages/NotFound';
 import CommunityDetail from '@/pages/CommunityPage/CommunityDetail';
+import SocialLoadingPage from '@/pages/SocialLoadingPage';
 
 const routerInfo = [
   {
@@ -15,7 +16,11 @@ const routerInfo = [
     children: [
       { index: true, element: <HomePage /> },
       { path: '/signup', element: <SignupPage /> },
-      { path: '/signin', element: <SigninPage /> },
+      {
+        path: '/signin',
+        element: <SigninPage />,
+      },
+      { path: '/signin/loading', element: <SocialLoadingPage /> },
       {
         path: '/community',
         element: <CommunityPage />,

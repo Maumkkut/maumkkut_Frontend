@@ -159,8 +159,8 @@ const SigninPage = () => {
                   className="mt-7 cursor-pointer"
                   onClick={() => {
                     window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?
-		client_id=477831349954-rrpg2rhq9b1r3ttca8knt8e4oq71ekrc.apps.googleusercontent.com
-		&redirect_uri=http://localhost:8000/accounts/google/callback/
+		client_id=739668012102-7lgh5m9hcjacbncgadsog7nuva90lb92.apps.googleusercontent.com
+		&redirect_uri=http://localhost:5173/signin/loading
 		&response_type=code
 		&scope=email profile&access_type=offline`;
                   }}
