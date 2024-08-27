@@ -6,9 +6,14 @@ import CommunityReply from '@components/community/CommunityReply';
 
 const CommunityComment = ({ data }: { data: TBoardComment }) => {
   const [isEdit, setEdit] = useState(false);
+  const [isOpenReply, setOpenReply] = useState(false);
 
   const handleCommentEdit = () => {
     return setEdit(!isEdit);
+  };
+
+  const handleOpenReply = () => {
+    return setOpenReply(!isOpenReply);
   };
 
   return (
@@ -20,6 +25,7 @@ const CommunityComment = ({ data }: { data: TBoardComment }) => {
             commentType="commentEdit"
             commentId={data.id}
             handler={handleCommentEdit}
+            previousContent={data.content}
           />
         ) : (
           <p>{data.content}</p>
@@ -33,9 +39,29 @@ const CommunityComment = ({ data }: { data: TBoardComment }) => {
             수정
           </span>
           <span className="cursor-pointer">신고</span>
-          <span className="cursor-pointer">답글 달기</span>
+          <button
+            className="cursor-pointer"
+            onClick={() => handleOpenReply()}
+          >
+            답글 달기
+          </button>
         </div>
       </div>
+      {isOpenReply && (
+        <div className="flex items-center gap-x-8">
+          <span className="material-symbols-outlined text-mk-logo3">
+            subdirectory_arrow_right
+          </span>
+
+          <div className="flex flex-col gap-y-3">
+            <CommentInput
+              commentType={'reply'}
+              commentId={data.id}
+              handler={setOpenReply}
+            />
+          </div>
+        </div>
+      )}
       {data.replies.length !== 0 &&
         data.replies.map((item) => (
           <CommunityReply

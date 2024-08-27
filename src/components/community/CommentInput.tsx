@@ -4,7 +4,9 @@ import { useQueryClient } from '@tanstack/react-query';
 import { TcommentPayload } from '@/types/community';
 import {
   usePostBoardComment,
+  usePostBoardCommentReply,
   useUpdateBoardComment,
+  useUpdateBoardCommentReply,
 } from '@/hooks/queries/board';
 
 type ParamsType = {
@@ -16,15 +18,23 @@ type TComment = 'comment' | 'commentEdit' | 'reply' | 'replyEdit';
 interface ICommentInput {
   commentType: TComment;
   commentId?: number;
+  previousContent?: string;
   handler?: (flag: boolean) => void;
 }
 
-const CommentInput = ({ commentType, commentId, handler }: ICommentInput) => {
+const CommentInput = ({
+  commentType,
+  commentId,
+  previousContent,
+  handler,
+}: ICommentInput) => {
   const queryClient = useQueryClient();
   const { page: postId } = useParams() as ParamsType;
   const { register, handleSubmit, resetField } = useForm<TcommentPayload>();
   const { mutateAsync: commentMutate } = usePostBoardComment();
   const { mutateAsync: commentEditMutate } = useUpdateBoardComment();
+  const { mutateAsync: commentReplyMutate } = usePostBoardCommentReply();
+  const { mutateAsync: commentReplyEditMutate } = useUpdateBoardCommentReply();
 
   const commentSubmit = (formValues: TcommentPayload) => {
     const payload = {
@@ -35,17 +45,29 @@ const CommentInput = ({ commentType, commentId, handler }: ICommentInput) => {
 
     switch (commentType) {
       case 'comment':
+        console.log('Type comment');
         commentMutate(payload);
         break;
       case 'commentEdit':
         if (handler) {
+          console.log('Type comment Edit');
           commentEditMutate(payload);
           handler(false);
         }
         break;
       case 'reply':
+        if (handler) {
+          console.log('Type replyComment');
+          commentReplyMutate(payload);
+          handler(false);
+        }
         break;
       case 'replyEdit':
+        if (handler) {
+          console.log('Type replyComment Edit');
+          commentReplyEditMutate(payload);
+          handler(false);
+        }
         break;
     }
 
@@ -67,11 +89,12 @@ const CommentInput = ({ commentType, commentId, handler }: ICommentInput) => {
       className="flex h-14 w-full"
       onSubmit={handleSubmit(commentSubmit)}
     >
-      <textarea
+      <input
         id=""
         className="grow resize-none border-[1px] px-4 py-1"
         {...commentRegister}
-      ></textarea>
+        defaultValue={previousContent}
+      ></input>
       <button className="w-[100px] bg-mk-logo2 text-white">작성</button>
     </form>
   );

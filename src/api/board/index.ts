@@ -18,17 +18,14 @@ const fetchBoardSearch = async (
     ...(search_type && { search_type }),
     ...(content && { content }),
   };
-  console.log(params);
   const res = await instance.get(`board/posts/search/`, {
     params,
   });
-  console.log(res);
   return res.data;
 };
 
 // 게시판 게시글 조회
 const fetchBoard = async (boardType: string, page: string) => {
-  console.log(page, boardType);
   const res = await instance.get(`board/${boardType}/`, {
     params: {
       page: page,
@@ -42,9 +39,7 @@ const fetchBoardDetail = async (
   boardType: string,
   id: number,
 ): Promise<FetchBoardDetailInterface> => {
-  console.log(id, boardType);
   const res = await instance.get(`board/${boardType}/${id}`);
-  console.log(res.data);
   return res.data;
 };
 
@@ -52,7 +47,6 @@ const fetchBoardDetail = async (
 const fetchBoardComment = async (id: number) => {
   console.log(id);
   const res = await instance.get(`board/${id}/comments`);
-  console.log(res.data);
   return res.data;
 };
 
@@ -63,11 +57,31 @@ const postBoard = async (payload: postBoardType) => {
 
 // 게시판 댓글 작성
 const postBoardComment = async (payload: TcommentPayload) => {
+  console.log('comment palyload', payload);
   await instance.post(`board/${payload.postId}/comments/`, payload.content);
 };
 
 // 게시판 댓글 수정
 const updateBoardComment = async (payload: TcommentPayload) => {
+  console.log('copmment edit palyload', payload);
+  await instance.put(
+    `board/${payload.postId}/comments/${payload.commentId}/`,
+    payload.content,
+  );
+};
+
+// 게시판 대댓글 작성
+const postBoardCommentReply = async (payload: TcommentPayload) => {
+  console.log('reply palyload', payload);
+  await instance.post(
+    `board/${payload.postId}/comments/${payload.commentId}/detail/`,
+    payload.content,
+  );
+};
+
+// 게시판 대댓글 수정
+const updateBoardCommentReply = async (payload: TcommentPayload) => {
+  console.log('reply edit palyload', payload);
   await instance.put(
     `board/${payload.postId}/comments/${payload.commentId}/`,
     payload.content,
@@ -82,4 +96,6 @@ export {
   postBoardComment,
   updateBoardComment,
   fetchBoardSearch,
+  postBoardCommentReply,
+  updateBoardCommentReply,
 };
