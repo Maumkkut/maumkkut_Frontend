@@ -2,6 +2,7 @@ import ContentLayout from '@/layout/ContentLayout';
 import resultDefault from '@/assets/images/TravelTasteTest/resultDefault.png';
 import useTTTStore from '@/store/useTTTStore';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
 
 const TestHistoryPage = () => {
   const name: string = '호준';
@@ -24,10 +25,11 @@ const HistoryList = () => {
       {testResults.map((result, index) => (
         <HistoryCard
           key={result.id}
+          id={result.id}
           index={index}
           date={result.date}
           type={result.type}
-          description={result.description}
+          // description={result.description}
         />
       ))}
     </div>
@@ -35,15 +37,17 @@ const HistoryList = () => {
 };
 
 const HistoryCard = ({
+  id,
   index,
   date,
   type,
   // description,
 }: {
+  id: number;
   index: number;
   date: string;
   type: string;
-  description: string;
+  // description: string;
 }) => {
   const deleteDetail = (idx: number) => {
     Swal.fire({
@@ -86,15 +90,19 @@ const HistoryCard = ({
         </div>
         <div className="w-[250px] flex-col justify-between">
           <div className="mb-[20px] h-[60px] w-full">
-            <button className="h-full w-full rounded-[10px] bg-mk-logo3 text-[23px] text-white"
-            onClick={console.log}>
-              자세히 보기
-            </button>
+            <Link to={`history/${id}`}>
+              <button
+                className="h-full w-full rounded-[10px] bg-mk-logo3 text-[23px] text-white"
+                onClick={console.log}
+              >
+                자세히 보기
+              </button>
+            </Link>
           </div>
           <div className="h-[60px] w-full">
             <button
               className="h-full w-full rounded-[10px] border border-mk-logo3 text-[23px] text-[#6E6E6E]"
-              onClick={() => deleteDetail(0)} //나중에 0대신 유형 index들어가야함
+              onClick={() => deleteDetail(id)} //나중에 0대신 유형 index들어가야함
             >
               유형 삭제하기
             </button>
