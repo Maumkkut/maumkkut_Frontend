@@ -90,7 +90,7 @@ const HistoryCard = ({
         </div>
         <div className="w-[250px] flex-col justify-between">
           <div className="mb-[20px] h-[60px] w-full">
-            <Link to={`history/${id}`}>
+            <Link to={`${id}`}>
               <button
                 className="h-full w-full rounded-[10px] bg-mk-logo3 text-[23px] text-white"
                 onClick={console.log}

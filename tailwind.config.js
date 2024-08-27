@@ -4,6 +4,7 @@ export default {
   theme: {
     extend: {
       colors: {
+        'mk-logo0': '#E2F1F0',
         'mk-logo1': '#8BD9D1',
         'mk-logo2': '#04BFBF',
         'mk-logo3': '#038C8C',
