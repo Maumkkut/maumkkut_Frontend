@@ -26,7 +26,7 @@ const routerInfo = [
         element: <CommunityPage />,
         children: [
           // 전체 보기
-          { path: 'free/:page', element: <CommunityBoard /> },
+          { path: 'free', element: <CommunityBoard /> },
           { path: 'travel/:page', element: <CommunityBoard /> },
           { path: 'all/:page', element: <CommunityBoard /> },
           // 개별 디테일

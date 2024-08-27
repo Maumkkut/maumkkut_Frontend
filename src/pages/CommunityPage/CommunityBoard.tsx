@@ -1,25 +1,39 @@
 import CommunityBoardItem from '@components/community/CommunityBoardItem';
-import { useNavigate, useLocation, useParams } from 'react-router-dom';
-import { useFetchBoard } from '@/hooks/queries/board';
+import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
+import { useFetchBoardSearch } from '@/hooks/queries/board';
 import { BoardItemInterface, FetchBoardInterface } from '@/types/community';
 import Pagination from '@/components/Pagination';
 import NoContents from '@pages/NoContents';
 import { SEARCH_PERIOD, SEARCH_TYPE } from '@/constants/boardType';
-import { useState } from 'react';
-
-type ParamsType = {
-  page: string;
-};
+import React, { useEffect, useState } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 
 const CommunityBoard = () => {
+  const queryClient = useQueryClient();
   const location = useLocation();
-  const { page } = useParams() as ParamsType;
+  const [searchParams] = useSearchParams();
 
   const pathSegments = location.pathname.split('/');
+  const page = searchParams.get('page') || '1';
+  const days = searchParams.get('days') || null;
+  const search_type = searchParams.get('search_type') || null;
+  const content = searchParams.get('content') || null;
 
-  const { data: boardData, isSuccess } = useFetchBoard(pathSegments[2], page);
+  const { data: boardData, isSuccess } = useFetchBoardSearch(
+    pathSegments[2],
+    page,
+    days,
+    search_type,
+    content,
+  );
 
-  if (isSuccess && boardData.results.length === 0) {
+  useEffect(() => {
+    queryClient.invalidateQueries({
+      queryKey: [`${pathSegments[2]}board`, page],
+    });
+  }, [page, days, search_type, content, pathSegments, queryClient]);
+
+  if (isSuccess && boardData.length === 0) {
     return (
       <div className="mb-40 flex flex-col items-center gap-y-7">
         <CommunityToolbar data={boardData} />
@@ -65,7 +79,7 @@ const CommunityBoard = () => {
           </div>
           {/* board item */}
           {isSuccess &&
-            boardData.results.map((data: BoardItemInterface) => (
+            boardData.map((data: BoardItemInterface) => (
               <CommunityBoardItem
                 key={data.id}
                 data={data}
@@ -77,7 +91,7 @@ const CommunityBoard = () => {
         <Pagination
           currentPage={page}
           totalContents={boardData?.total_count}
-          boardType={pathSegments[2]}
+          boardType={'free'}
         />
       </div>
     </div>
@@ -86,10 +100,22 @@ const CommunityBoard = () => {
 
 const CommunityToolbar = ({ data }: { data: FetchBoardInterface }) => {
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const [isSearchPeriodOpen, setSearchPeriodOpen] = useState(false);
   const [isSearchTypeOpen, setSearchTypeOpen] = useState(false);
   const [searchPeriod, setSearchPeriod] = useState('전체 기간');
   const [searchType, setSearchType] = useState('제목');
+  const [searchContent, setSearchContent] = useState('');
+
+  const handleSearchBtn = () => {
+    searchParams.set('days', SEARCH_PERIOD[searchPeriod]);
+    searchParams.set('search_type', SEARCH_TYPE[searchType]);
+    searchParams.set('content', searchContent);
+
+    setSearchParams(searchParams);
+    console.log(searchParams);
+  };
 
   const handlePostBtn = () => {
     navigate('/community/post');
@@ -116,6 +142,10 @@ const CommunityToolbar = ({ data }: { data: FetchBoardInterface }) => {
     setSearchTypeOpen(!isSearchTypeOpen);
   };
 
+  const handleContent = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.value);
+    setSearchContent(event.target.value);
+  };
   const handlePeriod = (period: string) => {
     setSearchPeriod(period);
     setSearchPeriodOpen(false);
@@ -212,10 +242,14 @@ const CommunityToolbar = ({ data }: { data: FetchBoardInterface }) => {
             </button>
 
             {/* ect btn */}
-            <input className="h-[50px] w-[200px] rounded-md border-[1px] border-mk-newgrey"></input>
+            <input
+              className="h-[50px] w-[200px] rounded-md border-[1px] border-mk-newgrey px-3"
+              onChange={(event) => handleContent(event)}
+            ></input>
             <button
               className="h-10 w-[70px] rounded-md bg-mk-logo3"
               type="button"
+              onClick={() => handleSearchBtn()}
             >
               <span className="text-white">검색</span>
             </button>

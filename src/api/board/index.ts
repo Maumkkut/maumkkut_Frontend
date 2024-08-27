@@ -2,6 +2,30 @@ import { instance } from '@api/axios';
 import { postBoardType } from '@/types/community';
 import { FetchBoardDetailInterface } from '@/types/community';
 import { TcommentPayload } from '@/types/community';
+
+// 게시판 조회 & 검색
+const fetchBoardSearch = async (
+  boardType: string = 'all',
+  page: string = '1',
+  days: string | null = null,
+  search_type: string | null = null,
+  content: string | null = null,
+) => {
+  const params = {
+    board_type: boardType,
+    page,
+    ...(days && { days }),
+    ...(search_type && { search_type }),
+    ...(content && { content }),
+  };
+  console.log(params);
+  const res = await instance.get(`board/posts/search/`, {
+    params,
+  });
+  console.log(res);
+  return res.data;
+};
+
 // 게시판 게시글 조회
 const fetchBoard = async (boardType: string, page: string) => {
   console.log(page, boardType);
@@ -57,4 +81,5 @@ export {
   fetchBoardComment,
   postBoardComment,
   updateBoardComment,
+  fetchBoardSearch,
 };

@@ -43,7 +43,7 @@ const CommunityPage = () => {
                   : ''
               }`}
             >
-              <NavLink to={'/community/free/1'}>
+              <NavLink to={'/community/free?page=1'}>
                 <span className="font-bold text-mk-darkgray">자유 게시글</span>
               </NavLink>
             </li>

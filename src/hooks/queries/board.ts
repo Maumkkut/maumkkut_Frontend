@@ -1,12 +1,29 @@
 import { useQuery, useMutation, queryOptions } from '@tanstack/react-query';
 import {
   fetchBoard,
+  fetchBoardSearch,
   fetchBoardDetail,
   fetchBoardComment,
   postBoard,
   postBoardComment,
   updateBoardComment,
 } from '@/api/board';
+
+export const useFetchBoardSearch = (
+  boardType: string,
+  page: string,
+  days: string | null,
+  search_type: string | null,
+  content: string | null,
+) => {
+  return useQuery({
+    queryKey: [`${boardType}board`, page],
+    queryFn: () =>
+      fetchBoardSearch(boardType, page, days, search_type, content),
+    staleTime: 1000 * 60 * 10,
+    retry: 1,
+  });
+};
 
 export const useFetchBoard = (boardType: string, page: string) => {
   return useQuery({
