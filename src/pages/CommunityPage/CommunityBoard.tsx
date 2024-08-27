@@ -95,10 +95,24 @@ const CommunityToolbar = ({ data }: { data: FetchBoardInterface }) => {
     navigate('/community/post');
   };
 
-  const handlePeriodDrop = () => {
+  const handlePeriodDrop = (
+    e:
+      | React.MouseEvent<HTMLButtonElement>
+      | React.FocusEvent<HTMLButtonElement>,
+  ) => {
+    if (e.type === 'blur') {
+      return setSearchPeriodOpen(false);
+    }
     setSearchPeriodOpen(!isSearchPeriodOpen);
   };
-  const handleTypeDrop = () => {
+  const handleTypeDrop = (
+    e:
+      | React.MouseEvent<HTMLButtonElement>
+      | React.FocusEvent<HTMLButtonElement>,
+  ) => {
+    if (e.type === 'blur') {
+      return setSearchTypeOpen(false);
+    }
     setSearchTypeOpen(!isSearchTypeOpen);
   };
 
@@ -142,10 +156,10 @@ const CommunityToolbar = ({ data }: { data: FetchBoardInterface }) => {
           <div className="relative flex items-center gap-x-5">
             {/* dropdown */}
             {/* 기간 옵션 */}
-            <div
+            <button
               className="flex h-[50px] w-[150px] items-center justify-center border-[1px] border-mk-newgrey"
-              onClick={() => handlePeriodDrop()}
-              aria-hidden="true"
+              onClick={(e) => handlePeriodDrop(e)}
+              onBlur={(e) => handlePeriodDrop(e)}
             >
               <span className="grow pl-4 text-center">{searchPeriod}</span>
 
@@ -168,12 +182,12 @@ const CommunityToolbar = ({ data }: { data: FetchBoardInterface }) => {
                   })}
                 </div>
               )}
-            </div>
+            </button>
             {/* 검색 옵션 */}
-            <div
+            <button
               className="flex h-[50px] w-[150px] items-center justify-center border-[1px] border-mk-newgrey"
-              onClick={() => handleTypeDrop()}
-              aria-hidden="true"
+              onClick={(e) => handleTypeDrop(e)}
+              onBlur={(e) => handleTypeDrop(e)}
             >
               <span className="grow pl-4 text-center">{searchType}</span>
               <span className="material-symbols-outlined cursor-pointer px-2">
@@ -195,7 +209,7 @@ const CommunityToolbar = ({ data }: { data: FetchBoardInterface }) => {
                   })}
                 </div>
               )}
-            </div>
+            </button>
 
             {/* ect btn */}
             <input className="h-[50px] w-[200px] rounded-md border-[1px] border-mk-newgrey"></input>
