@@ -1,5 +1,6 @@
 import ContentLayout from '@/layout/ContentLayout';
 import resultDefault from '@/assets/images/TravelTasteTest/resultDefault.png';
+import { Link } from 'react-router-dom';
 
 const TestDetailPage = () => {
   return (
@@ -67,9 +68,11 @@ const SaveOrRetry = () => {
       <button className="h-full w-[150px] rounded-[6px] bg-mk-newgrey text-[15px] font-semibold text-white">
         결과 저장하기
       </button>
-      <button className="h-full w-[150px] rounded-[6px] bg-mk-newgrey text-[15px] font-semibold text-white">
-        다시 검사하기
-      </button>
+      <Link to={'/TravelTasteTest/test'}>
+        <button className="h-full w-[150px] rounded-[6px] bg-mk-newgrey text-[15px] font-semibold text-white">
+          다시 검사하기
+        </button>
+      </Link>
     </div>
   );
 };
