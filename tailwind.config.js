@@ -14,6 +14,7 @@ export default {
         'mk-grey1': '#4D4D4D',
         'mk-grey2': '#717171',
         'mk-grey3': '#666666',
+        'mk-darkgrey': '#6E6E6E',
         'mk-newgrey': '#B5B5B5',
         'mk-gangwon': '#CA0238',
         'mk-mint': '#8BD9D1',
