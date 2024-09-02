@@ -9,7 +9,7 @@ const SocialLoadingPage = () => {
 
   const handleSocialLogin = async (code: string) => {
     try {
-      const res = await instance.post('/google/callback/', null, {
+      const res = await instance.get('/accounts/google/callback/', {
         params: {
           code: code,
         },
