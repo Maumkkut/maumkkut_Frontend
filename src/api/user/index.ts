@@ -1,11 +1,14 @@
 import { instance } from '@api/axios';
 import { userSignin, userSignup } from '@/types/user';
+import { UserInfoOrNull } from '@/types/user';
 
 const socialLogin = async () => {
   instance.get('accounts/google/login/');
 };
 
-const fetchUserInfo = async () => {
+const fetchUserInfo = async (): Promise<UserInfoOrNull> => {
+  const access = sessionStorage.getItem('token');
+  if (!access) return null;
   const res = await instance.get('accounts/user/');
   return res.data;
 };

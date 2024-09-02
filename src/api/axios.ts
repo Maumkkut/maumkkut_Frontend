@@ -31,13 +31,6 @@ instance.interceptors.response.use(
     if (error.config.url === '/api/reissue' && statusCode === 400) {
       return Promise.reject(error);
     }
-    if (statusCode === 401) {
-      const res = await instance.post('/api/reissue');
-      sessionStorage.setItem('access', res.headers['access']);
-      error.config.headers['access'] = res.headers['access'];
-      const reResponse = await axios(error.config);
-      return reResponse;
-    }
     if (statusCode === 404) {
       console.log(404);
     }

@@ -14,4 +14,14 @@ interface userSignup {
   date_of_birth: number;
 }
 
-export type { userSignin, userSignup };
+interface UserInfoInterface {
+  pk: number;
+  username: number;
+  email: number;
+  first_name: string;
+  last_name: string;
+}
+
+type UserInfoOrNull = UserInfoInterface | null;
+
+export type { userSignin, userSignup, UserInfoOrNull };

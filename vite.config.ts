@@ -24,6 +24,10 @@ export default defineConfig({
       { find: '@data', replacement: path.resolve(__dirname, 'src/data') },
       { find: '@types', replacement: path.resolve(__dirname, 'src/types') },
       { find: '@layout', replacement: path.resolve(__dirname, 'src/layout') },
+      {
+        find: '@constants',
+        replacement: path.resolve(__dirname, 'src/constants'),
+      },
     ],
   },
 });

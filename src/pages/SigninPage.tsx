@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import { NavLink } from 'react-router-dom';
 import { useUserSignin } from '@/hooks/queries/user';
+// import { socialLogin } from '@/api/user';
 
 interface LoginType {
   id: string;
@@ -157,12 +158,9 @@ const SigninPage = () => {
                 <h3 className="text-lg text-mk-grey3">소셜 로그인</h3>
                 <button
                   className="mt-7 cursor-pointer"
+                  // onClick={() => socialLogin()}
                   onClick={() => {
-                    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?
-		client_id=477831349954-rrpg2rhq9b1r3ttca8knt8e4oq71ekrc.apps.googleusercontent.com
-		&redirect_uri=http://localhost:8000/accounts/google/callback/
-		&response_type=code
-		&scope=email profile&access_type=offline`;
+                    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${import.meta.env.VITE_GOOGLE_CLIENT_ID}&redirect_uri=${import.meta.env.VITE_GOOGLE_REDIRECT_URL}&response_type=code&scope=email profile&access_type=offline`;
                   }}
                 >
                   <img
