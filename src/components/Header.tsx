@@ -21,7 +21,7 @@ const Header = () => {
           {/* 추후 navlink 연결 필요 */}
           <div className="ml-[81px] flex w-[859px] justify-between font-dotum">
             <NavLink to={'/'}>강원도 이곳저곳</NavLink>
-            <NavLink to={'/'}>여행 취향 테스트</NavLink>
+            <NavLink to={'/TravelTasteTest'}>여행 취향 테스트</NavLink>
             <NavLink to={'/'}>우리여행 코스추천</NavLink>
             <NavLink to={'/'}>랜덤 여행지 추천</NavLink>
             <NavLink to={'/'}>커뮤니티</NavLink>
