@@ -9,6 +9,10 @@ import NotFound from '@/pages/NotFound';
 import CommunityDetail from '@/pages/CommunityPage/CommunityDetail';
 import SocialLoadingPage from '@/pages/SocialLoadingPage';
 import TravelTastTestPage from '@/pages/TravelTasteTest/TravelTastTestPage';
+import GroupTripPage from '@/pages/GroupTripPage';
+import RightSideBar from '@/pages/GroupTripPage/RightSideBar';
+
+import GroupMake from '@/pages/GroupTripPage/RightSideBar/GroupMake';
 
 const routerInfo = [
   {
@@ -42,6 +46,14 @@ const routerInfo = [
       { path: '/signin', element: <SigninPage /> },
       // TravelTasteTest 뒤에 뭐가 붙든 일단 TravelTasteTestPage로 감
       { path: '/TravelTasteTest/*', element: <TravelTastTestPage /> },
+      {
+        path: '/grouptrip/*',
+        element: <GroupTripPage />,
+        children: [
+          { path: '*', element: <RightSideBar /> },
+          { path: 'groupmake', element: <GroupMake /> },
+        ],
+      },
     ],
   },
 ];
