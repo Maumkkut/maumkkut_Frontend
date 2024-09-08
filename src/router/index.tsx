@@ -27,11 +27,11 @@ const routerInfo = [
       },
       { path: '/signin/loading', element: <SocialLoadingPage /> },
       {
-        path: '/community',
+        path: '/community/*',
         element: <CommunityPage />,
         children: [
           // 전체 보기
-          { path: 'free', element: <CommunityBoard /> },
+          { path: 'free/*', element: <CommunityBoard /> },
           { path: 'travel/:page', element: <CommunityBoard /> },
           { path: 'all/:page', element: <CommunityBoard /> },
           // 개별 디테일
