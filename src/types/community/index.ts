@@ -37,9 +37,13 @@ export type TBoardComment = {
 };
 
 export type TcommentPayload = {
-  content: object;
+  content?: object;
   postId: string;
   commentId?: number;
+};
+export type TcommentDeletePayload = {
+  postId: number;
+  commentId: number;
 };
 
 export interface FetchBoardDetailInterface extends BoardItemInterface {

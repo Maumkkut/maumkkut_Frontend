@@ -1,6 +1,9 @@
 import { instance } from '@api/axios';
 import { postBoardType } from '@/types/community';
-import { FetchBoardDetailInterface } from '@/types/community';
+import {
+  FetchBoardDetailInterface,
+  TcommentDeletePayload,
+} from '@/types/community';
 import { TcommentPayload } from '@/types/community';
 
 // 게시판 조회 & 검색
@@ -88,6 +91,13 @@ const updateBoardCommentReply = async (payload: TcommentPayload) => {
   );
 };
 
+// 게시판 댓글 삭제
+const deleteBoardComment = async (payload: TcommentDeletePayload) => {
+  await instance.delete(
+    `board/${payload.postId}/comments/${payload.commentId}/`,
+  );
+};
+
 export {
   fetchBoard,
   postBoard,
@@ -98,4 +108,5 @@ export {
   fetchBoardSearch,
   postBoardCommentReply,
   updateBoardCommentReply,
+  deleteBoardComment,
 };

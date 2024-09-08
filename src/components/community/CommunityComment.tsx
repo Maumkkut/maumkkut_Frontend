@@ -3,10 +3,24 @@ import { useState } from 'react';
 
 import CommentInput from '@components/community/CommentInput';
 import CommunityReply from '@components/community/CommunityReply';
+import { useDeleteBoardComment } from '@/hooks/queries/board';
+import { useQueryClient } from '@tanstack/react-query';
+import { useUserInfo } from '@/hooks/queries/user';
 
-const CommunityComment = ({ data }: { data: TBoardComment }) => {
+const CommunityComment = ({
+  data,
+  boardType,
+  postId,
+}: {
+  data: TBoardComment;
+  boardType: string;
+  postId: number;
+}) => {
   const [isEdit, setEdit] = useState(false);
   const [isOpenReply, setOpenReply] = useState(false);
+  const queryClient = useQueryClient();
+  const { mutate: deleteCommentMutation } = useDeleteBoardComment();
+  const { data: userData } = useUserInfo();
 
   const handleCommentEdit = () => {
     return setEdit(!isEdit);
@@ -14,6 +28,20 @@ const CommunityComment = ({ data }: { data: TBoardComment }) => {
 
   const handleOpenReply = () => {
     return setOpenReply(!isOpenReply);
+  };
+
+  const handleCommentDelete = () => {
+    const payload = {
+      postId: postId,
+      commentId: data.id,
+    };
+    deleteCommentMutation(payload, {
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: [`${boardType}boardDetail`, postId],
+        });
+      },
+    });
   };
 
   return (
@@ -38,9 +66,17 @@ const CommunityComment = ({ data }: { data: TBoardComment }) => {
           >
             수정
           </span>
-          <span className="cursor-pointer">신고</span>
+          {data.author_username === userData?.username && (
+            <button
+              className="cursor-pointer"
+              onClick={() => handleCommentDelete()}
+            >
+              삭제
+            </button>
+          )}
+          {/* <span className="cursor-pointer">신고</span> */}
           <button
-            className="cursor-pointer"
+            className="cursor-pointer text-mk-logo3"
             onClick={() => handleOpenReply()}
           >
             답글 달기
@@ -68,6 +104,8 @@ const CommunityComment = ({ data }: { data: TBoardComment }) => {
             key={item.id}
             data={item}
             parent_author={data.author_username}
+            boardType={boardType}
+            postId={postId}
           />
         ))}
     </div>

@@ -9,6 +9,7 @@ import {
   updateBoardComment,
   postBoardCommentReply,
   updateBoardCommentReply,
+  deleteBoardComment,
 } from '@/api/board';
 
 export const useFetchBoardSearch = (
@@ -81,6 +82,12 @@ export const usePostBoardCommentReply = () => {
 export const useUpdateBoardCommentReply = () => {
   return useMutation({
     mutationFn: updateBoardCommentReply,
+  });
+};
+
+export const useDeleteBoardComment = () => {
+  return useMutation({
+    mutationFn: deleteBoardComment,
   });
 };
 

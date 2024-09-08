@@ -76,6 +76,8 @@ const CommunityDetail = () => {
                   <CommunityComment
                     key={item.id}
                     data={item}
+                    boardType={data.board_type}
+                    postId={data.id}
                   />
                 ))}
               </div>
