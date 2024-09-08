@@ -6,7 +6,7 @@ import {
   useMap,
   CustomOverlayMap,
 } from 'react-kakao-maps-sdk';
-import pin from '@assets/images/GroupTrip/pin.svg';
+import pin from '@assets/images/GroupTrip/Marker.svg';
 import { useMemo, useState } from 'react';
 
 interface trip {
@@ -36,8 +36,8 @@ const Kakaomap = ({ data }: { data: Array<trip> }) => {
       id="map"
       className="h-[400px] w-full"
       center={{
-        lat: 37.7343114116,
-        lng: 128.9904199396,
+        lat: data[0].mapy,
+        lng: data[0].mapx,
       }}
       level={5}
     >
@@ -49,13 +49,14 @@ const Kakaomap = ({ data }: { data: Array<trip> }) => {
           })),
         ]}
         strokeWeight={5}
-        strokeColor={'#038C8C'}
+        strokeColor={'#CA0238'}
         strokeOpacity={1}
         strokeStyle={'solid'}
       />
-      {data.map((location) => (
+      {data.map((location, index) => (
         <CustomMarker
           key={location.addr1}
+          index={index}
           data={location}
         />
       ))}
@@ -64,7 +65,7 @@ const Kakaomap = ({ data }: { data: Array<trip> }) => {
   );
 };
 
-const CustomMarker = ({ data }: { data: trip }) => {
+const CustomMarker = ({ data, index }: { data: trip; index: number }) => {
   CustomOverlayMap;
   const [isOpen, setIsOpen] = useState(false);
 
@@ -92,19 +93,41 @@ const CustomMarker = ({ data }: { data: trip }) => {
             lng: data.mapx,
           }}
         >
-          <div className="absolute -top-20 left-4 rounded-md bg-white p-3">
-            <div className="flex gap-x-3">
-              <span>test</span>
-              <button onClick={() => setIsOpen(false)}>닫기</button>
-            </div>
-            <div className="flex flex-col">
-              <span>장소 : {data.title}</span>
-              <span>주소 : {data.addr1}</span>
-            </div>
-          </div>
+          <CustomeInfo
+            handler={setIsOpen}
+            index={index}
+            title={data.title}
+          />
         </CustomOverlayMap>
       )}
     </>
+  );
+};
+
+const CustomeInfo = ({
+  handler,
+  index,
+  title,
+}: {
+  handler: (arg: boolean) => void;
+  index: number;
+  title: string;
+}) => {
+  return (
+    <div className="absolute -top-20 left-4 flex min-h-[50px] w-[250px] rounded-md bg-white text-sm">
+      <div className="flex items-center justify-center bg-mk-logo1 px-2">
+        <p>{index + 1}</p>
+      </div>
+      <div className="flex grow items-center justify-center text-wrap px-4">
+        <p>{title}</p>
+      </div>
+      <button
+        className="flex items-center justify-center px-2"
+        onClick={() => handler(false)}
+      >
+        <span className="material-symbols-outlined">close</span>
+      </button>
+    </div>
   );
 };
 
