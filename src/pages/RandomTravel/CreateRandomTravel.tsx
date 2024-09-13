@@ -1,4 +1,5 @@
 import ContentLayout from '@/layout/ContentLayout';
+// import useRTStore from '@/store/useRTStore';
 import { Link } from 'react-router-dom';
 
 const CreateRandomTravel = () => {
@@ -29,6 +30,7 @@ const CreateOrMy = () => {
 };
 
 const SelectStart = () => {
+  // const { startPos } = useRTStore();
   return (
     <>
       <div className="mx-auto my-[80px] text-center">
@@ -40,6 +42,7 @@ const SelectStart = () => {
           <hr className="w-[30%] border-t border-black" />
         </div>
       </div>
+      <div></div>
     </>
   );
 };
