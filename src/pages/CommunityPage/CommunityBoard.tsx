@@ -80,7 +80,7 @@ const CommunityBoard = () => {
           </div>
           {/* board item */}
           {isSuccess &&
-            boardData.results.map((data: BoardItemInterface) => (
+            boardData?.results.map((data: BoardItemInterface) => (
               <CommunityBoardItem
                 key={data.id}
                 data={data}
