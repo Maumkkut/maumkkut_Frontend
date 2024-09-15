@@ -33,7 +33,7 @@ const CommunityBoard = () => {
     });
   }, [page, days, search_type, content, pathSegments, queryClient]);
 
-  if (isSuccess && boardData.results.length === 0) {
+  if (!boardData) {
     return (
       <div className="mb-40 flex flex-col items-center gap-y-7">
         <CommunityToolbar data={boardData} />
@@ -41,7 +41,8 @@ const CommunityBoard = () => {
       </div>
     );
   }
-  if (!boardData) {
+
+  if (isSuccess && boardData?.total_count === 0) {
     return (
       <div className="mb-40 flex flex-col items-center gap-y-7">
         <CommunityToolbar data={boardData} />
