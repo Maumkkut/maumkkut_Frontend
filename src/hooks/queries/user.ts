@@ -15,7 +15,11 @@ export const useUserSignin = () => {
     mutationFn: originSignin,
     onSuccess: async (data) => {
       sessionStorage.setItem('token', data);
+      fetchUserInfo;
       navigate('/');
+    },
+    onError: () => {
+      alert('아이디 또는 비밀번호가 일치하지 않습니다.');
     },
   });
 };
