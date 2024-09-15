@@ -50,16 +50,18 @@ const CommunityReply = ({
       <div className="flex flex-col gap-y-3">
         <div className="flex gap-x-3">
           <span className="font-bold">{data.author_username}</span>
-          <button
-            className="text-mk-newgrey"
-            onClick={() => handleCommentEdit()}
-          >
-            수정
-          </button>
+          {data.author_username === userData?.username && (
+            <button
+              className="text-mk-newgrey"
+              onClick={() => handleCommentEdit()}
+            >
+              수정
+            </button>
+          )}
 
           {data.author_username === userData?.username && (
             <button
-              className="cursor-pointer"
+              className="text-mk-newgrey"
               onClick={() => handleCommentDelete()}
             >
               삭제

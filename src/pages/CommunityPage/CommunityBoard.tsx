@@ -33,7 +33,7 @@ const CommunityBoard = () => {
     });
   }, [page, days, search_type, content, pathSegments, queryClient]);
 
-  if (isSuccess && boardData.length === 0) {
+  if (isSuccess && boardData.results.length === 0) {
     return (
       <div className="mb-40 flex flex-col items-center gap-y-7">
         <CommunityToolbar data={boardData} />
@@ -79,7 +79,7 @@ const CommunityBoard = () => {
           </div>
           {/* board item */}
           {isSuccess &&
-            boardData.map((data: BoardItemInterface) => (
+            boardData.results.map((data: BoardItemInterface) => (
               <CommunityBoardItem
                 key={data.id}
                 data={data}

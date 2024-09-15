@@ -24,7 +24,7 @@ const fetchBoardSearch = async (
   const res = await instance.get(`board/${boardType}/`, {
     params,
   });
-  return res.data.results;
+  return res.data;
 };
 
 // // 게시판 게시글 조회

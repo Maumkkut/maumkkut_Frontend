@@ -59,13 +59,15 @@ const CommunityComment = ({
           <p>{data.content}</p>
         )}
         <div className="flex items-center gap-x-3 text-mk-newgrey">
-          <span
-            className="cursor-pointer"
-            onClick={() => handleCommentEdit()}
-            aria-hidden="true"
-          >
-            수정
-          </span>
+          {data.author_username === userData?.username && (
+            <button
+              className="cursor-pointer"
+              onClick={() => handleCommentEdit()}
+              aria-hidden="true"
+            >
+              수정
+            </button>
+          )}
           {data.author_username === userData?.username && (
             <button
               className="cursor-pointer"
