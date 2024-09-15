@@ -14,7 +14,15 @@ const fetchUserInfo = async (): Promise<UserInfoOrNull> => {
 };
 
 const originSignup = async (payload: userSignup) => {
-  await instance.post('accounts/registration/', payload);
+  const res = await instance
+    .post('accounts/registration/', payload)
+    .then(() => {
+      return true;
+    })
+    .catch(() => {
+      return false;
+    });
+  return res;
 };
 
 const originSignin = async (payload: userSignin) => {
@@ -22,4 +30,41 @@ const originSignin = async (payload: userSignin) => {
   return res.data.key;
 };
 
-export { socialLogin, originSignup, originSignin, fetchUserInfo };
+const fetchcheckUserName = async (username: string) => {
+  const params = {
+    username: username,
+  };
+  const res = await instance
+    .get('accounts/check/username/', { params })
+    .then(() => {
+      return true;
+    })
+    .catch(() => {
+      return false;
+    });
+  return res;
+};
+
+const fetchcheckNickname = async (nickname: string) => {
+  const params = {
+    nickname: nickname,
+  };
+  const res = await instance
+    .get('accounts/check/nickname/', { params })
+    .then(() => {
+      return true;
+    })
+    .catch(() => {
+      return false;
+    });
+  return res;
+};
+
+export {
+  socialLogin,
+  originSignup,
+  originSignin,
+  fetchUserInfo,
+  fetchcheckUserName,
+  fetchcheckNickname,
+};

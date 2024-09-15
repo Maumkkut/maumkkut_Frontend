@@ -8,6 +8,9 @@ import { ErrorMessage } from '@hookform/error-message';
 import { useState } from 'react';
 import { originSignup } from '@/api/user';
 
+import { fetchcheckNickname, fetchcheckUserName } from '@/api/user';
+import { useNavigate } from 'react-router-dom';
+
 interface SignupType {
   id: string;
   password: string;
@@ -28,6 +31,15 @@ interface SignupType {
 const SignupPage = () => {
   const [isCheckId, setCheckId] = useState(false);
   const [isCheckNickname, setCheckNickname] = useState(false);
+  const navigate = useNavigate();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    resetField,
+    watch,
+    setValue,
+  } = useForm<SignupType>();
 
   // 다음 주소찾기 API
   const openAddressPopup = useDaumPostcodePopup();
@@ -37,25 +49,21 @@ const SignupPage = () => {
   };
 
   const handleComplete = (data: { zonecode: string; address: string }) => {
-    const postalCodeInput = document.getElementById(
-      'postalCode',
-    ) as HTMLInputElement;
-    const addressInput = document.getElementById('address') as HTMLInputElement;
-    postalCodeInput.value = data.zonecode;
-    addressInput.value = data.address;
+    setValue('postalCode', data.zonecode);
+    setValue('address', data.address);
   };
-  //
 
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-    resetField,
-  } = useForm<SignupType>();
+  const usernameInput = watch('id');
+  const nicknameInput = watch('nickname');
 
-  const signupSubmit = (formValues: SignupType) => {
-    resetField('id');
-    resetField('password');
+  const signupSubmit = async (formValues: SignupType) => {
+    if (!isCheckId) {
+      return alert('아이디 중복체크는 필수입니다!');
+    }
+    if (!isCheckNickname) {
+      return alert('닉네임 중복체크는 필수입니다!');
+    }
+
     const payload = {
       username: formValues.id,
       email: formValues.email,
@@ -72,7 +80,21 @@ const SignupPage = () => {
       nickname: formValues.nickname,
       date_of_birth: formValues.birth_date,
     };
-    originSignup(payload);
+    const res = await originSignup(payload);
+    if (!res) {
+      return alert('회원가입 중 오류가 발생했습니다. 나중에 다시 시도해주세요');
+    }
+    resetField('id');
+    resetField('email');
+    resetField('password');
+    resetField('confirm_password');
+    resetField('name');
+    resetField('phone_number');
+    resetField('address');
+    resetField('nickname');
+    resetField('birth_date');
+    navigate('/signin');
+    return alert('회원가입을 성공했습니다. 로그인을 해주세요');
   };
 
   const idRegister = register('id', {
@@ -171,13 +193,27 @@ const SignupPage = () => {
     },
   });
 
-  const checkId = () => {
-    // 중복확인 후 다시누르는 거 금지하는 로직추가필요
-    setCheckId(!isCheckId);
+  const checkId = async () => {
+    if (isCheckId) return;
+    if (!usernameInput) return;
+    const res = await fetchcheckUserName(usernameInput);
+    if (!res) {
+      return alert('이미 사용 중인 아이디입니다.');
+    }
+    alert('사용가능한 아이디입니다!');
+    setCheckId(true);
   };
 
-  const checkNickname = () => {
-    setCheckNickname(!isCheckNickname);
+  const checkNickname = async () => {
+    if (isCheckNickname) return;
+    if (!nicknameInput) return;
+
+    const res = await fetchcheckNickname(nicknameInput);
+    if (!res) {
+      return alert('이미 사용 중인 닉네임입니다.');
+    }
+    alert('사용가능한 닉네임입니다!');
+    setCheckNickname(true);
   };
 
   return (
