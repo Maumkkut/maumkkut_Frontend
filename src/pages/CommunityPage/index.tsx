@@ -32,7 +32,7 @@ const CommunityPage = () => {
                   : ''
               }`}
             >
-              <NavLink to={'/community/all/1'}>
+              <NavLink to={'/community/all?page=1'}>
                 <span className="font-bold text-mk-darkgray">전체 게시글</span>
               </NavLink>
             </li>
@@ -54,7 +54,7 @@ const CommunityPage = () => {
                   : ''
               }`}
             >
-              <NavLink to={'/community/travel/1'}>
+              <NavLink to={'/community/travel?page=1'}>
                 <span className="font-bold text-mk-darkgray">
                   여행 후기 게시글
                 </span>

@@ -32,8 +32,8 @@ const routerInfo = [
         children: [
           // 전체 보기
           { path: 'free/*', element: <CommunityBoard /> },
-          { path: 'travel/:page', element: <CommunityBoard /> },
-          { path: 'all/:page', element: <CommunityBoard /> },
+          { path: 'travel/*', element: <CommunityBoard /> },
+          { path: 'all/*', element: <CommunityBoard /> },
           // 개별 디테일
           { path: 'free/detail/:page', element: <CommunityDetail /> },
           { path: 'travel/detail/:page', element: <CommunityDetail /> },
