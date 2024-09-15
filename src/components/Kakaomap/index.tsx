@@ -148,8 +148,11 @@ const ReSetttingMapBounds = ({
 
   return (
     <p>
-      <button onClick={() => map.setBounds(bounds)}>
-        지도 범위 재설정 하기
+      <button
+        className="mt-4 w-full rounded-lg bg-mk-logo3 py-5 text-white"
+        onClick={() => map.setBounds(bounds)}
+      >
+        지도 한 눈에 보기
       </button>
     </p>
   );
