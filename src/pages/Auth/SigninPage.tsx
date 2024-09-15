@@ -6,7 +6,7 @@ import ContentLayout from '@/layout/ContentLayout';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import { NavLink } from 'react-router-dom';
-import { useUserSignin } from '@/hooks/queries/user';
+import { useUserSignin, useUserInfo } from '@/hooks/queries/user';
 // import { socialLogin } from '@/api/user';
 
 interface LoginType {
@@ -15,7 +15,9 @@ interface LoginType {
 }
 
 const SigninPage = () => {
-  const { mutate: signinMutate } = useUserSignin();
+  const { mutateAsync: signinMutate } = useUserSignin();
+  const { refetch } = useUserInfo();
+
   const {
     register,
     formState: { errors },
@@ -23,13 +25,14 @@ const SigninPage = () => {
     // resetField,
   } = useForm<LoginType>();
 
-  const signinSubmit = (formValues: LoginType) => {
+  const signinSubmit = async (formValues: LoginType) => {
     const payload = {
       username: formValues.id,
       password: formValues.password,
     };
 
-    signinMutate(payload);
+    await signinMutate(payload);
+    refetch();
   };
 
   const idRegister = register('id', {
