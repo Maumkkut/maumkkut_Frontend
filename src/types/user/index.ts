@@ -16,7 +16,7 @@ interface userSignup {
 
 interface UserInfoInterface {
   pk: number;
-  username: number;
+  username: string;
   email: number;
   first_name: string;
   last_name: string;

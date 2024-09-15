@@ -28,7 +28,11 @@ const SocialLoadingPage = () => {
       console.log('로그인 재시도하세요.');
     }
   }, [code, navigate]);
-  return;
+  return (
+    <div>
+      <p>카카오 로그인 중...</p>
+    </div>
+  );
 };
 
 export default SocialLoadingPage;

@@ -1,6 +1,10 @@
 import { instance } from '@api/axios';
 import { postBoardType } from '@/types/community';
-import { FetchBoardDetailInterface } from '@/types/community';
+import {
+  FetchBoardDetailInterface,
+  TcommentDeletePayload,
+  TlikePayload,
+} from '@/types/community';
 import { TcommentPayload } from '@/types/community';
 
 // 게시판 조회 & 검색
@@ -18,21 +22,21 @@ const fetchBoardSearch = async (
     ...(search_type && { search_type }),
     ...(content && { content }),
   };
-  const res = await instance.get(`board/posts/search/`, {
+  const res = await instance.get(`board/${boardType}/`, {
     params,
   });
   return res.data;
 };
 
-// 게시판 게시글 조회
-const fetchBoard = async (boardType: string, page: string) => {
-  const res = await instance.get(`board/${boardType}/`, {
-    params: {
-      page: page,
-    },
-  });
-  return res.data;
-};
+// // 게시판 게시글 조회
+// const fetchBoard = async (boardType: string, page: string) => {
+//   const res = await instance.get(`board/${boardType}/`, {
+//     params: {
+//       page: page,
+//     },
+//   });
+//   return res.data;
+// };
 
 // 게시판 게시글 상세 조회
 const fetchBoardDetail = async (
@@ -88,8 +92,22 @@ const updateBoardCommentReply = async (payload: TcommentPayload) => {
   );
 };
 
+// 게시판 댓글 삭제
+const deleteBoardComment = async (payload: TcommentDeletePayload) => {
+  await instance.delete(
+    `board/${payload.postId}/comments/${payload.commentId}/`,
+  );
+};
+
+// 게시글 좋아요
+
+const postLiked = async (payload: TlikePayload) => {
+  await instance.post(`board/${payload.boardType}/${payload.postId}/like/`);
+};
+
 export {
-  fetchBoard,
+  // fetchBoard,
+  postLiked,
   postBoard,
   fetchBoardDetail,
   fetchBoardComment,
@@ -98,4 +116,5 @@ export {
   fetchBoardSearch,
   postBoardCommentReply,
   updateBoardCommentReply,
+  deleteBoardComment,
 };
