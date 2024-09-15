@@ -21,21 +21,21 @@ const fetchBoardSearch = async (
     ...(search_type && { search_type }),
     ...(content && { content }),
   };
-  const res = await instance.get(`board/posts/search/`, {
+  const res = await instance.get(`board/${boardType}/`, {
     params,
   });
-  return res.data;
+  return res.data.results;
 };
 
-// 게시판 게시글 조회
-const fetchBoard = async (boardType: string, page: string) => {
-  const res = await instance.get(`board/${boardType}/`, {
-    params: {
-      page: page,
-    },
-  });
-  return res.data;
-};
+// // 게시판 게시글 조회
+// const fetchBoard = async (boardType: string, page: string) => {
+//   const res = await instance.get(`board/${boardType}/`, {
+//     params: {
+//       page: page,
+//     },
+//   });
+//   return res.data;
+// };
 
 // 게시판 게시글 상세 조회
 const fetchBoardDetail = async (
@@ -99,7 +99,7 @@ const deleteBoardComment = async (payload: TcommentDeletePayload) => {
 };
 
 export {
-  fetchBoard,
+  // fetchBoard,
   postBoard,
   fetchBoardDetail,
   fetchBoardComment,
