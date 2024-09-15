@@ -1,3 +1,5 @@
+import AuthGuard from '@router/AuthGuard';
+
 import HomePage from '@pages/HomePage';
 import GlobalLayout from '@layout/GlobalLayout';
 import SignupPage from '@/pages/Auth/SignupPage';
@@ -20,12 +22,30 @@ const routerInfo = [
     element: <GlobalLayout />,
     children: [
       { index: true, element: <HomePage /> },
-      { path: '/signup', element: <SignupPage /> },
+      {
+        path: '/signup',
+        element: (
+          <AuthGuard auth={false}>
+            <SignupPage />
+          </AuthGuard>
+        ),
+      },
       {
         path: '/signin',
-        element: <SigninPage />,
+        element: (
+          <AuthGuard auth={false}>
+            <SigninPage />
+          </AuthGuard>
+        ),
       },
-      { path: '/signin/loading', element: <SocialLoadingPage /> },
+      {
+        path: '/signin/loading',
+        element: (
+          <AuthGuard auth={false}>
+            <SocialLoadingPage />
+          </AuthGuard>
+        ),
+      },
       {
         path: '/community/*',
         element: <CommunityPage />,
@@ -39,16 +59,34 @@ const routerInfo = [
           { path: 'travel/detail/:page', element: <CommunityDetail /> },
           { path: 'all/detail/:page', element: <CommunityDetail /> },
           // 글 작성
-          { path: 'post', element: <CommunityPost /> },
+          {
+            path: 'post',
+            element: (
+              <AuthGuard auth={true}>
+                <CommunityPost />
+              </AuthGuard>
+            ),
+          },
         ],
       },
       { path: '*', element: <NotFound /> },
-      { path: '/signin', element: <SigninPage /> },
       // TravelTasteTest 뒤에 뭐가 붙든 일단 TravelTasteTestPage로 감
-      { path: '/TravelTasteTest/*', element: <TravelTastTestPage /> },
+      {
+        path: '/TravelTasteTest/*',
+        element: (
+          <AuthGuard auth={true}>
+            <TravelTastTestPage />
+          </AuthGuard>
+        ),
+      },
+
       {
         path: '/grouptrip/*',
-        element: <GroupTripPage />,
+        element: (
+          <AuthGuard auth={true}>
+            <GroupTripPage />,
+          </AuthGuard>
+        ),
         children: [
           { path: '*', element: <RightSideBar /> },
           { path: 'groupmake', element: <GroupMake /> },
