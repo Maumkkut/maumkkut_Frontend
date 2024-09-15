@@ -3,6 +3,7 @@ import { postBoardType } from '@/types/community';
 import {
   FetchBoardDetailInterface,
   TcommentDeletePayload,
+  TlikePayload,
 } from '@/types/community';
 import { TcommentPayload } from '@/types/community';
 
@@ -98,8 +99,15 @@ const deleteBoardComment = async (payload: TcommentDeletePayload) => {
   );
 };
 
+// 게시글 좋아요
+
+const postLiked = async (payload: TlikePayload) => {
+  await instance.post(`board/${payload.boardType}/${payload.postId}/like/`);
+};
+
 export {
   // fetchBoard,
+  postLiked,
   postBoard,
   fetchBoardDetail,
   fetchBoardComment,

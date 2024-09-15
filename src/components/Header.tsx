@@ -24,7 +24,7 @@ const Header = () => {
             <NavLink to={'/TravelTasteTest'}>여행 취향 테스트</NavLink>
             <NavLink to={'/'}>우리여행 코스추천</NavLink>
             <NavLink to={'/'}>랜덤 여행지 추천</NavLink>
-            <NavLink to={'/community/free?page=1'}>커뮤니티</NavLink>
+            <NavLink to={'/community/all'}>커뮤니티</NavLink>
             {/* <NavLink to={'/'}>마이페이지</NavLink> */}
           </div>
 
