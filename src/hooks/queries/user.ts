@@ -15,7 +15,6 @@ export const useUserSignin = () => {
     mutationFn: originSignin,
     onSuccess: async (data) => {
       sessionStorage.setItem('token', data);
-      fetchUserInfo;
       navigate('/');
     },
     onError: () => {

@@ -22,6 +22,13 @@ interface UserInfoInterface {
   last_name: string;
 }
 
+interface IAddInfo {
+  date_of_birth: number;
+  nickname: string;
+  name: string;
+  phone_number: string;
+}
+
 type UserInfoOrNull = UserInfoInterface | null;
 
-export type { userSignin, userSignup, UserInfoOrNull };
+export type { userSignin, userSignup, UserInfoOrNull, IAddInfo };

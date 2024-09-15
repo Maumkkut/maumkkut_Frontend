@@ -1,6 +1,7 @@
 import { instance } from '@api/axios';
 import { userSignin, userSignup } from '@/types/user';
 import { UserInfoOrNull } from '@/types/user';
+import { IAddInfo } from '@/types/user';
 
 const socialLogin = async () => {
   instance.get('accounts/google/login/');
@@ -60,6 +61,10 @@ const fetchcheckNickname = async (nickname: string) => {
   return res;
 };
 
+const socialAddInfo = async (payload: IAddInfo) => {
+  await instance.post('accounts/add-user-info/', payload);
+};
+
 export {
   socialLogin,
   originSignup,
@@ -67,4 +72,5 @@ export {
   fetchUserInfo,
   fetchcheckUserName,
   fetchcheckNickname,
+  socialAddInfo,
 };
