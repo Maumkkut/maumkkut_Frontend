@@ -58,7 +58,7 @@ const HomePage = () => {
 const GoService = () => {
   return (
     <div className="mt-20 text-center">
-      <h2 className="text-mk-grey1 font-tantan text-4xl">서비스 바로가기</h2>
+      <h2 className="font-tantan text-4xl text-mk-grey1">서비스 바로가기</h2>
       <div></div>
       <div className="me-[144px] ms-[144px] mt-[100px] flex h-[200px] justify-between">
         <div className="relative w-[300px]">
@@ -161,7 +161,7 @@ const EventInGangwon = () => {
 
   return (
     <div className="my-[100px] text-center">
-      <h2 className="text-mk-grey1 font-tantan text-4xl">이벤트 in 강원</h2>
+      <h2 className="font-tantan text-4xl text-mk-grey1">이벤트 in 강원</h2>
       <div className="mx-[100px] mt-[70px] flex h-[700px] justify-between">
         <img
           src={btnLeft}
@@ -177,7 +177,7 @@ const EventInGangwon = () => {
                 className="h-full w-full object-cover"
               />
             </div>
-            <h3 className="text-mk-grey1 mt-[24px] font-pretendard text-[20px]">
+            <h3 className="mt-[24px] font-pretendard text-[20px] text-mk-grey1">
               {gangwondoEvent[0].title}
             </h3>
           </div>
@@ -189,7 +189,7 @@ const EventInGangwon = () => {
                 className="h-full w-full object-cover"
               />
             </div>
-            <h3 className="text-mk-grey1 my-[18px] font-pretendard text-[28px]">
+            <h3 className="my-[18px] font-pretendard text-[28px] text-mk-grey1">
               {gangwondoEvent[1].title}
             </h3>
           </div>
@@ -201,7 +201,7 @@ const EventInGangwon = () => {
                 className="h-full w-full object-cover"
               />
             </div>
-            <h3 className="text-mk-grey1 mt-[24px] font-pretendard text-[20px]">
+            <h3 className="mt-[24px] font-pretendard text-[20px] text-mk-grey1">
               {gangwondoEvent[2].title}
             </h3>
           </div>
@@ -219,7 +219,7 @@ const EventInGangwon = () => {
 const CourseRecommend = () => {
   return (
     <div className="my-[100px] text-center">
-      <h2 className="text-mk-grey1 font-tantan text-4xl">
+      <h2 className="font-tantan text-4xl text-mk-grey1">
         강원도 추천 여행 코스
       </h2>
       <div className="mx-[100px] mt-[70px] flex h-[488px] justify-center">
@@ -238,10 +238,10 @@ const CourseRecommend = () => {
                   className="h-full w-full object-cover"
                 />
               </div>
-              <h3 className="text-mk-grey1 font-pretendard text-[28px] font-bold">
+              <h3 className="font-pretendard text-[28px] font-bold text-mk-grey1">
                 양양서핑 페스티벌
               </h3>
-              <div className="text-mk-grey2 mt-[12px] font-pretendard text-[20px] font-medium">
+              <div className="mt-[12px] font-pretendard text-[20px] font-medium text-mk-grey2">
                 <p>
                   파도를 거스르는 자들이여
                   <br />
@@ -259,10 +259,10 @@ const CourseRecommend = () => {
                   className="h-full w-full object-cover"
                 />
               </div>
-              <h3 className="text-mk-grey1 font-pretendard text-[28px] font-bold">
+              <h3 className="font-pretendard text-[28px] font-bold text-mk-grey1">
                 강원 바다
               </h3>
-              <div className="text-mk-grey2 mt-[12px] font-pretendard text-[20px] font-medium">
+              <div className="mt-[12px] font-pretendard text-[20px] font-medium text-mk-grey2">
                 <p>
                   힐링을 찾는 그대에게!
                   <br />
@@ -280,10 +280,10 @@ const CourseRecommend = () => {
                   className="h-full w-full object-cover"
                 />
               </div>
-              <h3 className="text-mk-grey1 font-pretendard text-[28px] font-bold">
+              <h3 className="font-pretendard text-[28px] font-bold text-mk-grey1">
                 액티비티 패스
               </h3>
-              <div className="text-mk-grey2 mt-[12px] font-pretendard text-[20px] font-medium">
+              <div className="mt-[12px] font-pretendard text-[20px] font-medium text-mk-grey2">
                 <p>
                   활동적인 당신을 위한
                   <br />
@@ -301,10 +301,10 @@ const CourseRecommend = () => {
                   className="h-full w-full object-cover"
                 />
               </div>
-              <h3 className="text-mk-grey1 font-pretendard text-[28px] font-bold">
+              <h3 className="font-pretendard text-[28px] font-bold text-mk-grey1">
                 역사 여행 속으로
               </h3>
-              <div className="text-mk-grey2 mt-[12px] font-pretendard text-[20px] font-medium">
+              <div className="mt-[12px] font-pretendard text-[20px] font-medium text-mk-grey2">
                 <p>
                   전통이 살아있는
                   <br />

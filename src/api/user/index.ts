@@ -1,6 +1,7 @@
 import { instance } from '@api/axios';
 import { userSignin, userSignup } from '@/types/user';
 import { UserInfoOrNull } from '@/types/user';
+import { IAddInfo } from '@/types/user';
 
 const socialLogin = async () => {
   instance.get('accounts/google/login/');
@@ -14,7 +15,15 @@ const fetchUserInfo = async (): Promise<UserInfoOrNull> => {
 };
 
 const originSignup = async (payload: userSignup) => {
-  await instance.post('accounts/registration/', payload);
+  const res = await instance
+    .post('accounts/registration/', payload)
+    .then(() => {
+      return true;
+    })
+    .catch(() => {
+      return false;
+    });
+  return res;
 };
 
 const originSignin = async (payload: userSignin) => {
@@ -22,4 +31,51 @@ const originSignin = async (payload: userSignin) => {
   return res.data.key;
 };
 
-export { socialLogin, originSignup, originSignin, fetchUserInfo };
+const fetchcheckUserName = async (username: string) => {
+  const params = {
+    username: username,
+  };
+  const res = await instance
+    .get('accounts/check/username/', { params })
+    .then(() => {
+      return true;
+    })
+    .catch(() => {
+      return false;
+    });
+  return res;
+};
+
+const fetchcheckNickname = async (nickname: string) => {
+  const params = {
+    nickname: nickname,
+  };
+  const res = await instance
+    .get('accounts/check/nickname/', { params })
+    .then(() => {
+      return true;
+    })
+    .catch(() => {
+      return false;
+    });
+  return res;
+};
+
+const socialAddInfo = async (payload: IAddInfo) => {
+  await instance.post('accounts/add-user-info/', payload);
+};
+
+const logout = async () => {
+  await instance.post('accounts/logout/');
+};
+
+export {
+  logout,
+  socialLogin,
+  originSignup,
+  originSignin,
+  fetchUserInfo,
+  fetchcheckUserName,
+  fetchcheckNickname,
+  socialAddInfo,
+};

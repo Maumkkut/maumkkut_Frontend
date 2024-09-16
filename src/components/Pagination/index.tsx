@@ -39,7 +39,8 @@ const Pagination = ({
     if (!pageNumbers.includes(number)) {
       return;
     }
-    navigate(`/community/${boardType}/${number}`);
+    // setSearchParams({ page: number });
+    navigate(`/community/${boardType}?page=${number}`);
   };
 
   return (
