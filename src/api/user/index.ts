@@ -65,7 +65,12 @@ const socialAddInfo = async (payload: IAddInfo) => {
   await instance.post('accounts/add-user-info/', payload);
 };
 
+const logout = async () => {
+  await instance.post('accounts/logout/');
+};
+
 export {
+  logout,
   socialLogin,
   originSignup,
   originSignin,
