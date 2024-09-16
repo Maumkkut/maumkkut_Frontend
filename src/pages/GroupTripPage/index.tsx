@@ -53,10 +53,17 @@ const GroupSideBar = ({ data }: { data: Array<GroupData> }) => {
         <span>그룹 추가</span>
       </NavLink>
       <div className="h-[1px] w-full bg-black"></div>
-      <div className="flex flex-col gap-y-7 text-xl">
+      <div className="flex flex-col gap-y-7 text-xl font-semibold">
         {data.map((item: GroupData) => (
           <div key={item.id}>
-            <NavLink to={`/grouptrip/${item.id}`}>{item.name}</NavLink>
+            <NavLink
+              to={`/grouptrip/${item.id}`}
+              className={({ isActive }) =>
+                isActive ? 'text-mk-logo4' : 'text-mk-gray-2'
+              }
+            >
+              {item.name}
+            </NavLink>
           </div>
         ))}
       </div>

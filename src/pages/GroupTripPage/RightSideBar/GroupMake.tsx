@@ -1,6 +1,17 @@
+import { REGION_CODE } from '@/constants/regionCode';
+
+import SearchMate from '@/components/SearchMate';
+import { useState } from 'react';
+
 const GroupMake = () => {
+  const [mateNumber, setMateNumber] = useState<number>(1);
+
+  const handleAddMember = () => {
+    setMateNumber(mateNumber + 1);
+  };
+
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center text-sm">
       <div className="flex flex-col gap-y-20">
         <h1 className="flex justify-center text-3xl font-bold text-mk-logo4">
           <span>새 여행 그룹 만들기</span>
@@ -12,7 +23,7 @@ const GroupMake = () => {
             {/* 이름 */}
             <div className="flex h-[40px] items-center gap-x-5">
               <span>그룹 이름</span>
-              <div className="flex h-full w-[410px] justify-between">
+              <div className="flex h-full w-[410px] items-center justify-between">
                 <input
                   type="text"
                   className="h-full w-[320px] rounded-md border border-black"
@@ -38,17 +49,36 @@ const GroupMake = () => {
               </div>
             </div>
             {/* 숙소 */}
-            <div className="flex h-[64px] items-center gap-x-5">
-              <span>숙소 입력</span>
-              <div className="flex h-[64px] w-[410px] flex-col justify-between">
-                <input
-                  type="text"
-                  className="h-[40px] w-full rounded-md border border-black"
-                />
-                <span className="text-mk-logo4">
-                  정확한 숙소 정보가 없을 경우 여행지의 기차역을 작성해주세요
-                </span>
+            <div>
+              <span>여행 지역 선택</span>
+            </div>
+            <div className="flex items-center gap-x-5">
+              <div className="grid w-[400px] grow grid-cols-4 gap-3">
+                {Object.values(REGION_CODE).map((item) => (
+                  <button
+                    key={item}
+                    className="rounded-md border border-mk-newgrey px-4 py-2"
+                  >
+                    {item}
+                  </button>
+                ))}
               </div>
+            </div>
+            <div>
+              <span className="font-bold">여행 메이트 검색</span>
+            </div>
+
+            <div className="flex flex-col items-center gap-y-3">
+              {Array.from({ length: mateNumber }).map((_, index) => (
+                <SearchMate key={index} />
+              ))}
+
+              <button
+                className="h-[30px] w-[90px] rounded-3xl border border-mk-newgrey text-xs"
+                onClick={() => handleAddMember()}
+              >
+                + 인원 추가
+              </button>
             </div>
           </div>
         </div>

@@ -14,6 +14,7 @@ import TravelTastTestPage from '@/pages/TravelTasteTest/TravelTastTestPage';
 import GroupTripPage from '@/pages/GroupTripPage';
 import RightSideBar from '@/pages/GroupTripPage/RightSideBar';
 
+import GroupDetail from '@/pages/GroupTripPage/RightSideBar/GroupDetail';
 import ProfilePage from '@/pages/ProfilePage';
 
 import GroupMake from '@/pages/GroupTripPage/RightSideBar/GroupMake';
@@ -99,6 +100,7 @@ const routerInfo = [
         ),
         children: [
           { path: '*', element: <RightSideBar /> },
+          { path: ':groupId', element: <GroupDetail /> },
           { path: 'groupmake', element: <GroupMake /> },
         ],
       },
