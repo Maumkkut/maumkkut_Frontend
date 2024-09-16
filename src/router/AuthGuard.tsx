@@ -7,7 +7,7 @@ interface AuthGuardProps {
 }
 
 const AuthGuard = ({ auth, children }: AuthGuardProps) => {
-  const isAuthenticated = sessionStorage.getItem('access');
+  const isAuthenticated = sessionStorage.getItem('token');
 
   if (auth) {
     return isAuthenticated === null || isAuthenticated === 'false' ? (

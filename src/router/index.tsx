@@ -14,6 +14,8 @@ import TravelTastTestPage from '@/pages/TravelTasteTest/TravelTastTestPage';
 import GroupTripPage from '@/pages/GroupTripPage';
 import RightSideBar from '@/pages/GroupTripPage/RightSideBar';
 
+import ProfilePage from '@/pages/ProfilePage';
+
 import GroupMake from '@/pages/GroupTripPage/RightSideBar/GroupMake';
 
 const routerInfo = [
@@ -43,6 +45,14 @@ const routerInfo = [
         element: (
           <AuthGuard auth={false}>
             <SocialLoadingPage />
+          </AuthGuard>
+        ),
+      },
+      {
+        path: '/profile',
+        element: (
+          <AuthGuard auth={true}>
+            <ProfilePage />
           </AuthGuard>
         ),
       },
