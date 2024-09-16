@@ -21,6 +21,7 @@ const CommunityComment = ({
   const queryClient = useQueryClient();
   const { mutate: deleteCommentMutation } = useDeleteBoardComment();
   const { data: userData } = useUserInfo();
+  const isAuthenticated = sessionStorage.getItem('token');
 
   const handleCommentEdit = () => {
     return setEdit(!isEdit);
@@ -77,12 +78,15 @@ const CommunityComment = ({
             </button>
           )}
           {/* <span className="cursor-pointer">신고</span> */}
-          <button
-            className="cursor-pointer text-mk-logo3"
-            onClick={() => handleOpenReply()}
-          >
-            답글 달기
-          </button>
+
+          {isAuthenticated && (
+            <button
+              className="cursor-pointer text-mk-logo3"
+              onClick={() => handleOpenReply()}
+            >
+              답글 달기
+            </button>
+          )}
         </div>
       </div>
       {isOpenReply && (

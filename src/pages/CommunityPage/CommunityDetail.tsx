@@ -12,6 +12,8 @@ import { postLiked } from '@/api/board';
 
 import { useQueryClient } from '@tanstack/react-query';
 
+import GoodColoredIcon from '@assets/images/GroupTrip/GoodColoredIcon.svg';
+
 type ParamsType = {
   page: string;
 };
@@ -21,6 +23,7 @@ const CommunityDetail = () => {
   const queryClient = useQueryClient();
   const pathSegments = location.pathname.split('/');
   const { page } = useParams() as ParamsType;
+  const isAuthenticated = sessionStorage.getItem('token');
 
   const { data, isPending } = useFetchBoardDetail(
     pathSegments[2],
@@ -29,14 +32,16 @@ const CommunityDetail = () => {
 
   const handlePostLike = () => {
     if (!data) return;
-    const payload = {
-      boardType: data.board_type,
-      postId: data.id,
-    };
-    postLiked(payload);
-    queryClient.invalidateQueries({
-      queryKey: [`${data.board_type}boardDetail`, data.id],
-    });
+    if (isAuthenticated) {
+      const payload = {
+        boardType: data.board_type,
+        postId: data.id,
+      };
+      postLiked(payload);
+      queryClient.invalidateQueries({
+        queryKey: [`${data.board_type}boardDetail`, data.id],
+      });
+    }
   };
 
   if (isPending) {
@@ -71,7 +76,11 @@ const CommunityDetail = () => {
             onClick={() => handlePostLike()}
           >
             <div className="flex gap-x-2">
-              <span>좋아요</span>
+              <img
+                className="w-5"
+                src={GoodColoredIcon}
+                alt="GoodIcon"
+              />
               <span>{data.liked_users_count}</span>
             </div>
           </button>
