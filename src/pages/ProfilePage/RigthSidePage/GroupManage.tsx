@@ -1,8 +1,12 @@
+import { useNavigate } from 'react-router-dom';
+
 export default function GroupManage() {
+  const navigate = useNavigate();
+
   return (
     <div className="flex w-[800px] flex-col gap-y-5">
       <div className="flex justify-end">
-        <button>
+        <button onClick={() => navigate('/grouptrip/groupmake')}>
           <span className="text-bold text-mk-logo3">그룹추가</span>
         </button>
       </div>
