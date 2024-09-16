@@ -35,6 +35,7 @@ const CommentInput = ({
   const { mutateAsync: commentEditMutate } = useUpdateBoardComment();
   const { mutateAsync: commentReplyMutate } = usePostBoardCommentReply();
   const { mutateAsync: commentReplyEditMutate } = useUpdateBoardCommentReply();
+  const isAuthenticated = sessionStorage.getItem('token');
 
   const commentSubmit = (formValues: TcommentPayload) => {
     const payload = {
@@ -84,6 +85,9 @@ const CommentInput = ({
     },
   });
 
+  if (!isAuthenticated || isAuthenticated === undefined) {
+    return <></>;
+  }
   return (
     <form
       className="flex h-14 w-full"
