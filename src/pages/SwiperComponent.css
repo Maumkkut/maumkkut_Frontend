@@ -1,0 +1,25 @@
+/* .swiper {
+  overflow: visible;
+  position: relative; 
+} */
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: gray; /* 화살표 색상 */
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  font-weight: bold; /* 화살표 두께 조정 */
+}
+
+.swiper-button-prev {
+  left: 0px; /* 왼쪽 화살표 위치 조정 */
+}
+
+.swiper-button-next {
+  right: 0px; /* 오른쪽 화살표 위치 조정 */
+}
