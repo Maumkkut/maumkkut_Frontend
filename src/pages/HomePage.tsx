@@ -18,7 +18,7 @@ import course3 from '@/assets/images/HomePage/Course3.png';
 import course4 from '@/assets/images/HomePage/Course4.png';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-// import { useState } from 'react';
+import { SetStateAction, useState } from 'react';
 import { Pagination, Autoplay, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/autoplay';
@@ -36,7 +36,6 @@ const HomePage = () => {
         <GoService />
         {/* 이벤트 in 강원 컴포넌트 */}
         <EventInGangwon />
-        {/* <EventInGangwon2 /> */}
         {/* 강원도 추천 여행 코스 컴포넌트 */}
         <CourseRecommend /> {/*화살표가 바깥으로 가야하고 모양도 바꿔야함!!*/}
       </ContentLayout>
@@ -258,7 +257,7 @@ const GoService = () => {
           </h3>
         </button>
 
-        <button className="relative w-[300px]">
+        <button className="relative w-[300px] hover:drop-shadow-2xl">
           <div className="h-full overflow-hidden rounded-lg">
             <img
               src={sea}
@@ -276,6 +275,43 @@ const GoService = () => {
   );
 };
 
+const SmallCard = ({ img, title }: { img: string; title: string }) => {
+  return (
+    <div className="mx-auto my-auto h-[250px] w-[300px] rounded-lg shadow-lg transition-all duration-300 ease-in-out">
+      <div className="mx-auto my-[24px] h-[150px] w-[100px]">
+        <img
+          className="h-full w-full rounded-t-lg"
+          src={img}
+          alt={title}
+        />
+      </div>
+      <div>
+        <p className="mt-[24px] text-[20px] text-mk-grey1">{title}</p>
+      </div>
+    </div>
+  );
+};
+const BigCard = ({ img, title }: { img: string; title: string }) => {
+  return (
+    <>
+      <div className="h-[20px]"></div>
+      <div className="mx-auto my-auto h-[500px] w-[400px] rounded-lg shadow-lg transition-all duration-300 ease-in-out">
+        <div className="mx-auto h-[400px] w-[300px]">
+          <img
+            className="h-full w-full rounded-t-lg object-cover"
+            src={img}
+            alt={title}
+          />
+        </div>
+        <div>
+          <p className="my-[18px] text-[28px] text-mk-grey1">{title}</p>
+        </div>
+      </div>
+      <div className="h-[20px]"></div>
+    </>
+  );
+};
+
 const EventInGangwon = () => {
   const gangwondoEvent = [
     { title: '영월 캠핑 페스티벌', img: eventIcon1 },
@@ -285,28 +321,41 @@ const EventInGangwon = () => {
     { title: '청춘양구 곰취 그린페스타', img: eventIcon5 },
   ];
 
+  const [activeIndex, setActiveIndex] = useState(1);
+
   return (
     <div className="mx-auto my-[100px] h-[700px] w-[1400px] text-center">
       <h2 className="font-tantan text-4xl text-mk-grey1">이벤트 in 강원</h2>
-      <div className="swiper-container my-auto">
+      <div className="swiper-container my-auto mt-[100px]">
         <Swiper
           className="mx-auto"
           modules={[Navigation]}
-          spaceBetween={50}
+          spaceBetween={-100}
           autoplay
           navigation
           slidesPerView={3}
           loop={true}
+          onSlideChange={(swiper: { realIndex: SetStateAction<number> }) =>
+            setActiveIndex(swiper.realIndex)
+          }
         >
           {gangwondoEvent.map((item, index) => (
             <SwiperSlide
               key={index}
-              className="mx-0 my-auto h-[250px] w-[300px]"
+              className="my-auto flex h-[700px] w-[300px] justify-center"
             >
-              <BigCard
-                img={item.img}
-                title={item.title}
-              />
+              {index === activeIndex + 1 ||
+              (activeIndex === gangwondoEvent.length - 1 && index === 0) ? (
+                <BigCard
+                  img={item.img}
+                  title={item.title}
+                />
+              ) : (
+                <SmallCard
+                  img={item.img}
+                  title={item.title}
+                />
+              )}
             </SwiperSlide>
           ))}
         </Swiper>
@@ -314,96 +363,6 @@ const EventInGangwon = () => {
     </div>
   );
 };
-// const SmallCard = ({ img, title }: { img: string; title: string }) => {
-//   return (
-//     <div className="my-auto h-[250px] w-[300px] rounded-lg shadow-lg">
-//       <div className="mx-auto my-[24px] h-[150px] w-[100px]">
-//         <img
-//           className="h-full w-full"
-//           src={img}
-//           alt={title}
-//         />
-//       </div>
-//       <div>
-//         <p className="mt-[24px] text-[20px] text-mk-grey1">{title}</p>
-//       </div>
-//     </div>
-//   );
-// };
-const BigCard = ({ img, title }: { img: string; title: string }) => {
-  return (
-    <div className="h-[500px] w-[400px] rounded-lg shadow-lg">
-      <div className="mx-auto h-[400px] w-[300px]">
-        <img
-          className="h-full w-full"
-          src={img}
-          alt={title}
-        />
-      </div>
-      <div>
-        <p className="my-[18px] text-[28px] text-mk-grey1">{title}</p>
-      </div>
-    </div>
-  );
-};
-
-// const EventInGangwon2 = () => {
-//   const gangwondoEvent = [
-//     { title: '영월 캠핑 페스티벌', img: eventIcon1 },
-//     { title: '화천 토마토 축제', img: eventIcon2 },
-//     { title: '강릉 커피 축제', img: eventIcon3 },
-//   ];
-
-//   const n: number = gangwondoEvent.length; //강원도 이벤트 개수
-//   const [idx, setIdx] = useState<number>(0);
-//   const setMove = function () {
-//     setIdx((idx + 1) % n);
-//     console.log(idx);
-//   };
-//   return (
-//     <div className="my-[100px] text-center">
-//       <h2 className="font-tantan text-4xl text-mk-grey1">이벤트 in 강원</h2>
-//       <div className="flex justify-center">
-//         <div className="my-[100px] flex justify-center space-x-4 text-center">
-//           <button
-//             className="my-auto"
-//             onClick={setMove}
-//           >
-//             <img
-//               src={btnLeft}
-//               alt="btnLeft"
-//             />
-//           </button>
-
-//           {gangwondoEvent.map((item, index) =>
-//             index === idx ? (
-//               <BigCard
-//                 key={index}
-//                 img={item.img}
-//                 title={item.title}
-//               />
-//             ) : (
-//               <SmallCard
-//                 key={index}
-//                 img={item.img}
-//                 title={item.title}
-//               />
-//             ),
-//           )}
-//           <button
-//             className="my-auto"
-//             onClick={setMove}
-//           >
-//             <img
-//               src={btnRight}
-//               alt="btnRight"
-//             />
-//           </button>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
 
 interface CourseCardProps {
   title: string;
@@ -493,10 +452,10 @@ const CourseRecommend = () => {
         강원도 추천 여행 코스
       </h2>
 
-      <div className="swiper-container">
+      <div className="swiper-container mt-[100px]">
         <Swiper
           className="my-auto mt-[70px] h-[490px] w-[1210px]"
-          modules={[Navigation]}
+          modules={[Navigation, Autoplay]}
           spaceBetween={0}
           slidesPerView={4}
           autoplay
