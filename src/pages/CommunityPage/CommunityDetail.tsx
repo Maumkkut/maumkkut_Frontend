@@ -8,6 +8,11 @@ import { useParams, useLocation } from 'react-router-dom';
 import LoadingPage from '@pages/LoadingPage';
 import CommunityComment from '@/components/community/CommunityComment';
 import CommentInput from '@/components/community/CommentInput';
+import { postLiked } from '@/api/board';
+
+import { useQueryClient } from '@tanstack/react-query';
+
+import GoodColoredIcon from '@assets/images/GroupTrip/GoodColoredIcon.svg';
 
 type ParamsType = {
   page: string;
@@ -15,13 +20,29 @@ type ParamsType = {
 
 const CommunityDetail = () => {
   const location = useLocation();
+  const queryClient = useQueryClient();
   const pathSegments = location.pathname.split('/');
   const { page } = useParams() as ParamsType;
+  const isAuthenticated = sessionStorage.getItem('token');
 
   const { data, isPending } = useFetchBoardDetail(
     pathSegments[2],
     parseInt(page),
   );
+
+  const handlePostLike = () => {
+    if (!data) return;
+    if (isAuthenticated) {
+      const payload = {
+        boardType: data.board_type,
+        postId: data.id,
+      };
+      postLiked(payload);
+      queryClient.invalidateQueries({
+        queryKey: [`${data.board_type}boardDetail`, data.id],
+      });
+    }
+  };
 
   if (isPending) {
     return <LoadingPage />;
@@ -49,6 +70,22 @@ const CommunityDetail = () => {
         <div className="py-9">
           <p className="whitespace-pre-line text-xl">{data.content}</p>
         </div>
+        <div className="flex justify-center">
+          <button
+            className="rounded-lg border border-mk-logo1 px-6 py-4"
+            onClick={() => handlePostLike()}
+          >
+            <div className="flex gap-x-2">
+              <img
+                className="w-5"
+                src={GoodColoredIcon}
+                alt="GoodIcon"
+              />
+              <span>{data.liked_users_count}</span>
+            </div>
+          </button>
+        </div>
+
         <div className="my-4 border-[1px]" />
         {/* 댓글 */}
         <div className="flex flex-col items-center">
@@ -76,6 +113,8 @@ const CommunityDetail = () => {
                   <CommunityComment
                     key={item.id}
                     data={item}
+                    boardType={data.board_type}
+                    postId={data.id}
                   />
                 ))}
               </div>

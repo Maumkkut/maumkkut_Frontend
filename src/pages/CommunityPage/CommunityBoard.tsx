@@ -33,7 +33,7 @@ const CommunityBoard = () => {
     });
   }, [page, days, search_type, content, pathSegments, queryClient]);
 
-  if (isSuccess && boardData.length === 0) {
+  if (!boardData) {
     return (
       <div className="mb-40 flex flex-col items-center gap-y-7">
         <CommunityToolbar data={boardData} />
@@ -41,7 +41,8 @@ const CommunityBoard = () => {
       </div>
     );
   }
-  if (!boardData) {
+
+  if (isSuccess && boardData?.total_count === 0) {
     return (
       <div className="mb-40 flex flex-col items-center gap-y-7">
         <CommunityToolbar data={boardData} />
@@ -79,7 +80,7 @@ const CommunityBoard = () => {
           </div>
           {/* board item */}
           {isSuccess &&
-            boardData.map((data: BoardItemInterface) => (
+            boardData?.results.map((data: BoardItemInterface) => (
               <CommunityBoardItem
                 key={data.id}
                 data={data}
@@ -91,7 +92,7 @@ const CommunityBoard = () => {
         <Pagination
           currentPage={page}
           totalContents={boardData?.total_count}
-          boardType={'free'}
+          boardType={pathSegments[2]}
         />
       </div>
     </div>
@@ -159,7 +160,7 @@ const CommunityToolbar = ({ data }: { data: FetchBoardInterface }) => {
   return (
     <div>
       <div className="flex w-full justify-center gap-x-7 py-14">
-        <button
+        {/* <button
           className="h-[50px] w-[120px] rounded-md border-2 border-mk-newgrey"
           type="button"
         >
@@ -170,7 +171,7 @@ const CommunityToolbar = ({ data }: { data: FetchBoardInterface }) => {
           type="button"
         >
           인기순 🔥
-        </button>
+        </button> */}
       </div>
       <div className="w-[1000px]">
         <div className="flex items-center justify-between">
