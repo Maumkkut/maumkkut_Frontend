@@ -141,8 +141,6 @@ const ResultOrRestart = () => {
 
   const checkAnswers = (): void => {
     if (answers.includes(0)) {
-      // 빈칸이 있다고 모달 띄우는 로직 필요
-      // window.alert('빈칸이 있습니다!');
       Swal.fire({
         icon: 'error',
         title: '빈칸이 있습니다.',

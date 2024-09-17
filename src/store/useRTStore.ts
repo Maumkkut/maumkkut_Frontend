@@ -15,7 +15,7 @@ interface RTStore {
 
 // Zustand의 create 함수를 사용하여 RTStore를 생성
 const useRTStore = create<RTStore>((set) => ({
-  index: 0,
+  index: -1,
   setIndex: (index) => set({ index }),
   startPos: [
     { name: '강릉', id: 1 },
