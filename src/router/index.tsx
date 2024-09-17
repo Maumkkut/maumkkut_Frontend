@@ -13,7 +13,7 @@ import SocialLoadingPage from '@/pages/Auth/SocialLoadingPage';
 import TravelTastTestPage from '@/pages/TravelTasteTest/TravelTastTestPage';
 import GroupTripPage from '@/pages/GroupTripPage';
 import RightSideBar from '@/pages/GroupTripPage/RightSideBar';
-
+import RandomTravelPage from '@/pages/RandomTravel/RandomTravelPage';
 import GroupDetail from '@/pages/GroupTripPage/RightSideBar/GroupDetail';
 import ProfilePage from '@/pages/ProfilePage';
 
@@ -104,6 +104,7 @@ const routerInfo = [
           { path: 'groupmake', element: <GroupMake /> },
         ],
       },
+      { path: '/RandomTravel/*', element: <RandomTravelPage /> },
     ],
   },
 ];
