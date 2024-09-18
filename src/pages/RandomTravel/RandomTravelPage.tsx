@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import CreateRandomTravel from './CreateRandomTravel';
+import RandomResult from '@/pages/RandomTravel/RandomResult';
 import MyRandomTravel from './MyRandomTravel';
 import ContentLayout from '@/layout/ContentLayout';
 import dice from '@/assets/images/HomePage/dice.jpg';
@@ -15,6 +16,10 @@ const RandomTravelPage = () => {
         <Route
           path="my"
           element={<MyRandomTravel />}
+        />
+        <Route
+          path="result"
+          element={<RandomResult />}
         />
       </Routes>
     </>

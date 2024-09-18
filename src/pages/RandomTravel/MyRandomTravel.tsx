@@ -2,6 +2,7 @@ import ContentLayout from '@/layout/ContentLayout';
 import { Link } from 'react-router-dom';
 import Kakaomap from '@/components/Kakaomap';
 import useRTStore from '@/store/useRTStore';
+
 const MyRandomTravel = () => {
   return (
     <ContentLayout>

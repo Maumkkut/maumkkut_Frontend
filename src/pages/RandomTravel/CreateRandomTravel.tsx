@@ -1,6 +1,6 @@
 import ContentLayout from '@/layout/ContentLayout';
 import useRTStore from '@/store/useRTStore';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const CreateRandomTravel = () => {
@@ -98,7 +98,8 @@ const StartPositionCard = ({
 };
 
 const ShowResult = () => {
-  const { index } = useRTStore();
+  const { index, startPos } = useRTStore();
+  const navigate = useNavigate();
   const handleClick = () => {
     if (index === -1) {
       Swal.fire({
@@ -107,10 +108,12 @@ const ShowResult = () => {
         text: '여행 시작 장소를 먼저 선택해주세요!',
       });
     } else {
-      // 결과를 보여주는 로직을 추가하세요.
-      console.log('결과를 보여줍니다.');
+      const region = startPos[index].name;
+      console.log(region);
+      navigate('result', { state: { region } });
     }
   };
+
   return (
     <div className="my-[50px] flex justify-center">
       <button
