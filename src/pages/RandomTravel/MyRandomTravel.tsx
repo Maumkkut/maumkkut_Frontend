@@ -65,7 +65,7 @@ const ResultDetail = () => {
     };
 
     fetchData();
-  }, []);
+  }, [passedIndex]);
 
   if (dummyList.length === 0) {
     return <div>데이터가 없습니다.</div>; // 데이터가 없을 때 표시할 내용
