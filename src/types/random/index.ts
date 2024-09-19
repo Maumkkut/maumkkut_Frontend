@@ -30,3 +30,19 @@ export type ConvertedTravelRecommendation = {
 export type ResultDetailBodyProps = {
   region?: string;
 };
+
+export type UserCourse = {
+  course_id: number;
+  created_at: string;
+};
+
+export type UserCourseResult = {
+  course_count: number;
+  course_list: UserCourse[];
+};
+
+// 유저의 여행 코스 리스트 조회 결과
+export type RandomCourseResponse = {
+  message: string;
+  result: UserCourseResult;
+};

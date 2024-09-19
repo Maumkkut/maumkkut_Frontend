@@ -7,7 +7,7 @@ import {
   ResultDetailBodyProps,
 } from '@/types/random';
 import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import LoadingPage from '../LoadingPage';
 
 const RandomResult = () => {
@@ -115,9 +115,11 @@ const ResultDetailBody = ({ region }: ResultDetailBodyProps) => {
 };
 
 const Buttons = ({ tour_list }: { tour_list: number[] | null }) => {
+  const navigate = useNavigate();
   const ClickConfrimCourse = () => {
     if (tour_list) {
       saveRandomTravel({ tour_list });
+      navigate('../my', { state: { index: 'max' } });
     }
   };
   return (

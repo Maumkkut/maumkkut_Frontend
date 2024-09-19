@@ -1,5 +1,9 @@
 import { instance } from '@api/axios';
-import { TourList, TravelRecommendation } from '@/types/random';
+import {
+  RandomCourseResponse,
+  TourList,
+  TravelRecommendation,
+} from '@/types/random';
 
 type ResultDetailBodyProps = {
   region?: string;
@@ -15,11 +19,11 @@ export async function recommendRandomTravel(
   return res.data;
 }
 
-// 랜덤 여행 코스
-export async function getRandomTravel(
+// 랜덤 여행 코스 조회
+export async function getRandomTravelDetail(
   course_id: number,
 ): Promise<TravelRecommendation> {
-  const res = await instance.post('random/course/', {
+  const res = await instance.get('random/course/', {
     params: {
       course_id: course_id,
     },
@@ -28,8 +32,15 @@ export async function getRandomTravel(
   return res.data;
 }
 
+// 랜덤 여행 코스 목록 조회
+export async function getRandomTravelList(): Promise<RandomCourseResponse> {
+  const res = await instance.get('random/course/list');
+  console.log(res.data);
+  return res.data;
+}
+
 // 랜덤 여행 코스 저장
 export async function saveRandomTravel(payload: TourList) {
   const res = await instance.post('random/course/', payload);
-  console.log(res)
+  console.log(res);
 }
