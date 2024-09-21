@@ -70,10 +70,33 @@ export default function GroupDetail() {
             groupLikeList.tour_list.map((item) => (
               <div
                 key={item.tour_id}
-                className="flex items-center justify-between text-mk-darkgray"
+                className="grop flex items-center justify-between text-mk-darkgray"
               >
-                <div className="rounded-xl bg-mk-logo0 px-5 py-3">
+                <div className="group relative rounded-xl bg-mk-logo0 px-5 py-3">
                   <span>{item.tour_name}</span>
+                  {/* 호버시 */}
+                  <div className="absolute -top-1/2 left-full z-20 hidden flex-col gap-y-1 rounded-xl border border-mk-darkgrey bg-mk-logo0 px-7 py-5 group-hover:flex">
+                    <span className="text-xl font-bold">좋아요</span>
+                    <div className="flex gap-x-2">
+                      {groupLikeList.tour_list
+                        .filter((tour) => tour.tour_id === item.tour_id)
+                        .map((data) =>
+                          data.like_members.map((item) => (
+                            <p key={item}>{item}</p>
+                          )),
+                        )}
+                    </div>
+                    <span className="text-xl font-bold">싫어요</span>
+                    <div className="flex gap-x-2">
+                      {groupLikeList.tour_list
+                        .filter((tour) => tour.tour_id === item.tour_id)
+                        .map((data) =>
+                          data.dislike_members.map((item) => (
+                            <p key={item}>{item}</p>
+                          )),
+                        )}
+                    </div>
+                  </div>
                 </div>
                 <div>
                   <span>
