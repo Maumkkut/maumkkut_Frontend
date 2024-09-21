@@ -1,21 +1,10 @@
 import BannerImg from '@assets/images/GroupTrip/Hero Section.svg';
 import ContentLayout from '@/layout/ContentLayout';
 import { NavLink, Outlet } from 'react-router-dom';
-
-const dummyData = [
-  {
-    id: 1,
-    name: 'test1',
-  },
-  {
-    id: 2,
-    name: 'test2',
-  },
-  {
-    id: 3,
-    name: 'test3',
-  },
-];
+import {
+  useFetchMyGroupList,
+  // useFetchGroupDetailToId,
+} from '@/hooks/queries/group';
 
 interface GroupData {
   id: number;
@@ -30,8 +19,9 @@ const GroupTripPage = () => {
           src={BannerImg}
           alt="HeroImg"
         />
-        <div className="flex gap-x-10">
-          <GroupSideBar data={dummyData} />
+
+        <div className="my-20 flex gap-x-10">
+          <GroupSideBar />
           <div className="w-[1px] bg-black"></div>
           <div className="grow">
             <Outlet />
@@ -42,7 +32,9 @@ const GroupTripPage = () => {
   );
 };
 
-const GroupSideBar = ({ data }: { data: Array<GroupData> }) => {
+const GroupSideBar = () => {
+  const { data } = useFetchMyGroupList();
+
   return (
     <div className="flex w-[300px] flex-col items-center gap-y-8">
       <NavLink
@@ -54,18 +46,24 @@ const GroupSideBar = ({ data }: { data: Array<GroupData> }) => {
       </NavLink>
       <div className="h-[1px] w-full bg-black"></div>
       <div className="flex flex-col gap-y-7 text-xl font-semibold">
-        {data.map((item: GroupData) => (
-          <div key={item.id}>
-            <NavLink
-              to={`/grouptrip/${item.id}`}
-              className={({ isActive }) =>
-                isActive ? 'text-mk-logo4' : 'text-mk-gray-2'
-              }
-            >
-              {item.name}
-            </NavLink>
+        {data ? (
+          data.result.map((item: GroupData) => (
+            <div key={item.id}>
+              <NavLink
+                to={`/grouptrip/${item.id}`}
+                className={({ isActive }) =>
+                  isActive ? 'text-mk-logo4' : 'text-mk-gray-2'
+                }
+              >
+                {item.name}
+              </NavLink>
+            </div>
+          ))
+        ) : (
+          <div>
+            <p>아직 그룹이 없어요</p>
           </div>
-        ))}
+        )}
       </div>
     </div>
   );
