@@ -5,6 +5,8 @@ import {
   postMakeGroup,
   fetchGroupTourListGroupLike,
   fetchGroupTourListUserLike,
+  fetchGroupTourList,
+  updateTourLike,
 } from '@/api/group';
 
 export const useFetchMyGroupList = () => {
@@ -39,11 +41,27 @@ export const useFetchGroupTourListGroupLike = (id: number) => {
     retry: 1,
   });
 };
+
 export const useFetchGroupTourListUserLikee = (id: number) => {
   return useQuery({
     queryKey: [`groupTourUserLikeList`, id],
     queryFn: () => fetchGroupTourListUserLike(id),
     staleTime: 1000 * 60 * 5,
     retry: 1,
+  });
+};
+
+export const useFetchGroupTourList = (id: number) => {
+  return useQuery({
+    queryKey: [`groupTourList`, id],
+    queryFn: () => fetchGroupTourList(id),
+    staleTime: 1000 * 60 * 5,
+    retry: 1,
+  });
+};
+
+export const useUpdateTourLike = () => {
+  return useMutation({
+    mutationFn: updateTourLike,
   });
 };

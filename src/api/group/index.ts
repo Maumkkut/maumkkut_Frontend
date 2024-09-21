@@ -5,6 +5,8 @@ import {
   TFetchGroupDetail,
   TGroupLikeListPayload,
   TUserLikeListPayload,
+  TFetchGroupTourList,
+  TTourLike,
 } from '@/types/group';
 
 // 그룹 생성
@@ -88,4 +90,16 @@ export async function checkGroupName(group_name: string) {
       return false;
     });
   return res;
+}
+
+export async function fetchGroupTourList(
+  group_id: number,
+): Promise<TFetchGroupTourList> {
+  const params = { group_id: group_id };
+  const res = await instance.get(`group/tour_list/`, { params });
+
+  return res.data.result[0];
+}
+export async function updateTourLike(payload: TTourLike) {
+  await instance.put(`group/like/`, payload);
 }

@@ -48,3 +48,27 @@ export type TUserLikeListPayload = {
   group: number;
   tour_list: TUserLikeTourList[];
 };
+
+export type TFetchGroupTourList = {
+  group: number;
+  tour_list: TTourList[];
+};
+
+export type TTourList = {
+  order: number;
+  tour: TTour;
+};
+export type TTour = {
+  id: number;
+  title: string;
+  addr1: string;
+  mapx: number;
+  mapy: number;
+  image: string;
+};
+
+export type TTourLike = {
+  tour_id: number;
+  is_liked: boolean;
+  is_disliked: boolean;
+};
