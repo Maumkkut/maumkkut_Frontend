@@ -19,7 +19,8 @@ const GroupTripPage = () => {
           src={BannerImg}
           alt="HeroImg"
         />
-        <div className="flex gap-x-10">
+
+        <div className="mt-20 flex gap-x-10">
           <GroupSideBar />
           <div className="w-[1px] bg-black"></div>
           <div className="grow">

@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { usePostMakeGroup } from '@/hooks/queries/group';
 import { useUserInfo } from '@/hooks/queries/user';
 import { useQueryClient } from '@tanstack/react-query';
+import { ErrorMessage } from '@hookform/error-message';
 
 import { useNavigate } from 'react-router-dom';
 const GroupMake = () => {
@@ -21,8 +22,13 @@ const GroupMake = () => {
   const {
     register,
     handleSubmit,
+    watch,
+    formState: { errors },
     // resetField,
   } = useForm<TMakeGroupPayload>();
+
+  const startDate = watch('start_date');
+  const today = new Date().toISOString().split('T')[0]; // 오늘 날짜
 
   const handleGroupMake = async (formValues: TMakeGroupPayload) => {
     if (!selectRegion) {
@@ -62,6 +68,10 @@ const GroupMake = () => {
       value: true,
       message: '해당 칸이 빈칸입니다.',
     },
+    validate: {
+      notPast: (value) =>
+        value >= today || '오늘보다 이전 날짜는 선택할 수 없습니다.',
+    },
   });
 
   const endDateRegister = register('end_date', {
@@ -69,25 +79,13 @@ const GroupMake = () => {
       value: true,
       message: '해당 칸이 빈칸입니다.',
     },
+    validate: {
+      notPast: (value) =>
+        value >= today || '오늘보다 이전 날짜는 선택할 수 없습니다.',
+      afterStartDate: (value) =>
+        value >= startDate || '종료 날짜는 시작 날짜보다 빠를 수 없습니다.',
+    },
   });
-
-  // const handleGroupMake = () => {
-  //   const payload = {
-  //     leader: userInfo?.pk,
-  //     members: [1],
-  //     name: '그룹임',
-  //     region: '강릉',
-  //     start_date: new Date().toISOString().split('T')[0],
-  //     end_date: new Date().toISOString().split('T')[0],
-  //   };
-
-  //   // 그거 해야함 리액트 hook form으로 만들고 저거 적용하기.
-  //   // mutate(payload,{
-  //   //   onSuccess: () => {
-
-  //   //   }
-  //   // });
-  // };
 
   const handleAddMember = () => {
     setMateNumber(mateNumber + 1);
@@ -122,24 +120,43 @@ const GroupMake = () => {
               </div>
             </div>
             {/* 일정 */}
-            <div className="flex h-[40px] items-center gap-x-5">
+            <div className="flex items-center gap-x-5">
               <span>그룹 일정</span>
               <div className="flex h-full w-[410px] items-center justify-between gap-x-5">
-                <input
-                  id="start_date"
-                  type="date"
-                  className="h-full w-[320px] rounded-md border border-black"
-                  {...startDateRegister}
-                />
+                <div className="flex h-full w-full flex-col">
+                  <input
+                    id="start_date"
+                    type="date"
+                    className="h-[40px] rounded-md border border-black"
+                    {...startDateRegister}
+                  />
+                  <ErrorMessage
+                    errors={errors}
+                    name="start_date"
+                    render={({ message }) => (
+                      <span className="text-xs text-mk-gangwon">{message}</span>
+                    )}
+                  />
+                </div>
                 <span> ~ </span>
-                <input
-                  id="end_date"
-                  type="date"
-                  className="h-full w-[320px] rounded-md border border-black"
-                  {...endDateRegister}
-                />
+                <div className="flex h-full w-full flex-col">
+                  <input
+                    id="end_date"
+                    type="date"
+                    className="h-[40px] rounded-md border border-black"
+                    {...endDateRegister}
+                  />
+                  <ErrorMessage
+                    errors={errors}
+                    name="end_date"
+                    render={({ message }) => (
+                      <span className="text-xs text-mk-gangwon">{message}</span>
+                    )}
+                  />
+                </div>
               </div>
             </div>
+            <div></div>
             {/* 숙소 */}
             <div>
               <span>여행 지역 선택</span>
