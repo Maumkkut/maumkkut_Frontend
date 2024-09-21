@@ -7,11 +7,14 @@ import {
   TUserLikeListPayload,
   TFetchGroupTourList,
   TTourLike,
+  TPostTourRecommendPayload,
 } from '@/types/group';
 
 // 그룹 생성
 export async function postMakeGroup(payload: TMakeGroupPayload) {
-  await instance.post(`group/`, payload);
+  const res = await instance.post(`group/`, payload);
+  console.log(res.data.result);
+  return res.data.result;
 }
 
 // 그룹ID로 그룹 상세 리스트 조회
@@ -102,4 +105,8 @@ export async function fetchGroupTourList(
 }
 export async function updateTourLike(payload: TTourLike) {
   await instance.put(`group/like/`, payload);
+}
+
+export async function postTourRecommend(payload: TPostTourRecommendPayload) {
+  await instance.post(`group/recommend/`, payload);
 }

@@ -75,7 +75,7 @@ export default function GroupDetail() {
                 <div className="group relative rounded-xl bg-mk-logo0 px-5 py-3">
                   <span>{item.tour_name}</span>
                   {/* 호버시 */}
-                  <div className="absolute -top-1/2 left-full z-20 hidden flex-col gap-y-1 rounded-xl border border-mk-darkgrey bg-mk-logo0 px-7 py-5 group-hover:flex">
+                  <div className="absolute -top-1/2 left-full z-20 hidden min-w-36 flex-col gap-y-1 rounded-xl border border-mk-darkgrey bg-mk-logo0 px-7 py-5 group-hover:flex">
                     <span className="text-xl font-bold">좋아요</span>
                     <div className="flex gap-x-2">
                       {groupLikeList.tour_list

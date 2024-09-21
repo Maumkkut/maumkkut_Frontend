@@ -7,7 +7,7 @@ import { usePostMakeGroup } from '@/hooks/queries/group';
 import { useUserInfo } from '@/hooks/queries/user';
 import { useQueryClient } from '@tanstack/react-query';
 import { ErrorMessage } from '@hookform/error-message';
-import { checkGroupName } from '@/api/group';
+import { checkGroupName, postTourRecommend } from '@/api/group';
 import { useNavigate } from 'react-router-dom';
 
 const GroupMake = () => {
@@ -56,7 +56,12 @@ const GroupMake = () => {
     console.log(payload);
 
     mutate(payload, {
-      onSuccess: () => {
+      onSuccess: (res) => {
+        const payload = {
+          group_id: res.id,
+          region: res.region,
+        };
+        postTourRecommend(payload);
         navigate('/grouptrip');
         queryClient.invalidateQueries({ queryKey: ['groupList'] });
       },

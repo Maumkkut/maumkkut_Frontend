@@ -72,3 +72,8 @@ export type TTourLike = {
   is_liked: boolean;
   is_disliked: boolean;
 };
+
+export type TPostTourRecommendPayload = {
+  group_id: number;
+  region: string;
+};
