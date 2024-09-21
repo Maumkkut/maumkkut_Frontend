@@ -21,8 +21,30 @@ export type TFetchGroup = {
 };
 
 export type TFetchGroupDetail = {
-  message: string;
-  result: {
-    id: number;
-  } & TMakeGroupPayload;
+  id: number;
+} & TMakeGroupPayload;
+
+export type TGroupTourList = {
+  tour_id: number;
+  tour_name: string;
+  like_count: number;
+  dislike_count: number;
+  like_members: string[];
+  dislike_members: string[];
+};
+export type TUserLikeTourList = {
+  tour_id: number;
+  tour_name: string;
+  is_liked: boolean;
+  is_disliked: boolean;
+};
+
+export type TGroupLikeListPayload = {
+  group: number;
+  tour_list: TGroupTourList[];
+};
+
+export type TUserLikeListPayload = {
+  group: number;
+  tour_list: TUserLikeTourList[];
 };

@@ -3,6 +3,8 @@ import {
   TMakeGroupPayload,
   TFetchGroup,
   TFetchGroupDetail,
+  TGroupLikeListPayload,
+  TUserLikeListPayload,
 } from '@/types/group';
 
 // 그룹 생성
@@ -20,7 +22,7 @@ export async function fetchGroupDetailToId(
   const res = await instance.get(`group/`, {
     params,
   });
-  return res.data;
+  return res.data.result;
 }
 
 // 나의 그룹 리스트 조회
@@ -30,6 +32,36 @@ export async function fetchMyGroupList(): Promise<TFetchGroup> {
 }
 
 //
+// export async function fetchGroupTourList(group_id: number) {
+//   const params = {
+//     group_id: group_id,
+//   };
+//   const res = await instance.get(`group/tour_list/`, { params });
+//   return res.data.result;
+// }
+
+// 단체의 여행지 리스트의 좋아요/싫어요 카운트 및 해당 멤버를 조회합니다.
+export async function fetchGroupTourListGroupLike(
+  group_id: number,
+): Promise<TGroupLikeListPayload> {
+  const params = {
+    group_id: group_id,
+  };
+  const res = await instance.get(`group/tour_list/like/group/`, { params });
+  return res.data.result[0];
+}
+
+// 개인의 여행지 리스트의 좋아요/싫어요 카운트 및 해당 멤버를 조회합니다.
+export async function fetchGroupTourListUserLike(
+  group_id: number,
+): Promise<TUserLikeListPayload> {
+  const params = {
+    group_id: group_id,
+  };
+  const res = await instance.get(`group/tour_list/like/`, { params });
+  return res.data.result[0];
+}
+
 export async function searchUser(username: string) {
   const params = { username: username };
   const res = await instance

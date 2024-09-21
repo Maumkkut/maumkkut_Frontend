@@ -3,6 +3,8 @@ import {
   fetchMyGroupList,
   fetchGroupDetailToId,
   postMakeGroup,
+  fetchGroupTourListGroupLike,
+  fetchGroupTourListUserLike,
 } from '@/api/group';
 
 export const useFetchMyGroupList = () => {
@@ -26,5 +28,22 @@ export const useFetchGroupDetailToId = (id: number) => {
 export const usePostMakeGroup = () => {
   return useMutation({
     mutationFn: postMakeGroup,
+  });
+};
+
+export const useFetchGroupTourListGroupLike = (id: number) => {
+  return useQuery({
+    queryKey: [`groupTourGroupLikeList`, id],
+    queryFn: () => fetchGroupTourListGroupLike(id),
+    staleTime: 1000 * 60 * 5,
+    retry: 1,
+  });
+};
+export const useFetchGroupTourListUserLikee = (id: number) => {
+  return useQuery({
+    queryKey: [`groupTourUserLikeList`, id],
+    queryFn: () => fetchGroupTourListUserLike(id),
+    staleTime: 1000 * 60 * 5,
+    retry: 1,
   });
 };

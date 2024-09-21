@@ -5,7 +5,8 @@ import {
   useFetchMyGroupList,
   // useFetchGroupDetailToId,
 } from '@/hooks/queries/group';
-
+import { Suspense } from 'react';
+import LoadingPage from '../LoadingPage';
 interface GroupData {
   id: number;
   name: string;
@@ -20,11 +21,13 @@ const GroupTripPage = () => {
           alt="HeroImg"
         />
 
-        <div className="mt-20 flex gap-x-10">
+        <div className="my-20 flex gap-x-10">
           <GroupSideBar />
           <div className="w-[1px] bg-black"></div>
           <div className="grow">
-            <Outlet />
+            <Suspense fallback={<LoadingPage />}>
+              <Outlet />
+            </Suspense>
           </div>
         </div>
       </div>
