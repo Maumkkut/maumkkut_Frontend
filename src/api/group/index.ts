@@ -76,3 +76,16 @@ export async function searchUser(username: string) {
     });
   return res;
 }
+
+export async function checkGroupName(group_name: string) {
+  const params = { group_name: group_name };
+  const res = await instance
+    .get(`group/check/`, { params })
+    .then(() => {
+      return true;
+    })
+    .catch(() => {
+      return false;
+    });
+  return res;
+}

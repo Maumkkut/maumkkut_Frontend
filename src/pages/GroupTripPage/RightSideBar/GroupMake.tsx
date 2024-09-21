@@ -7,14 +7,16 @@ import { usePostMakeGroup } from '@/hooks/queries/group';
 import { useUserInfo } from '@/hooks/queries/user';
 import { useQueryClient } from '@tanstack/react-query';
 import { ErrorMessage } from '@hookform/error-message';
-
+import { checkGroupName } from '@/api/group';
 import { useNavigate } from 'react-router-dom';
+
 const GroupMake = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [mateNumber, setMateNumber] = useState<number>(1);
   const [tripMateList, setTripMateList] = useState<number[]>([]);
   const [selectRegion, setSelectRegion] = useState(null);
+  const [isCheckGroupName, setCheckGroupName] = useState<boolean>(false);
 
   const { data: userInfo } = useUserInfo();
   const { mutate } = usePostMakeGroup();
@@ -28,6 +30,7 @@ const GroupMake = () => {
   } = useForm<TMakeGroupPayload>();
 
   const startDate = watch('start_date');
+  const groupName = watch('name');
   const today = new Date().toISOString().split('T')[0]; // 오늘 날짜
 
   const handleGroupMake = async (formValues: TMakeGroupPayload) => {
@@ -36,6 +39,10 @@ const GroupMake = () => {
     }
     if (!userInfo) {
       return alert('로그인을 해야합니다.');
+    }
+
+    if (!isCheckGroupName) {
+      return alert('그룹이름 중복검사는 필수입니다.');
     }
 
     const payload = {
@@ -91,6 +98,18 @@ const GroupMake = () => {
     setMateNumber(mateNumber + 1);
   };
 
+  const handleCheckGroupName = async () => {
+    if (!groupName) return;
+    if (isCheckGroupName) return;
+
+    const res = await checkGroupName(groupName);
+    if (res) {
+      setCheckGroupName(true);
+      return alert('사용가능한 그룹 이름입니다');
+    }
+    return alert('중복된 그룹 이름입니다');
+  };
+
   return (
     <div className="flex justify-center text-sm">
       <form
@@ -111,10 +130,15 @@ const GroupMake = () => {
                 <input
                   id="name"
                   type="text"
-                  className="h-full w-[320px] rounded-md border border-black"
+                  className={`h-full w-[320px] rounded-md border border-black px-2 ${isCheckGroupName && `bg-mk-newgrey`}`}
                   {...groupNameRegister}
+                  disabled={isCheckGroupName}
                 />
-                <button className="h-[30px] w-[70px] rounded-lg bg-mk-newgrey text-xs font-light text-white">
+                <button
+                  type="button"
+                  onClick={() => handleCheckGroupName()}
+                  className={`h-[30px] w-[70px] rounded-lg bg-mk-logo3 text-xs font-light text-white ${isCheckGroupName && `bg-mk-newgrey`}`}
+                >
                   중복확인
                 </button>
               </div>

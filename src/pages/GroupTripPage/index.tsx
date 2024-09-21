@@ -5,8 +5,7 @@ import {
   useFetchMyGroupList,
   // useFetchGroupDetailToId,
 } from '@/hooks/queries/group';
-import { Suspense } from 'react';
-import LoadingPage from '../LoadingPage';
+
 interface GroupData {
   id: number;
   name: string;
@@ -25,9 +24,7 @@ const GroupTripPage = () => {
           <GroupSideBar />
           <div className="w-[1px] bg-black"></div>
           <div className="grow">
-            <Suspense fallback={<LoadingPage />}>
-              <Outlet />
-            </Suspense>
+            <Outlet />
           </div>
         </div>
       </div>
