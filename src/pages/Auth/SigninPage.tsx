@@ -133,7 +133,7 @@ const SigninPage = () => {
                 </button>
               </form>
               {/* 로그인 옵션 */}
-              <div className="my-10 flex justify-between">
+              {/* <div className="my-10 flex justify-between">
                 <div className="flex items-center">
                   <input
                     type="checkbox"
@@ -146,17 +146,17 @@ const SigninPage = () => {
                   >
                     아이디 저장
                   </label>
-                </div>
-                {/* 추후 아이디&비밀번호 찾기 페이지 navlink */}
-                <div>
+                </div> */}
+              {/* 추후 아이디&비밀번호 찾기 페이지 navlink */}
+              {/* <div>
                   <span className="text-mk-gangwon underline">아이디 찾기</span>
                   <span className="ml-6 text-mk-gangwon underline">
                     비밀번호 찾기
                   </span>
                 </div>
-              </div>
+              </div> */}
               {/* 소셜로그인  */}
-              <div className="flex flex-col items-center">
+              <div className="mt-10 flex flex-col items-center">
                 <h3 className="text-lg text-mk-grey3">소셜 로그인</h3>
                 <button
                   className="mt-7 cursor-pointer"
