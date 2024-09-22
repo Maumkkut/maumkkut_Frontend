@@ -60,8 +60,8 @@ const GroupMake = () => {
     }
 
     const payload = {
-      leader: userInfo.pk,
-      members: [userInfo?.pk, ...tripMateList],
+      leader: userInfo.id,
+      members: [userInfo?.id, ...tripMateList],
       name: formValues.name,
       region: selectRegion,
       start_date: formValues.start_date,
