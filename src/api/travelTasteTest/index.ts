@@ -26,9 +26,19 @@ export async function testDetail(test_id: number): Promise<TravelPreference> {
   return res.data.result[0];
 }
 
-// export async function testDelete(params:type) {
-
-// }
+export async function testDelete(
+  test_id: number,
+): Promise<{ message: string }> {
+  try {
+    const res = await instance.delete('test', {
+      data: { test_id }, // DELETE 요청의 body에 test_id 포함
+    });
+    return res.data;
+  } catch (error) {
+    console.error('Failed to delete test result:', error);
+    throw new Error('테스트 결과 삭제에 실패했습니다. 다시 시도해주세요.'); // 에러 처리
+  }
+}
 
 //
 export async function testList(): Promise<TravelPreferenceTestList> {

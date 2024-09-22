@@ -9,14 +9,20 @@ import 사람좋아_쌀알 from '@/assets/images/TravelTasteTest/사람좋아 �
 import 액티비티형_옥수수 from '@/assets/images/TravelTasteTest/액티비티형 옥수수.png';
 import 인플루언서형_복숭아 from '@/assets/images/TravelTasteTest/인플루언서형 복숭아.png';
 import 힐링형_감자 from '@/assets/images/TravelTasteTest/힐링형 감자.png';
-import useTTTStore from '@/store/useTTTStore';
+
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
-import { testList } from '@/api/travelTasteTest';
+import { testDelete, testList } from '@/api/travelTasteTest';
+
+interface TestResult {
+  id: number;
+  created_at: string;
+  character_type: string;
+}
 
 const TestHistoryPage = () => {
   const [loading, setLoading] = useState(true);
-  const { setTestResults } = useTTTStore();
+  const [testResults, setTestResults] = useState<TestResult[]>([]);
   const name: string = '호준';
 
   useEffect(() => {
@@ -38,11 +44,17 @@ const TestHistoryPage = () => {
     };
 
     fetchTestResults();
-  }, [setTestResults]);
+  }, []);
 
   if (loading) {
     return <div>Loading...</div>; // You can replace this with a better loading indicator
   }
+
+  const handleDelete = (id: number) => {
+    setTestResults((prevResults) =>
+      prevResults.filter((result) => result.id !== id),
+    );
+  };
 
   return (
     <ContentLayout>
@@ -50,14 +62,22 @@ const TestHistoryPage = () => {
         <h2 className="ms-[122px] text-[40px]">
           <strong>{name}</strong>님의 여행 유형 결과 이력
         </h2>
-        <HistoryList />
+        <HistoryList
+          testResults={testResults}
+          onDelete={handleDelete}
+        />
       </div>
     </ContentLayout>
   );
 };
 
-const HistoryList = () => {
-  const { testResults } = useTTTStore();
+const HistoryList = ({
+  testResults,
+  onDelete,
+}: {
+  testResults: TestResult[];
+  onDelete: (id: number) => void;
+}) => {
   return (
     <div className="mt-[110px]">
       {testResults.map((result, index) => (
@@ -65,8 +85,9 @@ const HistoryList = () => {
           key={result.id}
           id={result.id}
           index={index}
-          date={result.created_at}
+          date={result.created_at.split('T')[0]}
           type={result.character_type}
+          onDelete={onDelete}
         />
       ))}
     </div>
@@ -78,15 +99,15 @@ const HistoryCard = ({
   index,
   date,
   type,
-  // description,
+  onDelete,
 }: {
   id: number;
   index: number;
   date: string;
   type: string;
-  // description: string;
+  onDelete: (id: number) => void;
 }) => {
-  const deleteDetail = (idx: number) => {
+  const deleteDetail = async (id: number) => {
     Swal.fire({
       icon: 'question',
       title: '여행 유형 삭제',
@@ -97,10 +118,27 @@ const HistoryCard = ({
       cancelButtonColor: '#d33',
       showCancelButton: true,
       showCloseButton: true,
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        console.log(`${idx}번째 삭제하는 로직 필요함`);
-        // 여기에서 삭제 로직을 추가해야함
+        try {
+          console.log(`${id}번째 삭제하는 로직 필요함`);
+          const response = await testDelete(id);
+          onDelete(id); // 상태에서 해당 결과 제거
+          Swal.fire({
+            icon: 'success',
+            title: '삭제 완료',
+            text: response.message,
+          });
+        } catch (error) {
+          const errorMessage =
+            (error as { message?: string }).message ||
+            '알 수 없는 오류가 발생했습니다.';
+          Swal.fire({
+            icon: 'error',
+            title: '삭제 실패',
+            text: errorMessage,
+          });
+        }
       }
     });
   };

@@ -27,3 +27,7 @@ export type TravelPreferenceSummary = {
   character_type: string;
   created_at: string;
 };
+
+export type Message = {
+  message: string;
+};
