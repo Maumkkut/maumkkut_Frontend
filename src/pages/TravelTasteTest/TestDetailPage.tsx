@@ -79,8 +79,9 @@ const ResultCard = () => {
           </h2>
           <div className="mx-auto my-[30px] h-[250px] w-[250px]">
             <img
-              src={resultDefault}
-              alt=""
+              src={getImageSrc(data?.character_type) || resultDefault}
+              alt={data?.character_type || '결과 이미지'}
+              className="w-max"
             />
           </div>
           <p>{data?.character_description} </p>
@@ -94,7 +95,7 @@ const ResultCard = () => {
             </h3>
             <div>
               <img
-                src={getImageSrc(data?.character_type) || resultDefault} // 기본 이미지 설정
+                src={getImageSrc(data?.best_match) || resultDefault}
                 alt={data?.character_type || '결과 이미지'}
                 className="w-max"
               />
@@ -105,7 +106,7 @@ const ResultCard = () => {
             <h3 className="mb-[30px] text-[20px] font-bold">추천 여행지</h3>
             <button>
               <img
-                src={getImageSrc(data?.recommend_place) || resultDefault} // 기본 이미지 설정
+                src={getImageSrc(data?.recommend_place) || resultDefault}
                 alt={data?.character_type || '결과 이미지'}
                 className="w-max"
               />
