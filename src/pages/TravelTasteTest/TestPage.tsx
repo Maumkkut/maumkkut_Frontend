@@ -10,10 +10,15 @@ import { testCreate } from '@/api/travelTasteTest';
 
 const TestPage = () => {
   const { pathname } = useLocation();
+  const { setAnswers } = useTTTStore();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
+
+  useEffect(() => {
+    setAnswers({ importance_list: Array(10).fill(0) });
+  }, [setAnswers]);
 
   const questions: string[] = [
     '여행지에서 마음의 안정을 찾고 힐링하는 것이 중요하다고 생각합니다.',
