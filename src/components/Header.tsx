@@ -1,6 +1,6 @@
 import ContentLayout from '@/layout/ContentLayout';
 import { NavLink, useNavigate } from 'react-router-dom';
-import logoImg from '@assets/images/logo/Logo.png';
+import logoImg from '@assets/images/logo/Logo.svg';
 import downArrow from '@assets/images/Profile/downArrow.svg';
 import userIcon from '@assets/images/Profile/userIcon.svg';
 import { logout } from '@/api/user';
