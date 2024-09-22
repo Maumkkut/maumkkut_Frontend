@@ -10,8 +10,8 @@ const socialLogin = async () => {
 const fetchUserInfo = async (): Promise<UserInfoOrNull> => {
   const access = sessionStorage.getItem('token');
   if (!access) return null;
-  const res = await instance.get('accounts/user/');
-  return res.data;
+  const res = await instance.get('accounts/user-info/');
+  return res.data.result;
 };
 
 const originSignup = async (payload: userSignup) => {

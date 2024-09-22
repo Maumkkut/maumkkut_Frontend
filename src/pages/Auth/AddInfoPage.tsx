@@ -48,7 +48,11 @@ export default function AddInfoPage() {
       nickname: formValues.nickname,
       date_of_birth: formValues.date_of_birth,
     };
-    await socialAddInfo(payload);
+    try {
+      await socialAddInfo(payload);
+    } catch {
+      return alert('오류가 발생했습니다.');
+    }
     resetField('name');
     resetField('phone_number');
     resetField('nickname');
