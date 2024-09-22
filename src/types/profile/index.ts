@@ -7,9 +7,11 @@ export type TProfileFeedCount = {
 
 export type TProfileCommentList = {
   id: number;
+  post_id: number;
   content: string;
   post_title: string;
   created_at: string;
+  board_type: string;
 };
 export type TProfilePostList = {
   id: number;
