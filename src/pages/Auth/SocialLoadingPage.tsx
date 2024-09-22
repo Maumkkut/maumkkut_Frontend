@@ -12,7 +12,6 @@ const SocialLoadingPage = () => {
   const code = params.get('code');
 
   const [isAddInfo, setAddInfo] = useState(false);
-
   const { refetch } = useUserInfo();
   const handleSocialLogin = async (code: string) => {
     try {
@@ -22,12 +21,12 @@ const SocialLoadingPage = () => {
         },
       });
 
-      console.log(res);
+      sessionStorage.setItem('token', res.data.key);
+      refetch();
       if (res.data.add_info) {
         setAddInfo(true);
         alert('추가정보를 입력해주세요');
       } else {
-        refetch();
         navigate('/');
       }
     } catch (error) {

@@ -20,6 +20,11 @@ interface UserInfoInterface {
   email: number;
   first_name: string;
   last_name: string;
+  nickname: string;
+  phone_number: string;
+  address: string;
+  id: number;
+  name: string;
 }
 
 interface IAddInfo {

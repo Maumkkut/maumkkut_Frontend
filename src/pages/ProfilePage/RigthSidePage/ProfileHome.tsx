@@ -1,5 +1,5 @@
 import { useFetchProfileFeedCounts } from '@/hooks/queries/profile';
-
+import { useUserInfo } from '@/hooks/queries/user';
 interface RightSidePageProps {
   currentCateory?: number;
   handleCategory: (category: number) => void;
@@ -7,10 +7,11 @@ interface RightSidePageProps {
 
 export default function ProfileHome({ handleCategory }: RightSidePageProps) {
   const { data } = useFetchProfileFeedCounts();
+  const { data: userInfo } = useUserInfo();
   return (
     <div className="flex flex-col items-center gap-y-2 text-xl text-mk-darkgray">
       <p>
-        <span>이름</span>
+        <span>{userInfo?.name}</span>
       </p>
       {/* 활동 정보 */}
       <div className="flex w-[500px] justify-between border-b border-mk-darkgray px-5 py-10 text-sm">
@@ -42,15 +43,15 @@ export default function ProfileHome({ handleCategory }: RightSidePageProps) {
         <div className="flex flex-col gap-y-10">
           <div className="flex flex-col">
             <span className="font-bold">이메일</span>
-            <span>che06718@Navigate</span>
+            <span>{userInfo?.email}</span>
           </div>
           <div className="flex flex-col">
             <span className="font-bold">휴대전화</span>
-            <span>010-0000-0000</span>
+            <span>{userInfo?.phone_number}</span>
           </div>
           <div className="flex flex-col">
             <span className="font-bold">주소</span>
-            <span>서울 강남구 테헤란로 212</span>
+            <span>{userInfo?.address}</span>
           </div>
         </div>
       </div>
