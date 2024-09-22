@@ -4,6 +4,7 @@ import logoImg from '@assets/images/logo/Logo.png';
 import downArrow from '@assets/images/Profile/downArrow.svg';
 import userIcon from '@assets/images/Profile/userIcon.svg';
 import { logout } from '@/api/user';
+import { useUserInfo } from '@/hooks/queries/user';
 
 import { useQueryClient } from '@tanstack/react-query';
 
@@ -12,7 +13,7 @@ const Header = () => {
 
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-
+  const { data } = useUserInfo();
   const handleLogout = () => {
     sessionStorage.removeItem('token');
     queryClient.removeQueries({ queryKey: ['userInfo'] });
@@ -53,7 +54,7 @@ const Header = () => {
                   src={userIcon}
                   alt="userIcon"
                 />
-                <p>닉네임닉네임</p>
+                <p>{data?.nickname}</p>
                 <img
                   src={downArrow}
                   alt="downArrow"

@@ -6,12 +6,14 @@ import {
 } from '@/hooks/queries/profile';
 import { useNavigate } from 'react-router-dom';
 
+import { useUserInfo } from '@/hooks/queries/user';
 import { TProfilePostList, TProfileCommentList } from '@/types/profile';
 import { useState } from 'react';
 
 export default function ActivityFeed() {
   const [selectType, setSelectType] = useState(0);
   const { data: feedCountsData } = useFetchProfileFeedCounts();
+  const { data: userInfo } = useUserInfo();
   return (
     <div className="flex flex-col items-center gap-y-14 px-10 text-mk-darkgray">
       <div className="w-[500px] border-b border-mk-darkgray px-5 py-10 text-center">
@@ -19,7 +21,7 @@ export default function ActivityFeed() {
       </div>
       {/* feed count */}
       <div className="flex items-center gap-x-10">
-        <span className="font-bold">nickname</span>
+        <span className="font-bold">{userInfo?.nickname}</span>
         <div className="flex w-[400px] justify-between text-sm">
           <div className="flex flex-col items-center">
             <span>작성글수</span>
