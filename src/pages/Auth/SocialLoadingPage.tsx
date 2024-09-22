@@ -1,4 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+
+import Swal from 'sweetalert2';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { instance } from '@/api/axios';
@@ -25,7 +27,11 @@ const SocialLoadingPage = () => {
       refetch();
       if (res.data.add_info) {
         setAddInfo(true);
-        alert('추가정보를 입력해주세요');
+        Swal.fire({
+          icon: 'info',
+          title: '추가정보',
+          text: '추가정보를 입력해주세요!',
+        });
       } else {
         navigate('/');
       }

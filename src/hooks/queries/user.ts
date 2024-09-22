@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import { useQuery, useMutation, queryOptions } from '@tanstack/react-query';
 import {
   originSignin,
@@ -18,7 +19,11 @@ export const useUserSignin = () => {
       navigate('/');
     },
     onError: () => {
-      alert('아이디 또는 비밀번호가 일치하지 않습니다.');
+      Swal.fire({
+        icon: 'error',
+        title: '로그인 실패',
+        text: '아이디 또는 비밀번호가 틀렸습니다!',
+      });
     },
   });
 };

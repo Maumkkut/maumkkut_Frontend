@@ -1,4 +1,6 @@
 /* eslint-disable no-useless-escape */
+
+import Swal from 'sweetalert2';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import { updatePassword } from '@/api/profile';
@@ -26,8 +28,11 @@ export default function EditProfile() {
 
       resetField('new_password1');
       resetField('new_password2');
-
-      alert('비밀번호 수정이 완료되었습니다.');
+      Swal.fire({
+        icon: 'success',
+        title: '비밀번호 수정 성공',
+        text: '비밀번호 수정이 완료되었습니다!',
+      });
     } catch {
       setError('submitError', {
         type: 'manual',

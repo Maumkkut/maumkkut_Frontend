@@ -1,4 +1,5 @@
 import ContentLayout from '@/layout/ContentLayout';
+import Swal from 'sweetalert2';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import { useState } from 'react';
@@ -26,15 +27,27 @@ export default function AddInfoPage() {
 
     const res = await fetchcheckNickname(nicknameInput);
     if (!res) {
-      return alert('이미 사용 중인 닉네임입니다.');
+      return Swal.fire({
+        icon: 'error',
+        title: '닉네임 중복',
+        text: '이미 사용중인 닉네임입니다!',
+      });
     }
-    alert('사용가능한 닉네임입니다!');
+    Swal.fire({
+      icon: 'success',
+      title: '닉네임 사용가능',
+      text: '사용가능한 닉네임입니다!',
+    });
     setCheckNickname(true);
   };
 
   const signupSubmit = async (formValues: IAddInfo) => {
     if (!isCheckNickname) {
-      return alert('닉네임 중복체크는 필수입니다!');
+      return Swal.fire({
+        icon: 'error',
+        title: '닉네임 중복',
+        text: '닉네임 중복체크는 필수입니다!',
+      });
     }
 
     const payload = {
@@ -51,7 +64,11 @@ export default function AddInfoPage() {
     try {
       await socialAddInfo(payload);
     } catch {
-      return alert('오류가 발생했습니다.');
+      return Swal.fire({
+        icon: 'error',
+        title: '오류',
+        text: '오류가 발생했습니다.',
+      });
     }
     resetField('name');
     resetField('phone_number');

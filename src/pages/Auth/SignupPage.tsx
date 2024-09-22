@@ -1,6 +1,7 @@
 /* eslint-disable no-useless-escape */
 import ContentLayout from '@/layout/ContentLayout';
 import logoTitle from '@assets/images/logo/logo_title.svg';
+import Swal from 'sweetalert2';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 
 import { useForm } from 'react-hook-form';
@@ -58,10 +59,18 @@ const SignupPage = () => {
 
   const signupSubmit = async (formValues: SignupType) => {
     if (!isCheckId) {
-      return alert('아이디 중복체크는 필수입니다!');
+      return Swal.fire({
+        icon: 'error',
+        title: '아이디 중복체크',
+        text: '아이디 중복체크는 필수입니다!',
+      });
     }
     if (!isCheckNickname) {
-      return alert('닉네임 중복체크는 필수입니다!');
+      return Swal.fire({
+        icon: 'error',
+        title: '닉네임 중복체크',
+        text: '닉네임 중복체크는 필수입니다!',
+      });
     }
 
     const payload = {
@@ -82,7 +91,11 @@ const SignupPage = () => {
     };
     const res = await originSignup(payload);
     if (!res) {
-      return alert('회원가입 중 오류가 발생했습니다. 나중에 다시 시도해주세요');
+      return Swal.fire({
+        icon: 'error',
+        title: '회원가입 오류',
+        text: '회원가입 중 오류가 발생했습니다. 나중에 다시 시도해주세요!',
+      });
     }
     resetField('id');
     resetField('email');
@@ -94,7 +107,11 @@ const SignupPage = () => {
     resetField('nickname');
     resetField('birth_date');
     navigate('/signin');
-    return alert('회원가입을 성공했습니다. 로그인을 해주세요');
+    return Swal.fire({
+      icon: 'success',
+      title: '회원가입 성공',
+      text: '회원가입을 성공했습니다. 로그인을 해주세요!',
+    });
   };
 
   const idRegister = register('id', {
@@ -198,9 +215,17 @@ const SignupPage = () => {
     if (!usernameInput) return;
     const res = await fetchcheckUserName(usernameInput);
     if (!res) {
-      return alert('이미 사용 중인 아이디입니다.');
+      return Swal.fire({
+        icon: 'error',
+        title: '아이디 중복',
+        text: '이미 사용중인 아이디입니다!',
+      });
     }
-    alert('사용가능한 아이디입니다!');
+    Swal.fire({
+      icon: 'success',
+      title: '아이디 사용가능',
+      text: '사용가능한 아이디입니다!',
+    });
     setCheckId(true);
   };
 
@@ -210,9 +235,17 @@ const SignupPage = () => {
 
     const res = await fetchcheckNickname(nicknameInput);
     if (!res) {
-      return alert('이미 사용 중인 닉네임입니다.');
+      return Swal.fire({
+        icon: 'error',
+        title: '닉네임 중복',
+        text: '이미 사용중인 닉네임입니다!',
+      });
     }
-    alert('사용가능한 닉네임입니다!');
+    Swal.fire({
+      icon: 'success',
+      title: '닉네임 사용가능',
+      text: '사용가능한 닉네임입니다!',
+    });
     setCheckNickname(true);
   };
 
