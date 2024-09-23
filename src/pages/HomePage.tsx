@@ -84,7 +84,7 @@ const HeroSection1 = () => {
               <p>&lsquo;마음껏 함께, 모두&rsquo; 즐기는 여행</p>
               <p>마음끗으로 떠나보세요</p>
             </div>
-            <Link to="">
+            <Link to="DiscoverGangwon/">
               <button className="mt-[36px] h-[52px] w-[179px] rounded bg-mk-logoPoint text-[20px] font-bold text-mk-logo4">
                 여행 시작하기
               </button>
@@ -192,7 +192,7 @@ const GoService = () => {
       <div></div>
       <div className="me-[144px] ms-[144px] mt-[100px] flex h-[200px] justify-between">
         <button className="relative w-[300px] hover:drop-shadow-2xl">
-          <Link to="/">
+          <Link to="DiscoverGangwon">
             <div className="h-full w-full overflow-hidden rounded-lg">
               <img
                 src={HeroImage}

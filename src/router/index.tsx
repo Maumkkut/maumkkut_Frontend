@@ -18,6 +18,7 @@ import GroupDetail from '@/pages/GroupTripPage/RightSideBar/GroupDetail';
 import ProfilePage from '@/pages/ProfilePage';
 
 import GroupMake from '@/pages/GroupTripPage/RightSideBar/GroupMake';
+import DiscoverGangwon from '@/pages/DiscoverGangwonPage/DiscoverGangwonPage';
 
 const routerInfo = [
   {
@@ -105,6 +106,7 @@ const routerInfo = [
         ],
       },
       { path: '/RandomTravel/*', element: <RandomTravelPage /> },
+      { path: '/DiscoverGangwon/*', element: <DiscoverGangwon /> },
     ],
   },
 ];
