@@ -26,6 +26,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import './SwiperComponent.css'; // 추가: 스타일을 적용할 CSS 파일 화살표 위치 조정
+import { Link } from 'react-router-dom';
 
 const HomePage = () => {
   return (
@@ -187,88 +188,100 @@ const GoService = () => {
       <div></div>
       <div className="me-[144px] ms-[144px] mt-[100px] flex h-[200px] justify-between">
         <button className="relative w-[300px] hover:drop-shadow-2xl">
-          <div className="h-full w-full overflow-hidden rounded-lg">
-            <img
-              src={HeroImage}
-              alt="HeroImage"
-              className="h-full w-full object-cover"
-            />
-          </div>
-          {/* 이미지를 어둡게하기 위해 살짝 반투명한 검정색 뒤집어 씌우기 */}
-          <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
-          <h3 className="absolute inset-0 top-[82px] text-[28px] font-bold text-mk-light">
-            강원도 이곳저곳
-          </h3>
+          <Link to="">
+            <div className="h-full w-full overflow-hidden rounded-lg">
+              <img
+                src={HeroImage}
+                alt="HeroImage"
+                className="h-full w-full object-cover"
+              />
+            </div>
+            {/* 이미지를 어둡게하기 위해 살짝 반투명한 검정색 뒤집어 씌우기 */}
+            <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
+            <h3 className="absolute inset-0 top-[82px] text-[28px] font-bold text-mk-light">
+              강원도 이곳저곳
+            </h3>
+          </Link>
         </button>
         <button className="relative w-[300px] hover:drop-shadow-2xl">
-          <div className="h-full overflow-hidden rounded-lg">
-            <img
-              src={sea}
-              alt="sea"
-              className="h-full w-full object-cover"
-            />
-          </div>
-          <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
-          <h3 className="absolute inset-0 top-[82px] text-[28px] font-bold text-mk-light">
-            여행 취향 테스트
-          </h3>
+          <Link to="TravelTasteTest/">
+            <div className="h-full overflow-hidden rounded-lg">
+              <img
+                src={sea}
+                alt="sea"
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
+            <h3 className="absolute inset-0 top-[82px] text-[28px] font-bold text-mk-light">
+              여행 취향 테스트
+            </h3>
+          </Link>
         </button>
 
         <button className="relative w-[300px] hover:drop-shadow-2xl">
-          <div className="h-full overflow-hidden rounded-lg">
-            <img
-              src={sea}
-              alt="sea"
-              className="h-full w-full object-cover"
-            />
-          </div>
-          <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
-          <h3 className="absolute inset-0 top-[82px] text-[28px] font-bold text-mk-light">
-            우리여행 코스추천
-          </h3>
+          <Link to="">
+            <div className="h-full overflow-hidden rounded-lg">
+              <img
+                src={sea}
+                alt="sea"
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
+            <h3 className="absolute inset-0 top-[82px] text-[28px] font-bold text-mk-light">
+              우리여행 코스추천
+            </h3>
+          </Link>
         </button>
       </div>
       <div className="me-[144px] ms-[144px] mt-[100px] flex h-[200px] justify-between">
         <button className="relative w-[300px] hover:drop-shadow-2xl">
-          <div className="h-full overflow-hidden rounded-lg">
-            <img
-              src={dice}
-              alt="dice"
-              className="h-full w-full object-cover"
-            />
-          </div>
-          {/* 이미지를 어둡게하기 위해 살짝 반투명한 검정색 뒤집어 씌우기 */}
-          <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
-          <h3 className="absolute inset-0 top-[82px] text-[28px] font-bold text-mk-light">
-            랜덤 여행지 추천
-          </h3>
+          <Link to="RandomTravel/">
+            <div className="h-full overflow-hidden rounded-lg">
+              <img
+                src={dice}
+                alt="dice"
+                className="h-full w-full object-cover"
+              />
+            </div>
+            {/* 이미지를 어둡게하기 위해 살짝 반투명한 검정색 뒤집어 씌우기 */}
+            <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
+            <h3 className="absolute inset-0 top-[82px] text-[28px] font-bold text-mk-light">
+              랜덤 여행지 추천
+            </h3>
+          </Link>
         </button>
         <button className="relative w-[300px] hover:drop-shadow-2xl">
-          <div className="h-full overflow-hidden rounded-lg">
-            <img
-              src={sea}
-              alt="sea"
-              className="h-full w-full object-cover"
-            />
-          </div>
-          <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
-          <h3 className="absolute inset-0 top-[82px] text-[28px] font-bold text-mk-light">
-            커뮤니티
-          </h3>
+          <Link to="community/all">
+            <div className="h-full overflow-hidden rounded-lg">
+              <img
+                src={sea}
+                alt="sea"
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
+            <h3 className="absolute inset-0 top-[82px] text-[28px] font-bold text-mk-light">
+              커뮤니티
+            </h3>
+          </Link>
         </button>
 
         <button className="relative w-[300px] hover:drop-shadow-2xl">
-          <div className="h-full overflow-hidden rounded-lg">
-            <img
-              src={sea}
-              alt="sea"
-              className="h-full w-full object-cover"
-            />
-          </div>
-          <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
-          <h3 className="absolute inset-0 top-[82px] text-[28px] font-bold text-mk-light">
-            마이페이지
-          </h3>
+          <Link to="profile">
+            <div className="h-full overflow-hidden rounded-lg">
+              <img
+                src={sea}
+                alt="sea"
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
+            <h3 className="absolute inset-0 top-[82px] text-[28px] font-bold text-mk-light">
+              마이페이지
+            </h3>
+          </Link>
         </button>
       </div>
     </div>
