@@ -1,14 +1,16 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import Swal from 'sweetalert2'; // SweetAlert2 import
 import { getTypeTravel } from '@/api/discover';
 import { TourLocation } from '@/types/discover';
 import ContentLayout from '@/layout/ContentLayout';
 import defaultImage from '@/assets/images/TravelTasteTest/resultDefault.png';
+
 const DiscoverDetail = () => {
   const { type } = useParams<{ type: string }>();
   const [travelDestinations, setTravelDestinations] = useState<TourLocation[]>(
     [],
-  ); // 상태 초기화
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,8 +18,25 @@ const DiscoverDetail = () => {
         const res = await getTypeTravel(type!);
         console.log(res);
         setTravelDestinations(res.result); // API 응답 결과를 상태에 저장
+
+        // destinations가 비어있는 경우 SweetAlert2로 경고 표시
+        if (res.result.length === 0) {
+          Swal.fire({
+            title: '알림',
+            text: '해당 유형의 추천 장소가 없습니다.',
+            icon: 'warning',
+            confirmButtonText: '확인',
+          });
+        }
       } catch (error) {
         console.error(error);
+        // 에러 발생 시 SweetAlert2로 경고 표시
+        Swal.fire({
+          title: '오류',
+          text: '해당 유형의 정보를 가져오지 못했습니다.',
+          icon: 'error',
+          confirmButtonText: '확인',
+        });
       }
     };
 
@@ -37,15 +56,13 @@ const DiscoverDetail = () => {
 const TypeRecommend = () => {
   const { type } = useParams<{ type: string }>();
   return (
-    <>
-      <div className="mx-auto my-[80px] text-center">
-        <div className="mx-auto flex w-[1060px] items-center justify-between text-[30px] font-bold text-mk-logo3">
-          <hr className="w-[30%] border-t border-black" />
-          <span className="whitespace-nowrap">{type} 타입 추천 장소</span>
-          <hr className="w-[30%] border-t border-black" />
-        </div>
+    <div className="mx-auto my-[80px] text-center">
+      <div className="mx-auto flex w-[1060px] items-center justify-between text-[30px] font-bold text-mk-logo3">
+        <hr className="w-[30%] border-t border-black" />
+        <span className="whitespace-nowrap">{type} 타입 추천 장소</span>
+        <hr className="w-[30%] border-t border-black" />
       </div>
-    </>
+    </div>
   );
 };
 
@@ -77,6 +94,7 @@ const DiscoverCard = ({
     const url = `https://www.google.com/search?q=${title}`;
     window.open(url, '_blank');
   };
+
   return (
     <div className="mx-auto w-full overflow-hidden rounded-lg border border-transparent shadow-md transition-colors duration-300 hover:border-mk-logo4">
       <button
