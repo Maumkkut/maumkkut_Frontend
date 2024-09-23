@@ -2,23 +2,19 @@ import ContentLayout from '@/layout/ContentLayout';
 import HeroImage from '@/assets/images/HomePage/HeroImage.png';
 import HeroImage2 from '@/assets/images/HomePage/HeroImage2.png';
 import HeroImage3 from '@/assets/images/HomePage/HeroImage3.png';
-import HeroImage4 from '@/assets/images/HomePage/HeroImage4.png';
 import dice from '@/assets/images/HomePage/dice.jpg';
 import sea from '@/assets/images/HomePage/sea.jpg';
-import eventIcon1 from '@/assets/images/HomePage/EventInGangwon1.png';
-import eventIcon2 from '@/assets/images/HomePage/EventInGangwon2.png';
-import eventIcon3 from '@/assets/images/HomePage/EventInGangwon3.png';
-import eventIcon4 from '@/assets/images/HomePage/EventInGangwon4.png';
-import eventIcon5 from '@/assets/images/HomePage/EventInGangwon5.png';
-// import btnRight from '@/assets/images/HomePage/carouselRight.png';
-// import btnLeft from '@/assets/images/HomePage/carouselLeft.png';
+import myPage from '@/assets/images/HomePage/myPage.jpg';
+import community from '@/assets/images/HomePage/Community.jpg';
+import ourTravel from '@/assets/images/HomePage/ourTravel.jpg';
 import course1 from '@/assets/images/HomePage/Course1.png';
 import course2 from '@/assets/images/HomePage/Course2.png';
 import course3 from '@/assets/images/HomePage/Course3.png';
 import course4 from '@/assets/images/HomePage/Course4.png';
+import defaultImage from '@/assets/images/TravelTasteTest/resultDefault.png';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { SetStateAction, useState } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 import { Pagination, Autoplay, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/autoplay';
@@ -26,6 +22,9 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import './SwiperComponent.css'; // 추가: 스타일을 적용할 CSS 파일 화살표 위치 조정
+import { Link } from 'react-router-dom';
+import { getFestivals } from '@/api/home';
+import { Festival } from '@/types/home';
 
 const HomePage = () => {
   return (
@@ -60,9 +59,9 @@ const HeroSection = () => {
       <SwiperSlide>
         <HeroSection3 />
       </SwiperSlide>
-      <SwiperSlide>
+      {/* <SwiperSlide>
         <HeroSection4 />
-      </SwiperSlide>
+      </SwiperSlide> */}
     </Swiper>
   );
 };
@@ -85,9 +84,11 @@ const HeroSection1 = () => {
               <p>&lsquo;마음껏 함께, 모두&rsquo; 즐기는 여행</p>
               <p>마음끗으로 떠나보세요</p>
             </div>
-            <button className="mt-[36px] h-[52px] w-[179px] rounded bg-mk-logoPoint text-[20px] font-bold text-mk-logo4">
-              여행 시작하기
-            </button>
+            <Link to="">
+              <button className="mt-[36px] h-[52px] w-[179px] rounded bg-mk-logoPoint text-[20px] font-bold text-mk-logo4">
+                여행 시작하기
+              </button>
+            </Link>
             <p className="mt-[36px] font-dotum text-[15px] text-mk-light">
               마음끗 : &lsquo;마음껏&rsquo;, 마카:&lsquo;모두&rsquo;라는 뜻의
               강원도 사투리
@@ -116,9 +117,11 @@ const HeroSection2 = () => {
             <div className="w-[1000px] font-tantan text-[64px] text-mk-light">
               <p>이번 여행지는 랜덤으로 정해볼까요?</p>
             </div>
-            <button className="mt-[36px] h-[52px] w-[280px] rounded bg-mk-logoPoint text-[20px] font-bold text-mk-logo4">
-              랜덤 여행지 추천 바로가기
-            </button>
+            <Link to="RandomTravel/">
+              <button className="mt-[36px] h-[52px] w-[280px] rounded bg-mk-logoPoint text-[20px] font-bold text-mk-logo4">
+                랜덤 여행지 추천 바로가기
+              </button>
+            </Link>
           </div>
         </ContentLayout>
       </div>
@@ -142,9 +145,11 @@ const HeroSection3 = () => {
             <div className="w-[1000px] font-tantan text-[64px] text-mk-light">
               <p>내 여행 MBTI는 뭘까?</p>
             </div>
-            <button className="mt-[36px] h-[52px] w-[280px] rounded bg-mk-logoPoint text-[20px] font-bold text-mk-logo4">
-              여행 취향 테스트 바로가기
-            </button>
+            <Link to="TravelTasteTest/">
+              <button className="mt-[36px] h-[52px] w-[280px] rounded bg-mk-logoPoint text-[20px] font-bold text-mk-logo4">
+                여행 취향 테스트 바로가기
+              </button>
+            </Link>
           </div>
         </ContentLayout>
       </div>
@@ -152,33 +157,33 @@ const HeroSection3 = () => {
   );
 };
 
-const HeroSection4 = () => {
-  return (
-    <div className="relative h-[610px] w-full overflow-hidden">
-      {/* Hero Image */}
-      <img
-        src={HeroImage4}
-        alt="HeroImage4"
-        className="h-full w-full object-cover"
-      />
-      {/* Hero Image 내부 글씨들 */}
-      <div className="absolute inset-0">
-        <ContentLayout>
-          {/* 작은 따옴표 그냥 쓰면 오류나서 &lsquo; 이용 */}
-          <div className="ms-36 mt-[152px]">
-            <div className="w-[1200px] font-tantan text-[64px] text-mk-light">
-              <p>강원도 이곳 저곳을 방문하고 포인트 모아</p>
-              <p>행운 룰렛에 참여하세요</p>
-            </div>
-            <button className="mt-[36px] h-[52px] w-[221px] rounded bg-mk-logoPoint text-[20px] font-bold text-mk-logo4">
-              행운 룰렛 참여하기
-            </button>
-          </div>
-        </ContentLayout>
-      </div>
-    </div>
-  );
-};
+// const HeroSection4 = () => {
+//   return (
+//     <div className="relative h-[610px] w-full overflow-hidden">
+//       {/* Hero Image */}
+//       <img
+//         src={HeroImage4}
+//         alt="HeroImage4"
+//         className="h-full w-full object-cover"
+//       />
+//       {/* Hero Image 내부 글씨들 */}
+//       <div className="absolute inset-0">
+//         <ContentLayout>
+//           {/* 작은 따옴표 그냥 쓰면 오류나서 &lsquo; 이용 */}
+//           <div className="ms-36 mt-[152px]">
+//             <div className="w-[1200px] font-tantan text-[64px] text-mk-light">
+//               <p>강원도 이곳 저곳을 방문하고 포인트 모아</p>
+//               <p>행운 룰렛에 참여하세요</p>
+//             </div>
+//             <button className="mt-[36px] h-[52px] w-[221px] rounded bg-mk-logoPoint text-[20px] font-bold text-mk-logo4">
+//               행운 룰렛 참여하기
+//             </button>
+//           </div>
+//         </ContentLayout>
+//       </div>
+//     </div>
+//   );
+// };
 
 const GoService = () => {
   return (
@@ -187,88 +192,100 @@ const GoService = () => {
       <div></div>
       <div className="me-[144px] ms-[144px] mt-[100px] flex h-[200px] justify-between">
         <button className="relative w-[300px] hover:drop-shadow-2xl">
-          <div className="h-full w-full overflow-hidden rounded-lg">
-            <img
-              src={HeroImage}
-              alt="HeroImage"
-              className="h-full w-full object-cover"
-            />
-          </div>
-          {/* 이미지를 어둡게하기 위해 살짝 반투명한 검정색 뒤집어 씌우기 */}
-          <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
-          <h3 className="absolute inset-0 top-[82px] text-[28px] font-bold text-mk-light">
-            강원도 이곳저곳
-          </h3>
+          <Link to="/">
+            <div className="h-full w-full overflow-hidden rounded-lg">
+              <img
+                src={HeroImage}
+                alt="HeroImage"
+                className="h-full w-full object-cover"
+              />
+            </div>
+            {/* 이미지를 어둡게하기 위해 살짝 반투명한 검정색 뒤집어 씌우기 */}
+            <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
+            <h3 className="absolute inset-0 top-[82px] text-[28px] font-bold text-mk-light">
+              강원도 이곳저곳
+            </h3>
+          </Link>
         </button>
         <button className="relative w-[300px] hover:drop-shadow-2xl">
-          <div className="h-full overflow-hidden rounded-lg">
-            <img
-              src={sea}
-              alt="sea"
-              className="h-full w-full object-cover"
-            />
-          </div>
-          <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
-          <h3 className="absolute inset-0 top-[82px] text-[28px] font-bold text-mk-light">
-            여행 취향 테스트
-          </h3>
+          <Link to="TravelTasteTest/">
+            <div className="h-full overflow-hidden rounded-lg">
+              <img
+                src={sea}
+                alt="sea"
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
+            <h3 className="absolute inset-0 top-[82px] text-[28px] font-bold text-mk-light">
+              여행 취향 테스트
+            </h3>
+          </Link>
         </button>
 
         <button className="relative w-[300px] hover:drop-shadow-2xl">
-          <div className="h-full overflow-hidden rounded-lg">
-            <img
-              src={sea}
-              alt="sea"
-              className="h-full w-full object-cover"
-            />
-          </div>
-          <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
-          <h3 className="absolute inset-0 top-[82px] text-[28px] font-bold text-mk-light">
-            우리여행 코스추천
-          </h3>
+          <Link to="/">
+            <div className="h-full overflow-hidden rounded-lg">
+              <img
+                src={ourTravel}
+                alt="ourTravel"
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
+            <h3 className="absolute inset-0 top-[82px] text-[28px] font-bold text-mk-light">
+              우리여행 코스추천
+            </h3>
+          </Link>
         </button>
       </div>
       <div className="me-[144px] ms-[144px] mt-[100px] flex h-[200px] justify-between">
         <button className="relative w-[300px] hover:drop-shadow-2xl">
-          <div className="h-full overflow-hidden rounded-lg">
-            <img
-              src={dice}
-              alt="dice"
-              className="h-full w-full object-cover"
-            />
-          </div>
-          {/* 이미지를 어둡게하기 위해 살짝 반투명한 검정색 뒤집어 씌우기 */}
-          <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
-          <h3 className="absolute inset-0 top-[82px] text-[28px] font-bold text-mk-light">
-            랜덤 여행지 추천
-          </h3>
+          <Link to="RandomTravel/">
+            <div className="h-full overflow-hidden rounded-lg">
+              <img
+                src={dice}
+                alt="dice"
+                className="h-full w-full object-cover"
+              />
+            </div>
+            {/* 이미지를 어둡게하기 위해 살짝 반투명한 검정색 뒤집어 씌우기 */}
+            <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
+            <h3 className="absolute inset-0 top-[82px] text-[28px] font-bold text-mk-light">
+              랜덤 여행지 추천
+            </h3>
+          </Link>
         </button>
         <button className="relative w-[300px] hover:drop-shadow-2xl">
-          <div className="h-full overflow-hidden rounded-lg">
-            <img
-              src={sea}
-              alt="sea"
-              className="h-full w-full object-cover"
-            />
-          </div>
-          <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
-          <h3 className="absolute inset-0 top-[82px] text-[28px] font-bold text-mk-light">
-            커뮤니티
-          </h3>
+          <Link to="community/all">
+            <div className="h-full overflow-hidden rounded-lg">
+              <img
+                src={community}
+                alt="community"
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
+            <h3 className="absolute inset-0 top-[82px] text-[28px] font-bold text-mk-light">
+              커뮤니티
+            </h3>
+          </Link>
         </button>
 
         <button className="relative w-[300px] hover:drop-shadow-2xl">
-          <div className="h-full overflow-hidden rounded-lg">
-            <img
-              src={sea}
-              alt="sea"
-              className="h-full w-full object-cover"
-            />
-          </div>
-          <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
-          <h3 className="absolute inset-0 top-[82px] text-[28px] font-bold text-mk-light">
-            마이페이지
-          </h3>
+          <Link to="profile">
+            <div className="h-full overflow-hidden rounded-lg">
+              <img
+                src={myPage}
+                alt="myPage"
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <div className="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
+            <h3 className="absolute inset-0 top-[82px] text-[28px] font-bold text-mk-light">
+              마이페이지
+            </h3>
+          </Link>
         </button>
       </div>
     </div>
@@ -276,89 +293,116 @@ const GoService = () => {
 };
 
 const SmallCard = ({ img, title }: { img: string; title: string }) => {
+  const handleClick = () => {
+    const url = `https://www.google.com/search?q=${title}`;
+    window.open(url, '_blank');
+  };
+
   return (
-    <div className="mx-auto my-auto h-[250px] w-[300px] rounded-lg shadow-lg transition-all duration-300 ease-in-out">
+    <button
+      className="mx-auto my-auto h-[250px] w-[300px] rounded-lg shadow-lg transition-all duration-300 ease-in-out"
+      onClick={handleClick}
+    >
       <div className="mx-auto my-[24px] h-[150px] w-[100px]">
         <img
           className="h-full w-full rounded-t-lg"
-          src={img}
+          src={img || defaultImage}
           alt={title}
         />
       </div>
-      <div>
-        <p className="mt-[24px] text-[20px] text-mk-grey1">{title}</p>
+      <div className="px-2">
+        <p className="mt-[12px] truncate text-center text-[20px] text-mk-grey1">
+          {title}
+        </p>
       </div>
-    </div>
+    </button>
   );
 };
+
 const BigCard = ({ img, title }: { img: string; title: string }) => {
+  const handleClick = () => {
+    const url = `https://www.google.com/search?q=${title}`;
+    window.open(url, '_blank');
+  };
+
   return (
-    <>
+    <button onClick={handleClick}>
       <div className="h-[20px]"></div>
       <div className="mx-auto my-auto h-[500px] w-[400px] rounded-lg shadow-lg transition-all duration-300 ease-in-out">
         <div className="mx-auto h-[400px] w-[300px]">
           <img
             className="h-full w-full rounded-t-lg object-cover"
-            src={img}
+            src={img || defaultImage}
             alt={title}
           />
         </div>
-        <div>
-          <p className="my-[18px] text-[28px] text-mk-grey1">{title}</p>
+        <div className="px-4">
+          <p className="my-[18px] truncate text-center text-[28px] text-mk-grey1">
+            {title}
+          </p>
         </div>
       </div>
       <div className="h-[20px]"></div>
-    </>
+    </button>
   );
 };
 
 const EventInGangwon = () => {
-  const gangwondoEvent = [
-    { title: '영월 캠핑 페스티벌', img: eventIcon1 },
-    { title: '화천 토마토 축제', img: eventIcon2 },
-    { title: '강릉 커피 축제', img: eventIcon3 },
-    { title: '영랑호 벚꽃 축제', img: eventIcon4 },
-    { title: '청춘양구 곰취 그린페스타', img: eventIcon5 },
-  ];
-
+  const [gangwondoEvent, setGangwondoEvent] = useState<Festival[] | null>(null);
   const [activeIndex, setActiveIndex] = useState(1);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await getFestivals();
+        setGangwondoEvent(res.result);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, []); // 의존성 배열에서 gangwondoEvent 제거
 
   return (
     <div className="mx-auto my-[100px] h-[700px] w-[1400px] text-center">
       <h2 className="font-tantan text-4xl text-mk-grey1">이벤트 in 강원</h2>
       <div className="swiper-container my-auto mt-[100px]">
-        <Swiper
-          className="mx-auto"
-          modules={[Navigation]}
-          spaceBetween={-100}
-          autoplay
-          navigation
-          slidesPerView={3}
-          loop={true}
-          onSlideChange={(swiper: { realIndex: SetStateAction<number> }) =>
-            setActiveIndex(swiper.realIndex)
-          }
-        >
-          {gangwondoEvent.map((item, index) => (
-            <SwiperSlide
-              key={index}
-              className="my-auto flex h-[700px] w-[300px] justify-center"
-            >
-              {index === activeIndex + 1 ||
-              (activeIndex === gangwondoEvent.length - 1 && index === 0) ? (
-                <BigCard
-                  img={item.img}
-                  title={item.title}
-                />
-              ) : (
-                <SmallCard
-                  img={item.img}
-                  title={item.title}
-                />
-              )}
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        {gangwondoEvent ? (
+          <Swiper
+            className="mx-auto"
+            modules={[Navigation]}
+            spaceBetween={-100}
+            autoplay
+            navigation
+            slidesPerView={3}
+            loop={true}
+            onSlideChange={(swiper: { realIndex: SetStateAction<number> }) =>
+              setActiveIndex(swiper.realIndex)
+            }
+          >
+            {gangwondoEvent.map((item, index) => (
+              <SwiperSlide
+                key={index}
+                className="my-auto flex h-[700px] w-[300px] justify-center"
+              >
+                {index === activeIndex + 1 ||
+                (activeIndex === gangwondoEvent.length - 1 && index === 0) ? (
+                  <BigCard
+                    img={item.image}
+                    title={item.title}
+                  />
+                ) : (
+                  <SmallCard
+                    img={item.image}
+                    title={item.title}
+                  />
+                )}
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        ) : (
+          <p>로딩 중...</p>
+        )}
       </div>
     </div>
   );

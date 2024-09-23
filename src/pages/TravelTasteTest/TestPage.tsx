@@ -20,7 +20,7 @@ const TestPage = () => {
     setAnswers({ importance_list: Array(10).fill(0) });
   }, [setAnswers]);
 
-  const questions: string[] = [
+  const questions: string[] = [   
     '여행지에서 마음의 안정을 찾고 힐링하는 것이 중요하다고 생각합니다.',
     '여행 중 여유롭게 시간을 보내는 것을 선호합니다.',
     '자연 경관을 즐기는 여행을 좋아합니다.',
