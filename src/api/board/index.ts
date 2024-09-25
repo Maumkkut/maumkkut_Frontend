@@ -49,7 +49,6 @@ const fetchBoardDetail = async (
 
 // 게시판 게시글 댓글 조회
 const fetchBoardComment = async (id: number) => {
-  console.log(id);
   const res = await instance.get(`board/${id}/comments`);
   return res.data;
 };
@@ -61,13 +60,11 @@ const postBoard = async (payload: postBoardType) => {
 
 // 게시판 댓글 작성
 const postBoardComment = async (payload: TcommentPayload) => {
-  console.log('comment palyload', payload);
   await instance.post(`board/${payload.postId}/comments/`, payload.content);
 };
 
 // 게시판 댓글 수정
 const updateBoardComment = async (payload: TcommentPayload) => {
-  console.log('copmment edit palyload', payload);
   await instance.put(
     `board/${payload.postId}/comments/${payload.commentId}/`,
     payload.content,
@@ -76,7 +73,6 @@ const updateBoardComment = async (payload: TcommentPayload) => {
 
 // 게시판 대댓글 작성
 const postBoardCommentReply = async (payload: TcommentPayload) => {
-  console.log('reply palyload', payload);
   await instance.post(
     `board/${payload.postId}/comments/${payload.commentId}/detail/`,
     payload.content,
@@ -85,7 +81,6 @@ const postBoardCommentReply = async (payload: TcommentPayload) => {
 
 // 게시판 대댓글 수정
 const updateBoardCommentReply = async (payload: TcommentPayload) => {
-  console.log('reply edit palyload', payload);
   await instance.put(
     `board/${payload.postId}/comments/${payload.commentId}/`,
     payload.content,

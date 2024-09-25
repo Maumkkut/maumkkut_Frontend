@@ -1,13 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+
+import Swal from 'sweetalert2';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { instance } from '@/api/axios';
 import { useUserInfo } from '@/hooks/queries/user';
 import AddInfoPage from './AddInfoPage';
+import LoadingPage from '../LoadingPage';
 
 const SocialLoadingPage = () => {
   const navigate = useNavigate();
-
   const params = new URLSearchParams(window.location.search);
   const code = params.get('code');
 
@@ -25,12 +27,20 @@ const SocialLoadingPage = () => {
       refetch();
       if (res.data.add_info) {
         setAddInfo(true);
-        alert('추가정보를 입력해주세요');
+        Swal.fire({
+          icon: 'info',
+          title: '추가정보',
+          text: '추가정보를 입력해주세요!',
+        });
       } else {
         navigate('/');
       }
     } catch (error) {
-      console.log(error);
+      Swal.fire({
+        icon: 'error',
+        title: '소셜로그인 실패',
+        text: '소셜로그인 중 오류가 발생했습니다. 다시 시도해주세요',
+      });
       navigate('/signin');
     }
   };
@@ -44,13 +54,9 @@ const SocialLoadingPage = () => {
     }
   }, [code, navigate]);
 
-  // if (!isAddInfo) {
-  //   return (
-  //     <div>
-  //       <p>카카오 로그인 중...</p>
-  //     </div>
-  //   );
-  // }
+  if (!isAddInfo) {
+    return <LoadingPage />;
+  }
 
   return (
     <div>

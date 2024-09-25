@@ -12,7 +12,7 @@ export default function SearchMate({ setTripMateList }: TSearchMateProps) {
 
   const handleSearchMate = async () => {
     const res = await searchUser(tripMate);
-    console.log(res);
+
     if (res) {
       setDisabled(true);
       setTripMateId(res);

@@ -31,7 +31,10 @@ interface IAddInfo {
   date_of_birth: number;
   nickname: string;
   name: string;
+  address: string;
   phone_number: string;
+  postalCode?: string;
+  addressDetail?: string;
 }
 
 type UserInfoOrNull = UserInfoInterface | null;

@@ -13,7 +13,6 @@ import {
 // 그룹 생성
 export async function postMakeGroup(payload: TMakeGroupPayload) {
   const res = await instance.post(`group/`, payload);
-  console.log(res.data.result);
   return res.data.result;
 }
 

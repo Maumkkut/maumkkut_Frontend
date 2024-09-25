@@ -118,7 +118,9 @@ function FeedList({ selectType }: { selectType: number }) {
             <div
               className="flex cursor-pointer gap-x-3 border-b border-mk-darkgrey py-3"
               key={item.id}
-              onClick={() => handleMovePostDetail(item.id, item.post_title)}
+              onClick={() =>
+                handleMovePostDetail(item.post_id, item.board_type)
+              }
               aria-hidden="true"
             >
               <div className="grow">

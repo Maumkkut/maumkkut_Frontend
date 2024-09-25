@@ -1,6 +1,6 @@
 import ContentLayout from '@/layout/ContentLayout';
 import { NavLink, useNavigate } from 'react-router-dom';
-import logoImg from '@assets/images/logo/Logo.png';
+import logoImg from '@assets/images/logo/Logo.svg';
 import downArrow from '@assets/images/Profile/downArrow.svg';
 import userIcon from '@assets/images/Profile/userIcon.svg';
 import { logout } from '@/api/user';
@@ -39,7 +39,7 @@ const Header = () => {
           <div className="ml-[81px] flex w-[859px] justify-between font-dotum">
             <NavLink to={'/DiscoverGangwon'}>강원도 이곳저곳</NavLink>
             <NavLink to={'/TravelTasteTest'}>여행 취향 테스트</NavLink>
-            <NavLink to={'/'}>우리여행 코스추천</NavLink>
+            <NavLink to={'/grouptrip'}>우리여행 코스추천</NavLink>
             <NavLink to={'/RandomTravel'}>랜덤 여행지 추천</NavLink>
             <NavLink to={'/community/all'}>커뮤니티</NavLink>
 

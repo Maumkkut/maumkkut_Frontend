@@ -115,7 +115,6 @@ const CommunityToolbar = ({ data }: { data: FetchBoardInterface }) => {
     searchParams.set('content', searchContent);
 
     setSearchParams(searchParams);
-    console.log(searchParams);
   };
 
   const handlePostBtn = () => {
@@ -144,7 +143,6 @@ const CommunityToolbar = ({ data }: { data: FetchBoardInterface }) => {
   };
 
   const handleContent = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value);
     setSearchContent(event.target.value);
   };
   const handlePeriod = (period: string) => {
@@ -179,7 +177,7 @@ const CommunityToolbar = ({ data }: { data: FetchBoardInterface }) => {
             <span>
               총{' '}
               <span className="font-bold text-mk-logo3">
-                {data?.total_count}
+                {data ? data.total_count : '0'}
               </span>
               개 글
             </span>

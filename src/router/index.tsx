@@ -20,12 +20,17 @@ import ProfilePage from '@/pages/ProfilePage';
 import GroupMake from '@/pages/GroupTripPage/RightSideBar/GroupMake';
 import DiscoverGangwon from '@/pages/DiscoverGangwonPage/DiscoverGangwonPage';
 
+import AddInfoPage from '@/pages/Auth/AddInfoPage';
+
 const routerInfo = [
   {
     path: '/',
     element: <GlobalLayout />,
     children: [
-      { index: true, element: <HomePage /> },
+      {
+        index: true,
+        element: <HomePage />,
+      },
       {
         path: '/signup',
         element: (
@@ -47,6 +52,14 @@ const routerInfo = [
         element: (
           <AuthGuard auth={false}>
             <SocialLoadingPage />
+          </AuthGuard>
+        ),
+      },
+      {
+        path: '/profile/addinfo',
+        element: (
+          <AuthGuard auth={true}>
+            <AddInfoPage />
           </AuthGuard>
         ),
       },

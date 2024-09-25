@@ -1,4 +1,4 @@
-import BannerImg from '@assets/images/GroupTrip/Hero Section.svg';
+import BannerImg from '@assets/images/GroupTrip/Hero Section.png';
 import ContentLayout from '@/layout/ContentLayout';
 import { NavLink, Outlet } from 'react-router-dom';
 import {
@@ -13,13 +13,27 @@ interface GroupData {
 
 const GroupTripPage = () => {
   return (
-    <ContentLayout>
-      <div>
+    <div>
+      <div className='overflow-hidden" relative h-[310px]'>
         <img
+          className="h-full w-full object-cover brightness-50"
           src={BannerImg}
-          alt="HeroImg"
+          alt="banner"
         />
-
+        <div className="absolute inset-0">
+          <ContentLayout>
+            <div className="left-[144px] my-[96px] ms-[162px] w-[1224px] text-center">
+              <p className="text-[32px] font-extralight text-white">
+                취향에 맞는 맞춤 코스를 추천해드려요
+              </p>
+              <h2 className="mt-[10px] font-tantan text-[48px] text-[#FFD74A]">
+                단체여행 코스 추천
+              </h2>
+            </div>
+          </ContentLayout>
+        </div>
+      </div>
+      <ContentLayout>
         <div className="my-20 flex gap-x-10">
           <GroupSideBar />
           <div className="w-[1px] bg-black"></div>
@@ -27,8 +41,8 @@ const GroupTripPage = () => {
             <Outlet />
           </div>
         </div>
-      </div>
-    </ContentLayout>
+      </ContentLayout>
+    </div>
   );
 };
 

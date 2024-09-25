@@ -1,3 +1,5 @@
+import Swal from 'sweetalert2';
+
 import { REGION_CODE } from '@/constants/regionCode';
 import { TMakeGroupPayload } from '@/types/group';
 import SearchMate from '@/components/SearchMate';
@@ -35,25 +37,36 @@ const GroupMake = () => {
 
   const handleGroupMake = async (formValues: TMakeGroupPayload) => {
     if (!selectRegion) {
-      return alert('지역을 선택해야 합니다.');
+      return Swal.fire({
+        icon: 'error',
+        title: '그룹 생성 오류',
+        text: '지역을 선택해야 합니다.',
+      });
     }
     if (!userInfo) {
-      return alert('로그인을 해야합니다.');
+      return Swal.fire({
+        icon: 'error',
+        title: '그룹 생성 오류',
+        text: '로그인을 해야합니다.',
+      });
     }
 
     if (!isCheckGroupName) {
-      return alert('그룹이름 중복검사는 필수입니다.');
+      return Swal.fire({
+        icon: 'error',
+        title: '그룹 생성 오류',
+        text: '그룹이름 중복검사는 필수입니다.',
+      });
     }
 
     const payload = {
-      leader: userInfo.pk,
-      members: [userInfo?.pk, ...tripMateList],
+      leader: userInfo.id,
+      members: [userInfo?.id, ...tripMateList],
       name: formValues.name,
       region: selectRegion,
       start_date: formValues.start_date,
       end_date: formValues.end_date,
     };
-    console.log(payload);
 
     mutate(payload, {
       onSuccess: (res) => {
@@ -110,9 +123,17 @@ const GroupMake = () => {
     const res = await checkGroupName(groupName);
     if (res) {
       setCheckGroupName(true);
-      return alert('사용가능한 그룹 이름입니다');
+      return Swal.fire({
+        icon: 'success',
+        title: '그룹이름 사용가능',
+        text: '사용가능한 그룹 이름입니다!',
+      });
     }
-    return alert('중복된 그룹 이름입니다');
+    return Swal.fire({
+      icon: 'error',
+      title: '그룹이름 중복',
+      text: '중복된 그룹 이름입니다',
+    });
   };
 
   return (
