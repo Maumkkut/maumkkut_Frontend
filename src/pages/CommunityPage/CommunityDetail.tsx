@@ -94,7 +94,10 @@ const CommunityDetail = () => {
             <div className="flex w-full items-center gap-x-4">
               <span className="text-2xl font-bold">댓글</span>
               <span className="grow text-lg">
-                총 <span className="text-mk-logo2">{data.comments.length}</span>
+                총{' '}
+                <span className="text-mk-logo2">
+                  {data ? data.comments.length : '0'}
+                </span>
                 개
               </span>
             </div>

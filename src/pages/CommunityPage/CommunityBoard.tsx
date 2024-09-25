@@ -179,7 +179,7 @@ const CommunityToolbar = ({ data }: { data: FetchBoardInterface }) => {
             <span>
               총{' '}
               <span className="font-bold text-mk-logo3">
-                {data?.total_count}
+                {data ? data.total_count : '0'}
               </span>
               개 글
             </span>
