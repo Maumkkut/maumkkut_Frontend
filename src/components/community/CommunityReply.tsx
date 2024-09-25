@@ -31,7 +31,6 @@ const CommunityReply = ({
       postId: postId,
       commentId: data.id,
     };
-    console.log(payload);
     deleteCommentMutation(payload, {
       onSuccess: () => {
         queryClient.invalidateQueries({

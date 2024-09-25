@@ -67,7 +67,6 @@ const GroupMake = () => {
       start_date: formValues.start_date,
       end_date: formValues.end_date,
     };
-    console.log(payload);
 
     mutate(payload, {
       onSuccess: (res) => {

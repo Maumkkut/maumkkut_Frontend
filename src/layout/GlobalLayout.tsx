@@ -15,7 +15,6 @@ const GlobalLayout = () => {
   useEffect(() => {
     if (isSuccess) {
       const isAuthenticated = sessionStorage.getItem('token');
-      console.log(isSuccess, isAuthenticated, data?.nickname);
       if (isAuthenticated && !data?.nickname) {
         Swal.fire({
           icon: 'info',

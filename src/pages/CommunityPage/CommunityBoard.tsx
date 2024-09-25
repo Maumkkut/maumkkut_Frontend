@@ -115,7 +115,6 @@ const CommunityToolbar = ({ data }: { data: FetchBoardInterface }) => {
     searchParams.set('content', searchContent);
 
     setSearchParams(searchParams);
-    console.log(searchParams);
   };
 
   const handlePostBtn = () => {
@@ -144,7 +143,6 @@ const CommunityToolbar = ({ data }: { data: FetchBoardInterface }) => {
   };
 
   const handleContent = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value);
     setSearchContent(event.target.value);
   };
   const handlePeriod = (period: string) => {

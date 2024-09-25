@@ -46,26 +46,22 @@ const CommentInput = ({
 
     switch (commentType) {
       case 'comment':
-        console.log('Type comment');
         commentMutate(payload);
         break;
       case 'commentEdit':
         if (handler) {
-          console.log('Type comment Edit');
           commentEditMutate(payload);
           handler(false);
         }
         break;
       case 'reply':
         if (handler) {
-          console.log('Type replyComment');
           commentReplyMutate(payload);
           handler(false);
         }
         break;
       case 'replyEdit':
         if (handler) {
-          console.log('Type replyComment Edit');
           commentReplyEditMutate(payload);
           handler(false);
         }
