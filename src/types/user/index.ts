@@ -16,12 +16,27 @@ interface userSignup {
 
 interface UserInfoInterface {
   pk: number;
-  username: number;
+  username: string;
   email: number;
   first_name: string;
   last_name: string;
+  nickname: string;
+  phone_number: string;
+  address: string;
+  id: number;
+  name: string;
+}
+
+interface IAddInfo {
+  date_of_birth: number;
+  nickname: string;
+  name: string;
+  address: string;
+  phone_number: string;
+  postalCode?: string;
+  addressDetail?: string;
 }
 
 type UserInfoOrNull = UserInfoInterface | null;
 
-export type { userSignin, userSignup, UserInfoOrNull };
+export type { userSignin, userSignup, UserInfoOrNull, IAddInfo };

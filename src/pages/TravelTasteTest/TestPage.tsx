@@ -4,17 +4,23 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { testCreate } from '@/api/travelTasteTest';
 
 // or via CommonJS
 
 const TestPage = () => {
   const { pathname } = useLocation();
+  const { setAnswers } = useTTTStore();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
-  const questions: string[] = [
+  useEffect(() => {
+    setAnswers({ importance_list: Array(10).fill(0) });
+  }, [setAnswers]);
+
+  const questions: string[] = [   
     '여행지에서 마음의 안정을 찾고 힐링하는 것이 중요하다고 생각합니다.',
     '여행 중 여유롭게 시간을 보내는 것을 선호합니다.',
     '자연 경관을 즐기는 여행을 좋아합니다.',
@@ -66,7 +72,7 @@ const QuestionCard = ({ question, i }: { question: string; i: number }) => {
         </div>
         <div className="flex w-[450px] justify-between">
           {CircleData.map((datum, index) =>
-            answers[i] === index + 1 ? (
+            answers.importance_list[i] === index + 1 ? (
               <CircleClicked
                 key={index}
                 color={datum.color}
@@ -120,8 +126,11 @@ const CircleButton = ({
   const { answers, setAnswers } = useTTTStore();
 
   const updateAnswer = function (i: number, j: number) {
-    const newAnswers = [...answers];
-    newAnswers[i] = j;
+    const newAnswers = {
+      ...answers,
+      importance_list: [...answers.importance_list],
+    };
+    newAnswers.importance_list[i] = j;
     setAnswers(newAnswers);
     console.log(newAnswers);
   };
@@ -137,26 +146,37 @@ const CircleButton = ({
 
 const ResultOrRestart = () => {
   const { answers, setAnswers } = useTTTStore();
-  const navigate = useNavigate();
 
-  const checkAnswers = (): void => {
-    if (answers.includes(0)) {
-      // 빈칸이 있다고 모달 띄우는 로직 필요
-      // window.alert('빈칸이 있습니다!');
+  const navigate = useNavigate();
+  const goToDetailPage = (id: number) => {
+    navigate(`../history/${id}`, { state: { id } });
+  };
+
+  const checkAnswers = async () => {
+    if (answers.importance_list.some((answer) => answer === 0)) {
       Swal.fire({
         icon: 'error',
         title: '빈칸이 있습니다.',
         text: '모든 항목을 선택해주세요!',
       });
     } else {
-      // 이곳에 결과 저장하는 로직필요
-      navigate('/TravelTasteTest/history');
+      console.log(answers.importance_list);
+      try {
+        const res = await testCreate(answers);
+        goToDetailPage(res.result.test_id);
+      } catch (error) {
+        console.error('Failed to create test result:', error);
+        Swal.fire({
+          icon: 'error',
+          title: '오류가 발생했습니다.',
+          text: '다시 시도해주세요.',
+        });
+      }
     }
   };
 
   const clickRestart = (): void => {
-    setAnswers([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]); //아무것도 클릭하지 않은 상태로 변경하기
-    // top:0 >> 맨위로  behavior:smooth >> 부드럽게 이동할수 있게 설정하는 속성
+    setAnswers({ importance_list: Array(10).fill(0) }); //아무것도 클릭하지 않은 상태로 변경하기
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 

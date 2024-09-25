@@ -1,6 +1,6 @@
-import { useQuery, useMutation, queryOptions } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import {
-  fetchBoard,
+  // fetchBoard,
   fetchBoardSearch,
   fetchBoardDetail,
   fetchBoardComment,
@@ -9,6 +9,7 @@ import {
   updateBoardComment,
   postBoardCommentReply,
   updateBoardCommentReply,
+  deleteBoardComment,
 } from '@/api/board';
 
 export const useFetchBoardSearch = (
@@ -27,14 +28,14 @@ export const useFetchBoardSearch = (
   });
 };
 
-export const useFetchBoard = (boardType: string, page: string) => {
-  return useQuery({
-    queryKey: [`${boardType}board`, page],
-    queryFn: () => fetchBoard(boardType, page),
-    staleTime: 1000 * 60 * 10,
-    retry: 1,
-  });
-};
+// export const useFetchBoard = (boardType: string, page: string) => {
+//   return useQuery({
+//     queryKey: [`${boardType}board`, page],
+//     queryFn: () => fetchBoard(boardType, page),
+//     staleTime: 1000 * 60 * 10,
+//     retry: 1,
+//   });
+// };
 
 export const useFetchBoardDetail = (boardType: string, id: number) => {
   return useQuery({
@@ -84,10 +85,16 @@ export const useUpdateBoardCommentReply = () => {
   });
 };
 
-export function boardQueryHelper(boardType: string, page: string) {
-  return queryOptions({
-    queryKey: [`${boardType}board`],
-    queryFn: () => fetchBoard(boardType, page),
-    staleTime: Infinity,
+export const useDeleteBoardComment = () => {
+  return useMutation({
+    mutationFn: deleteBoardComment,
   });
-}
+};
+
+// export function boardQueryHelper(boardType: string, page: string) {
+//   return queryOptions({
+//     queryKey: [`${boardType}board`],
+//     queryFn: () => fetchBoard(boardType, page),
+//     staleTime: Infinity,
+//   });
+// }

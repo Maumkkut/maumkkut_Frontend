@@ -35,6 +35,7 @@ const CommentInput = ({
   const { mutateAsync: commentEditMutate } = useUpdateBoardComment();
   const { mutateAsync: commentReplyMutate } = usePostBoardCommentReply();
   const { mutateAsync: commentReplyEditMutate } = useUpdateBoardCommentReply();
+  const isAuthenticated = sessionStorage.getItem('token');
 
   const commentSubmit = (formValues: TcommentPayload) => {
     const payload = {
@@ -45,26 +46,22 @@ const CommentInput = ({
 
     switch (commentType) {
       case 'comment':
-        console.log('Type comment');
         commentMutate(payload);
         break;
       case 'commentEdit':
         if (handler) {
-          console.log('Type comment Edit');
           commentEditMutate(payload);
           handler(false);
         }
         break;
       case 'reply':
         if (handler) {
-          console.log('Type replyComment');
           commentReplyMutate(payload);
           handler(false);
         }
         break;
       case 'replyEdit':
         if (handler) {
-          console.log('Type replyComment Edit');
           commentReplyEditMutate(payload);
           handler(false);
         }
@@ -84,6 +81,9 @@ const CommentInput = ({
     },
   });
 
+  if (!isAuthenticated || isAuthenticated === undefined) {
+    return <></>;
+  }
   return (
     <form
       className="flex h-14 w-full"
