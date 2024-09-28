@@ -3,9 +3,10 @@ import Swal from 'sweetalert2';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { fetchcheckNickname, socialAddInfo } from '@/api/user';
 import { useNavigate } from 'react-router-dom';
+import { useUserInfo } from '@/hooks/queries/user';
 
 import { IAddInfo } from '@/types/user';
 export default function AddInfoPage() {
@@ -19,6 +20,7 @@ export default function AddInfoPage() {
     watch,
     setValue,
   } = useForm<IAddInfo>();
+  const { data, isSuccess } = useUserInfo();
 
   const openAddressPopup = useDaumPostcodePopup();
   const handleOpenSearchAddress = () => {
@@ -133,6 +135,15 @@ export default function AddInfoPage() {
   });
 
   const addressDetailRegister = register('addressDetail');
+
+  useEffect(() => {
+    if (isSuccess) {
+      const isAuthenticated = sessionStorage.getItem('token');
+      if (isAuthenticated && data && data?.nickname) {
+        navigate('/');
+      }
+    }
+  });
 
   return (
     <ContentLayout>

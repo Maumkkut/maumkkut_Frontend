@@ -15,7 +15,7 @@ const GlobalLayout = () => {
   useEffect(() => {
     if (isSuccess) {
       const isAuthenticated = sessionStorage.getItem('token');
-      if (isAuthenticated && !data?.nickname) {
+      if (isAuthenticated && data && !data?.nickname) {
         Swal.fire({
           icon: 'info',
           title: '추가정보',
@@ -24,7 +24,7 @@ const GlobalLayout = () => {
         navigate('/profile/addinfo');
       }
     }
-  }, [data?.nickname, isSuccess, location.pathname, navigate]);
+  }, [data, isSuccess, location.pathname, navigate]);
 
   return (
     <div className="flex min-h-screen flex-col">
