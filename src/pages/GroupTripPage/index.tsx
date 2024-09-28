@@ -34,7 +34,7 @@ const GroupTripPage = () => {
         </div>
       </div>
       <ContentLayout>
-        <div className="my-20 flex gap-x-10">
+        <div className="my-28 flex gap-x-10">
           <GroupSideBar />
           <div className="w-[1px] bg-black"></div>
           <div className="grow">

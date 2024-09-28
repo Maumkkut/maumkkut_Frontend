@@ -238,6 +238,7 @@ const GroupMake = () => {
               ))}
 
               <button
+                type="button"
                 className="h-[30px] w-[90px] rounded-3xl border border-mk-newgrey text-xs"
                 onClick={() => handleAddMember()}
               >
