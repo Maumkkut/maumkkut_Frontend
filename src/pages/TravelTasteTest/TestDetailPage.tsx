@@ -33,9 +33,7 @@ const ResultCard = () => {
       try {
         const res = await testDetail(Number(id));
         setData(res);
-        console.log(res);
       } catch (error) {
-        console.error('Failed to fetch test results:', error);
         Swal.fire({
           icon: 'error',
           title: '오류가 발생했습니다.',

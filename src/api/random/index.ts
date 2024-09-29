@@ -12,7 +12,6 @@ type ResultDetailBodyProps = {
 export async function recommendRandomTravel(
   payload: ResultDetailBodyProps,
 ): Promise<TravelRecommendation> {
-  console.log(payload);
   const res = await instance.post<TravelRecommendation>('random/', {
     region: payload.region,
   });
@@ -35,12 +34,10 @@ export async function getRandomTravelDetail(
 // 랜덤 여행 코스 목록 조회
 export async function getRandomTravelList(): Promise<RandomCourseResponse> {
   const res = await instance.get('random/course/list');
-  console.log(res.data);
   return res.data;
 }
 
 // 랜덤 여행 코스 저장
 export async function saveRandomTravel(payload: TourList) {
-  const res = await instance.post('random/course/', payload);
-  console.log(res);
+  await instance.post('random/course/', payload);
 }

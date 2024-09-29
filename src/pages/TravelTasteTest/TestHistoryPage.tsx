@@ -44,7 +44,6 @@ const TestHistoryPage = () => {
           setTestResults(data.result);
         }
       } catch (error) {
-        console.error('Failed to fetch test results:', error);
         Swal.fire({
           icon: 'error',
           title: '오류가 발생했습니다.',
@@ -133,7 +132,6 @@ const HistoryCard = ({
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          console.log(`${id}번째 삭제하는 로직 필요함`);
           const response = await testDelete(id);
           onDelete(id); // 상태에서 해당 결과 제거
           Swal.fire({

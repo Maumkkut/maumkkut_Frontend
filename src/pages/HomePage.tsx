@@ -357,7 +357,7 @@ const EventInGangwon = () => {
         const res = await getFestivals();
         setGangwondoEvent(res.result);
       } catch (error) {
-        console.error(error);
+        // console.error(error);
       }
     };
     fetchData();

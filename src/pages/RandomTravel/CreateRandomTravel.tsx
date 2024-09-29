@@ -24,7 +24,6 @@ const CreateRandomTravel = () => {
           });
         }
       } catch (error) {
-        console.error('Failed to fetch test results:', error);
         Swal.fire({
           icon: 'error',
           title: '오류가 발생했습니다.',
@@ -145,7 +144,6 @@ const ShowResult = () => {
       });
     } else {
       const region = startPos[index].name;
-      console.log(region);
       navigate('result', { state: { region } });
     }
   };
