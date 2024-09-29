@@ -9,7 +9,6 @@ import 사람좋아_쌀알 from '@/assets/images/TravelTasteTest/사람좋아 �
 import 액티비티형_옥수수 from '@/assets/images/TravelTasteTest/액티비티형 옥수수.png';
 import 인플루언서형_복숭아 from '@/assets/images/TravelTasteTest/인플루언서형 복숭아.png';
 import 힐링형_감자 from '@/assets/images/TravelTasteTest/힐링형 감자.png';
-import { useUserInfo } from '@/hooks/queries/user';
 
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
@@ -24,25 +23,14 @@ interface TestResult {
 const TestHistoryPage = () => {
   const [loading, setLoading] = useState(true);
   const [testResults, setTestResults] = useState<TestResult[]>([]);
-  const { data: userInfo } = useUserInfo();
-  const navigate = useNavigate();
+  const name: string = '호준';
+
   useEffect(() => {
     const fetchTestResults = async () => {
       try {
         const data = await testList();
-        if (!data.result || data.result.length === 0) {
-          Swal.fire({
-            icon: 'info',
-            title: '테스트 결과가 없습니다',
-            text: '여행 취향 테스트를 먼저 진행해주세요.',
-            confirmButtonText: '확인',
-          }).then(() => {
-            // 부모 페이지로 이동 (이전 페이지로 이동)
-            navigate('../test/');
-          });
-        } else {
-          setTestResults(data.result);
-        }
+        console.log(data);
+        setTestResults(data.result);
       } catch (error) {
         console.error('Failed to fetch test results:', error);
         Swal.fire({
@@ -56,7 +44,7 @@ const TestHistoryPage = () => {
     };
 
     fetchTestResults();
-  }, [navigate]);
+  }, []);
 
   if (loading) {
     return <div>Loading...</div>; // You can replace this with a better loading indicator
@@ -72,7 +60,7 @@ const TestHistoryPage = () => {
     <ContentLayout>
       <div className="mt-[100px]">
         <h2 className="ms-[122px] text-[40px]">
-          <strong>{userInfo?.name}</strong>님의 여행 유형 결과 이력
+          <strong>{name}</strong>님의 여행 유형 결과 이력
         </h2>
         <HistoryList
           testResults={testResults}
