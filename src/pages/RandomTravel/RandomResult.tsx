@@ -9,6 +9,7 @@ import {
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import LoadingPage from '../LoadingPage';
+import Swal from 'sweetalert2';
 
 const RandomResult = () => {
   const location = useLocation();
@@ -79,7 +80,6 @@ const ResultDetailBody = ({ region }: ResultDetailBodyProps) => {
   useEffect(() => {
     const fetchData = async () => {
       if (!region) {
-        console.error('Region is required.');
         setLoading(false);
         return;
       }
@@ -90,10 +90,12 @@ const ResultDetailBody = ({ region }: ResultDetailBodyProps) => {
         const extractedTourIds = extractTourIds(data);
         setResult(travelRecommendations);
         setTourList(extractedTourIds);
-        console.log('Result:', travelRecommendations);
-        console.log('extractedTourIds:', extractedTourIds);
       } catch (error) {
-        console.error('Error fetching travel recommendations:', error);
+        Swal.fire({
+          icon: 'error',
+          title: '오류가 발생했습니다.',
+          text: '데이터를 불러오지 못했습니다. 다시 시도해주세요.',
+        });
       } finally {
         setLoading(false);
       }

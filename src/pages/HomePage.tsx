@@ -224,7 +224,7 @@ const GoService = () => {
         </button>
 
         <button className="relative w-[300px] hover:drop-shadow-2xl">
-          <Link to="/">
+          <Link to="grouptrip/">
             <div className="h-full overflow-hidden rounded-lg">
               <img
                 src={ourTravel}
@@ -357,7 +357,7 @@ const EventInGangwon = () => {
         const res = await getFestivals();
         setGangwondoEvent(res.result);
       } catch (error) {
-        console.error(error);
+        // console.error(error);
       }
     };
     fetchData();

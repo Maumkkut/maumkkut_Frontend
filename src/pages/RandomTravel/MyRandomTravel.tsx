@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import ContentLayout from '@/layout/ContentLayout';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Kakaomap from '@/components/Kakaomap';
 // import useRTStore from '@/store/useRTStore';
 import { getRandomTravelDetail, getRandomTravelList } from '@/api/random';
@@ -8,6 +8,7 @@ import {
   ConvertedTravelRecommendation,
   TravelRecommendation,
 } from '@/types/random';
+import Swal from 'sweetalert2';
 
 // MyRandomTravel 컴포넌트
 const MyRandomTravel = () => {
@@ -39,6 +40,7 @@ const CreateOrMy = () => {
 
 // ResultDetail 컴포넌트
 const ResultDetail = () => {
+  const navigate = useNavigate();
   const [dummyList, setDummyList] = useState<CourseItem[]>([]);
   const [index, setIndex] = useState<number>(0); // index 상태 추가
   const location = useLocation();
@@ -48,24 +50,42 @@ const ResultDetail = () => {
     const fetchData = async () => {
       try {
         const dummydummy = await getRandomTravelList();
-        console.log(dummydummy);
+        if (!dummydummy.result || dummydummy.result.course_list.length === 0) {
+          Swal.fire({
+            icon: 'info',
+            title: '랜덤 여행지 추천 결과가 없습니다',
+            text: '랜덤 여행지 만들기 페이지로 이동합니다.',
+            confirmButtonText: '확인',
+          }).then(() => {
+            // 여행취향테스트
+            navigate('../');
+          });
+        } else {
+          const updatedList: CourseItem[] = dummydummy.result.course_list.map(
+            (item, idx) => ({
+              text: `저장된 여행코스 ${idx + 1}`,
+              course_id: item.course_id,
+            }),
+          );
 
-        const updatedList: CourseItem[] = dummydummy.result.course_list.map(
-          (item, idx) => ({
-            text: `저장된 여행코스 ${idx + 1}`,
-            course_id: item.course_id,
-          }),
-        );
-
-        setDummyList(updatedList);
-        setIndex(passedIndex === 'max' ? updatedList.length - 1 : 0); // 'max'라고 받으면 가장 큰 인덱스 받기
+          setDummyList(updatedList);
+          setIndex(passedIndex === 'max' ? updatedList.length - 1 : 0); // 'max'라고 받으면 가장 큰 인덱스 받기
+        }
       } catch (error) {
-        console.error(error);
+        Swal.fire({
+          icon: 'info',
+          title: '랜덤 여행지 추천 결과를 가져오지 못했습니다',
+          text: '랜덤 여행지 만들기 페이지로 이동합니다.',
+          confirmButtonText: '확인',
+        }).then(() => {
+          // 여행취향테스트
+          navigate('../');
+        });
       }
     };
 
     fetchData();
-  }, [passedIndex]);
+  }, [navigate, passedIndex]);
 
   if (dummyList.length === 0) {
     return <div>데이터가 없습니다.</div>; // 데이터가 없을 때 표시할 내용
@@ -166,48 +186,19 @@ const ResultDetailBody = ({ course_id }: { course_id: number }) => {
     const fetchData = async () => {
       try {
         const dummydummy = await getRandomTravelDetail(course_id);
-        console.log(dummydummy);
         const tempData = convertToTravelRecommendation(dummydummy);
         setDummy(tempData);
       } catch (error) {
-        console.error(error);
+        Swal.fire({
+          icon: 'error',
+          title: '오류가 발생했습니다.',
+          text: '데이터를 불러오지 못했습니다. 다시 시도해주세요.',
+        });
       }
     };
 
     fetchData();
   }, [course_id]);
-  // const dummy = [
-  //   {
-  //     title: '안인해변(안인해수욕장)',
-  //     addr1: '강원특별자치도 강릉시 강동면 안인진리',
-  //     mapx: 128.9904199396,
-  //     mapy: 37.7343114116,
-  //   },
-  //   {
-  //     title: '옥계해변',
-  //     addr1: '강원특별자치도 강릉시 옥계면 금진솔밭길 104-32',
-  //     mapx: 129.0480708236,
-  //     mapy: 37.6280637014,
-  //   },
-  //   {
-  //     title: '순긋해변',
-  //     addr1: '강원특별자치도 강릉시 해안로 682-5',
-  //     mapx: 128.8931261433,
-  //     mapy: 37.8168194119,
-  //   },
-  //   {
-  //     title: '사근진해중공원 전망대',
-  //     addr1: '강원특별자치도 강릉시 해안로604번길 16',
-  //     mapx: 128.8988285332,
-  //     mapy: 37.8127616594,
-  //   },
-  //   {
-  //     title: '김동명문학관',
-  //     addr1: '강원특별자치도 강릉시 사천면 샛돌1길 30-2',
-  //     mapx: 128.8376949134,
-  //     mapy: 37.8206040035,
-  //   },
-  // ];
 
   return (
     <div className="mx-[30px]">
@@ -216,27 +207,27 @@ const ResultDetailBody = ({ course_id }: { course_id: number }) => {
       ) : (
         <p className="text-center">데이터 없음...</p>
       )}
-      <Buttons />
+      {/* <Buttons /> */}
     </div>
   );
 };
 
-// Buttons 컴포넌트
-const Buttons = () => {
-  return (
-    <div className="mx-auto my-[50px] flex h-[66px] w-[830px] justify-between text-[22px] font-semibold text-white">
-      <div className="h-full w-[400px]">
-        <button className="h-full w-full rounded-[6px] bg-mk-logo3">
-          코스 초기화
-        </button>
-      </div>
-      <div className="h-full w-[400px]">
-        <button className="h-full w-full rounded-[6px] bg-mk-logo3">
-          이 코스 확정하기
-        </button>
-      </div>
-    </div>
-  );
-};
+// // Buttons 컴포넌트
+// const Buttons = () => {
+//   return (
+//     <div className="mx-auto my-[50px] flex h-[66px] w-[830px] justify-between text-[22px] font-semibold text-white">
+//       <div className="h-full w-[400px]">
+//         <button className="h-full w-full rounded-[6px] bg-mk-logo3">
+//           코스 초기화
+//         </button>
+//       </div>
+//       <div className="h-full w-[400px]">
+//         <button className="h-full w-full rounded-[6px] bg-mk-logo3">
+//           이 코스 확정하기
+//         </button>
+//       </div>
+//     </div>
+//   );
+// };
 
 export default MyRandomTravel;

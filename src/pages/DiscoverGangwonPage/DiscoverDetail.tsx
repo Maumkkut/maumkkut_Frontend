@@ -16,7 +16,6 @@ const DiscoverDetail = () => {
     const fetchData = async () => {
       try {
         const res = await getTypeTravel(type!);
-        console.log(res);
         setTravelDestinations(res.result); // API 응답 결과를 상태에 저장
 
         // destinations가 비어있는 경우 SweetAlert2로 경고 표시
@@ -29,7 +28,6 @@ const DiscoverDetail = () => {
           });
         }
       } catch (error) {
-        console.error(error);
         // 에러 발생 시 SweetAlert2로 경고 표시
         Swal.fire({
           title: '오류',
