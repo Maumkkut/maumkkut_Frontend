@@ -9,6 +9,7 @@ import 사람좋아_쌀알 from '@/assets/images/TravelTasteTest/사람좋아 �
 import 액티비티형_옥수수 from '@/assets/images/TravelTasteTest/액티비티형 옥수수.png';
 import 인플루언서형_복숭아 from '@/assets/images/TravelTasteTest/인플루언서형 복숭아.png';
 import 힐링형_감자 from '@/assets/images/TravelTasteTest/힐링형 감자.png';
+import { useUserInfo } from '@/hooks/queries/user';
 
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
@@ -23,8 +24,7 @@ interface TestResult {
 const TestHistoryPage = () => {
   const [loading, setLoading] = useState(true);
   const [testResults, setTestResults] = useState<TestResult[]>([]);
-  const name: string = '호준';
-
+  const { data: userInfo } = useUserInfo();
   useEffect(() => {
     const fetchTestResults = async () => {
       try {
@@ -60,7 +60,7 @@ const TestHistoryPage = () => {
     <ContentLayout>
       <div className="mt-[100px]">
         <h2 className="ms-[122px] text-[40px]">
-          <strong>{name}</strong>님의 여행 유형 결과 이력
+          <strong>{userInfo?.name}</strong>님의 여행 유형 결과 이력
         </h2>
         <HistoryList
           testResults={testResults}
