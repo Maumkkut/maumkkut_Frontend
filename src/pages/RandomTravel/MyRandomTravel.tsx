@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import ContentLayout from '@/layout/ContentLayout';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Kakaomap from '@/components/Kakaomap';
 // import useRTStore from '@/store/useRTStore';
 import { getRandomTravelDetail, getRandomTravelList } from '@/api/random';
@@ -8,6 +8,7 @@ import {
   ConvertedTravelRecommendation,
   TravelRecommendation,
 } from '@/types/random';
+import Swal from 'sweetalert2';
 
 // MyRandomTravel 컴포넌트
 const MyRandomTravel = () => {
@@ -39,6 +40,7 @@ const CreateOrMy = () => {
 
 // ResultDetail 컴포넌트
 const ResultDetail = () => {
+  const navigate = useNavigate();
   const [dummyList, setDummyList] = useState<CourseItem[]>([]);
   const [index, setIndex] = useState<number>(0); // index 상태 추가
   const location = useLocation();
@@ -48,24 +50,34 @@ const ResultDetail = () => {
     const fetchData = async () => {
       try {
         const dummydummy = await getRandomTravelList();
-        console.log(dummydummy);
+        if (!dummydummy.result || dummydummy.result.course_list.length === 0) {
+          Swal.fire({
+            icon: 'info',
+            title: '랜덤 여행지 추천 결과가 없습니다',
+            text: '랜덤 여행지 만들기 페이지로 이동합니다.',
+            confirmButtonText: '확인',
+          }).then(() => {
+            // 여행취향테스트
+            navigate('../');
+          });
+        } else {
+          const updatedList: CourseItem[] = dummydummy.result.course_list.map(
+            (item, idx) => ({
+              text: `저장된 여행코스 ${idx + 1}`,
+              course_id: item.course_id,
+            }),
+          );
 
-        const updatedList: CourseItem[] = dummydummy.result.course_list.map(
-          (item, idx) => ({
-            text: `저장된 여행코스 ${idx + 1}`,
-            course_id: item.course_id,
-          }),
-        );
-
-        setDummyList(updatedList);
-        setIndex(passedIndex === 'max' ? updatedList.length - 1 : 0); // 'max'라고 받으면 가장 큰 인덱스 받기
+          setDummyList(updatedList);
+          setIndex(passedIndex === 'max' ? updatedList.length - 1 : 0); // 'max'라고 받으면 가장 큰 인덱스 받기
+        }
       } catch (error) {
         console.error(error);
       }
     };
 
     fetchData();
-  }, [passedIndex]);
+  }, [navigate, passedIndex]);
 
   if (dummyList.length === 0) {
     return <div>데이터가 없습니다.</div>; // 데이터가 없을 때 표시할 내용
@@ -216,27 +228,27 @@ const ResultDetailBody = ({ course_id }: { course_id: number }) => {
       ) : (
         <p className="text-center">데이터 없음...</p>
       )}
-      <Buttons />
+      {/* <Buttons /> */}
     </div>
   );
 };
 
-// Buttons 컴포넌트
-const Buttons = () => {
-  return (
-    <div className="mx-auto my-[50px] flex h-[66px] w-[830px] justify-between text-[22px] font-semibold text-white">
-      <div className="h-full w-[400px]">
-        <button className="h-full w-full rounded-[6px] bg-mk-logo3">
-          코스 초기화
-        </button>
-      </div>
-      <div className="h-full w-[400px]">
-        <button className="h-full w-full rounded-[6px] bg-mk-logo3">
-          이 코스 확정하기
-        </button>
-      </div>
-    </div>
-  );
-};
+// // Buttons 컴포넌트
+// const Buttons = () => {
+//   return (
+//     <div className="mx-auto my-[50px] flex h-[66px] w-[830px] justify-between text-[22px] font-semibold text-white">
+//       <div className="h-full w-[400px]">
+//         <button className="h-full w-full rounded-[6px] bg-mk-logo3">
+//           코스 초기화
+//         </button>
+//       </div>
+//       <div className="h-full w-[400px]">
+//         <button className="h-full w-full rounded-[6px] bg-mk-logo3">
+//           이 코스 확정하기
+//         </button>
+//       </div>
+//     </div>
+//   );
+// };
 
 export default MyRandomTravel;

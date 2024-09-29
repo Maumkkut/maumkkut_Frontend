@@ -1,9 +1,41 @@
 import ContentLayout from '@/layout/ContentLayout';
 import useRTStore from '@/store/useRTStore';
+import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { testList } from '@/api/travelTasteTest';
 
 const CreateRandomTravel = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchTestResults = async () => {
+      try {
+        const data = await testList();
+        if (!data.result || data.result.length === 0) {
+          Swal.fire({
+            icon: 'info',
+            title: '여행 취향 테스트 결과가 없습니다',
+            text: '랜덤 여행지 추천은 여행 취향 테스트 완료 후 진행할 수 있습니다.',
+            confirmButtonText: '확인',
+          }).then(() => {
+            // 여행취향테스트
+            navigate('../../TravelTasteTest/');
+          });
+        }
+      } catch (error) {
+        console.error('Failed to fetch test results:', error);
+        Swal.fire({
+          icon: 'error',
+          title: '오류가 발생했습니다.',
+          text: '데이터를 불러오지 못했습니다. 다시 시도해주세요.',
+        });
+      }
+    };
+
+    fetchTestResults();
+  }, [navigate]);
+
   return (
     <ContentLayout>
       <CreateOrMy />
@@ -50,6 +82,10 @@ const SelectStart = () => {
 
 const StartPositions = () => {
   const { startPos, index, setIndex } = useRTStore();
+
+  useEffect(() => {
+    setIndex(-1);
+  }, [setIndex]);
 
   interface Position {
     name: string;
