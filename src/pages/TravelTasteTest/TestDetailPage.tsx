@@ -104,13 +104,13 @@ const ResultCard = () => {
           </div>
           <div className="h-[184px] w-[135px]">
             <h3 className="mb-[30px] text-[20px] font-bold">추천 여행지</h3>
-            <button>
-              <img
-                src={getImageSrc(data?.recommend_place) || resultDefault}
-                alt={data?.character_type || '결과 이미지'}
-                className="w-max"
-              />
-            </button>
+
+            <img
+              src={getImageSrc(data?.recommend_place) || resultDefault}
+              alt={data?.character_type || '결과 이미지'}
+              className="w-max"
+            />
+
             <p>{data?.recommend_place}</p>
           </div>
         </div>
