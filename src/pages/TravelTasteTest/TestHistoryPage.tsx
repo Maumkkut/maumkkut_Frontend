@@ -25,12 +25,24 @@ const TestHistoryPage = () => {
   const [loading, setLoading] = useState(true);
   const [testResults, setTestResults] = useState<TestResult[]>([]);
   const { data: userInfo } = useUserInfo();
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchTestResults = async () => {
       try {
         const data = await testList();
-        console.log(data);
-        setTestResults(data.result);
+        if (!data.result || data.result.length === 0) {
+          Swal.fire({
+            icon: 'info',
+            title: '테스트 결과가 없습니다',
+            text: '여행 취향 테스트를 먼저 진행해주세요.',
+            confirmButtonText: '확인',
+          }).then(() => {
+            // 부모 페이지로 이동 (이전 페이지로 이동)
+            navigate('../test/');
+          });
+        } else {
+          setTestResults(data.result);
+        }
       } catch (error) {
         console.error('Failed to fetch test results:', error);
         Swal.fire({
@@ -44,7 +56,7 @@ const TestHistoryPage = () => {
     };
 
     fetchTestResults();
-  }, []);
+  }, [navigate]);
 
   if (loading) {
     return <div>Loading...</div>; // You can replace this with a better loading indicator
