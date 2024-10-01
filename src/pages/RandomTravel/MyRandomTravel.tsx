@@ -10,6 +10,8 @@ import {
 } from '@/types/random';
 import Swal from 'sweetalert2';
 
+import pin from '@assets/images/GroupTrip/Marker.svg';
+
 // MyRandomTravel 컴포넌트
 const MyRandomTravel = () => {
   return (
@@ -200,14 +202,44 @@ const ResultDetailBody = ({ course_id }: { course_id: number }) => {
     fetchData();
   }, [course_id]);
 
-  return (
-    <div className="mx-[30px]">
-      {dummy.length > 0 ? (
-        <Kakaomap data={dummy} />
-      ) : (
+  if (dummy.length === 0) {
+    return (
+      <div className="mx-[30px]">
         <p className="text-center">데이터 없음...</p>
-      )}
-      {/* <Buttons /> */}
+      </div>
+    );
+  }
+
+  return (
+    <div className="mx-[30px] mb-40 flex flex-col gap-y-7">
+      <Kakaomap data={dummy} />
+      <div className="p-5">
+        <h1 className="text-4xl font-bold text-mk-darkgray">전체 장소</h1>
+      </div>
+      <div className="grid grid-cols-5 justify-center">
+        {dummy.map((data) => (
+          <div
+            key={data.title}
+            className="flex items-center justify-center gap-x-5 gap-y-10"
+          >
+            <div className="flex w-[150px] flex-col items-center gap-y-2 text-xl">
+              {/* 이미지 */}
+              <div className="h-[120px] w-[120px]">
+                <img
+                  className="h-full w-full"
+                  // src={data.image === '' ? pin : data.image}
+                  src={pin}
+                  alt="region"
+                />
+              </div>
+              {/* 관광지명 이름 */}
+              <div>
+                <span>{data.title}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
