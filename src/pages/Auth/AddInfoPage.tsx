@@ -20,7 +20,7 @@ export default function AddInfoPage() {
     watch,
     setValue,
   } = useForm<IAddInfo>();
-  const { data, isSuccess } = useUserInfo();
+  const { data, isSuccess, refetch } = useUserInfo();
 
   const openAddressPopup = useDaumPostcodePopup();
   const handleOpenSearchAddress = () => {
@@ -77,6 +77,7 @@ export default function AddInfoPage() {
     };
     try {
       await socialAddInfo(payload);
+      await refetch();
     } catch {
       return Swal.fire({
         icon: 'error',
