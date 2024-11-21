@@ -114,7 +114,7 @@ export default function GroupDetail() {
         <div className="p-5">
           <h1 className="text-4xl font-bold text-mk-darkgray">전체 장소</h1>
         </div>
-        <div className="flex justify-center">
+        <div className="grid grid-cols-5 justify-center">
           {groupTourList.tour_list.length === 0 ? (
             <div>
               <p className="text-2xl">그룹에 여행지가 없어요!</p>
@@ -123,7 +123,7 @@ export default function GroupDetail() {
             groupTourList.tour_list.map((item) => (
               <div
                 key={item.order}
-                className="grid grid-cols-5 gap-x-5 gap-y-10"
+                className="flex items-center justify-center gap-x-5 gap-y-10"
               >
                 <ReigonCard
                   data={item.tour}

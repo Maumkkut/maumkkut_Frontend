@@ -33,9 +33,7 @@ const ResultCard = () => {
       try {
         const res = await testDetail(Number(id));
         setData(res);
-        console.log(res);
       } catch (error) {
-        console.error('Failed to fetch test results:', error);
         Swal.fire({
           icon: 'error',
           title: '오류가 발생했습니다.',
@@ -104,13 +102,11 @@ const ResultCard = () => {
           </div>
           <div className="h-[184px] w-[135px]">
             <h3 className="mb-[30px] text-[20px] font-bold">추천 여행지</h3>
-            <button>
-              <img
-                src={getImageSrc(data?.recommend_place) || resultDefault}
-                alt={data?.character_type || '결과 이미지'}
-                className="w-max"
-              />
-            </button>
+            <img
+              src={getImageSrc(data?.recommend_place) || resultDefault}
+              alt={data?.character_type || '결과 이미지'}
+              className="w-max"
+            />
             <p>{data?.recommend_place}</p>
           </div>
         </div>

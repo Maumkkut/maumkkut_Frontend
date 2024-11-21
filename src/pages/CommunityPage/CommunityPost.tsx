@@ -85,7 +85,6 @@ const CommunityPost = () => {
           >
             <option value="free">자유게시판</option>
             <option value="travel">여행후기 게시판</option>
-            <option value="notice">공지사항</option>
           </select>
         </div>
         <div>
